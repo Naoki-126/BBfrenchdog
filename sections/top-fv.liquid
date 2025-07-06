@@ -1,0 +1,78 @@
+
+<section class="top-fv">
+        <div class="top-fv__imgArea"></div>
+        <div class="page-inner">
+          <div class="page-contents">
+            <div class="top-fv__titleArea">
+              <h2 class="section-title__fv">{{ section.settings.title }}</h2>
+              <h3 class="section-subTitle">{{ section.settings.subTitle }}</h3>
+            </div>
+            <div class="top-fv__content">
+              <img src="{{ section.settings.image | image_url: width: 640 }}"  class="top-fv__img" alt="25'new BONNEL">
+              <p class="top-fv__text">{{ section.settings.text }}</p>
+            </div>
+            <div class="top-fv__btnArea">
+              {% if section.settings.button != blank%}
+                <button class="c-btn">{{ section.settings.button }}</button>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {% schema %}
+{
+  "name": "トップFV",
+  "tag": "section",
+  "class": "top-fv__content",
+  "settings": [
+    {
+      "type": "text",
+      "id":"title",
+      "label": "タイトル"
+    },
+    {
+      "type": "text",
+      "id":"subTitle",
+      "label": "サブタイトル"
+    },
+    {
+      "type": "image_picker",
+      "id":"image",
+      "label": "画像"
+    },
+    {
+      "type": "textarea",
+      "id":"text",
+      "label": "テキスト"
+    },
+    {
+      "type": "text",
+      "id":"button",
+      "label": "ボタンのテキスト"
+    },
+  ],
+  "blocks": [
+    {
+      "type": "name_of_block",
+      "name": "ブロック名",
+      "settings": [
+        {
+          "type": "range",
+          "id": "desk_space",
+          "min": 0,
+          "max": 300,
+          "step": 10,
+          "label": "PCサイズのスペーサー",
+          "default": 50
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name":"top-fv"
+    }
+  ]
+}
+{% endschema %}
