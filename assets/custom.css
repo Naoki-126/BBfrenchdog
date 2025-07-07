@@ -1,8 +1,89 @@
 /* base.cssに適用 */
 @charset "UTF-8";
 
+/* reset.css
+=========================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin:0;
+  padding:0;
+  border:0;
+  outline:0;
+  font-size:100%;
+  vertical-align:baseline;
+  background:transparent;
+}
+
+header,footer,nav,section,article,main,
+aside,figure,figcaption {
+  display: block;
+}
+
+ul, ol {
+  list-style:none;
+}
+
+li, dd {
+  list-style-type: none;
+}
+
+img {
+  border: none;
+  vertical-align: bottom;
+}
+
+a,button,label {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+}
+
+a {
+    margin:0;
+    padding:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+input, select {
+    vertical-align:middle;
+}
+
 /* 共通パーツ
 =========================== */
+
 html {
   font-size: 62.5%; /*  1rem = 10px  */
   scroll-behavior: smooth;
@@ -82,6 +163,7 @@ body {
 
 .c-btn {
 	background: #292929;
+	border: 1px solid #292929;
 	font-weight: 700;
 	line-height: 1.68;
 	color: #fff;
@@ -94,8 +176,8 @@ body {
 .c-btn::after {
 	content: "";
 	position: absolute;
-	background: url(../img/arrow-right.png)no-repeat center center /contain;
-	width: 5px;
+	background: url(../assets/arrow-rightWhite.png)no-repeat center center /contain;
+	width: 8px;
 	height: 8px;
 	top: 50%;
 	transform: translateY(-50%);
@@ -116,7 +198,7 @@ body {
 .c-btn__about::after {
 	content: "";
 	position: absolute;
-	background: url(../img/arrow-right.png)no-repeat center center /contain;
+	background: url(../assets/arrow-rightWhite.png)no-repeat center center /contain;
 	width: 5px;
 	height: 8px;
 	top: 50%;
@@ -138,7 +220,7 @@ body {
 .c-btn__pro::after {
 	content: "";
 	position: absolute;
-	background: url(../img/arrow-right.png)no-repeat center center /contain;
+	background: url(../assets/arrow-rightWhite.png)no-repeat center center /contain;
 	width: 5px;
 	height: 8px;
 	top: 50%;
@@ -157,7 +239,7 @@ body {
 .c-btn:hover::after,
 .c-btn__about:hover::after,
 .c-btn__pro:hover::after {
-	background: url(../img/arrow-rightGold.png)no-repeat center center /contain;
+	background: url(../assets/arrow-rightGold.png)no-repeat center center /contain;
 }
 
 .c-btn__byNow {
@@ -199,6 +281,7 @@ body {
 	max-width: 282px;
   height: auto;
   display: block;
+
 	/* position: relative; */
 }
 
@@ -404,14 +487,24 @@ body {
 
 .top-rec__items {
 	margin-top: 72px;
+	padding-left: 0;
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(0, 282px));
   gap: 32px 8px;
 }
 
 .top-rec__item {
 	width: 100%;
+	max-width: 282px;
 	height: 416px;
+}
+
+.top-rec__img {
+	max-width: 282px;
+  height: auto;
+	border: 1px solid #292929;
+	border-radius: 12px;
+
 }
 
 .top-rec__tagArea {

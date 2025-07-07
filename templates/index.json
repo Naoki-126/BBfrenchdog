@@ -35,7 +35,6 @@
         "heading",
         "button"
       ],
-      "disabled": true,
       "settings": {
         "image": "shopify://shop_images/top-fv.png",
         "image_overlay_opacity": 0,
@@ -61,67 +60,15 @@
         "button": "詳しく見る"
       }
     },
-    "multirow_4bXweL": {
-      "type": "multirow",
-      "blocks": {
-        "row_trCb6a": {
-          "type": "row",
-          "settings": {
-            "image": "shopify://shop_images/top-bonnel.png",
-            "caption": "",
-            "heading": "",
-            "text": "<p>飼い主も愛犬も、もっと自由に、もっと快適に。<br/>B&BFRENCHのヌケないハーネスは、「上質」「使いやすさ」「安心感」、そして―― “最高の優しさと美しさ” をもたらす、新しいハーネス体験です。<br/>美しい光沢と柔らかな手触りを持つ綾袋織ボンネルテープを採用。 その質感は、飼い主の手にも、愛犬の体にも優しく寄り添います。<br/>さらに、高級車の内装にも使われる「Ultrasuede®」を裏地全面に<br/>贅沢に使用。 肌触りは格別で、愛犬の皮膚や被毛にもやさしく、クセになる心地よさをご体験ください。<br/>見て感じて使って喜べるB&Bqualityを愛犬とあなたへ。</p>",
-            "button_label": "Button label",
-            "button_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "row_trCb6a"
-      ],
-      "name": "t:sections.multirow.presets.name",
+    "top_recommend_MiGqFf": {
+      "type": "top-recommend",
+      "name": "お勧め",
       "settings": {
-        "image_height": "medium",
-        "desktop_image_width": "medium",
-        "image_layout": "alternate-left",
-        "heading_size": "h1",
-        "text_style": "body",
-        "button_style": "secondary",
-        "desktop_content_position": "middle",
-        "desktop_content_alignment": "left",
-        "mobile_content_alignment": "left",
-        "section_color_scheme": "scheme-4d86266b-87c9-4367-a268-1c6518285829",
-        "row_color_scheme": "scheme-4d86266b-87c9-4367-a268-1c6518285829",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "collection": "new",
-        "products_to_show": 8,
-        "title": "New",
-        "heading_size": "h1",
-        "description": "<p>新着商品</p>",
-        "show_description": false,
-        "description_style": "uppercase",
-        "columns_desktop": 4,
-        "enable_desktop_slider": false,
-        "full_width": true,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "color_scheme": "scheme-4d86266b-87c9-4367-a268-1c6518285829",
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 44,
-        "padding_bottom": 36
+        "recommend": "new",
+        "title": "お勧め",
+        "subTitle": "新着商品",
+        "text": "",
+        "button": ""
       }
     },
     "collection_list_rNKVAP": {
@@ -212,8 +159,7 @@
   "order": [
     "image_banner",
     "top_fv_wFxjJH",
-    "multirow_4bXweL",
-    "featured_collection",
+    "top_recommend_MiGqFf",
     "collection_list_rNKVAP",
     "featured_collection_VXAYCJ"
   ]
