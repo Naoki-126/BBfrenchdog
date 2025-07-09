@@ -1,0 +1,60 @@
+<section class="top-category">
+  <div class="page-inner">
+    <div class="page-contents">
+      <div class="top-cat__titleArea">
+        <h2 class="section-title">{{ section.settings.title }}</h2>
+        <h3 class="section-subTitle">​{{ section.settings.subTitle }}</h3>
+      </div>
+      <ul class="top-cat__items">
+        {% for block in section.blocks %}
+          <li class="top-cat__item">
+            <a href="{{ block.settings.collection.url }}"><img src="{{ block.settings.image | image_url: width: 224 }}" alt="category-img1" class="cat-img"></a>
+          </li>
+        {% endfor  %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "カテゴリー一覧",
+  "tag": "section",
+  "class": "top-category",
+  "settings": [
+    {
+      "type": "text",
+      "id":"title",
+      "label": "タイトル"
+    },
+    {
+      "type": "text",
+      "id":"subTitle",
+      "label": "サブタイトル"
+    },
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "カテゴリー",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "画像"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "リンク先 コレクション",
+        },
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name":"カテゴリー"
+    }
+  ]
+}
+{% endschema %}

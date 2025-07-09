@@ -67,8 +67,59 @@
         "recommend": "new",
         "title": "お勧め",
         "subTitle": "新着商品",
-        "text": "",
-        "button": ""
+        "button": "新着商品を全てみる"
+      }
+    },
+    "top_category_FWXBT8": {
+      "type": "top-category",
+      "blocks": {
+        "item_bjdie9": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/cat-img1.png",
+            "collection": "harness"
+          }
+        },
+        "item_JcJUMt": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/cat-img2.png",
+            "collection": "wear"
+          }
+        },
+        "item_RQQaKm": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/cat-img3.png",
+            "collection": "food"
+          }
+        },
+        "item_XyeW48": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/cat-img4.png",
+            "collection": "floor"
+          }
+        },
+        "item_NYAkRH": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/cat-img5.png",
+            "collection": "origin"
+          }
+        }
+      },
+      "block_order": [
+        "item_bjdie9",
+        "item_JcJUMt",
+        "item_RQQaKm",
+        "item_XyeW48",
+        "item_NYAkRH"
+      ],
+      "name": "カテゴリー",
+      "settings": {
+        "title": "Category",
+        "subTitle": "カテゴリーから探す"
       }
     },
     "collection_list_rNKVAP": {
@@ -112,6 +163,7 @@
         "featured_collection_qgq6Xi",
         "featured_collection_Y7UxUq"
       ],
+      "disabled": true,
       "name": "t:sections.collection-list.presets.name",
       "settings": {
         "title": "Category",
@@ -160,6 +212,7 @@
     "image_banner",
     "top_fv_wFxjJH",
     "top_recommend_MiGqFf",
+    "top_category_FWXBT8",
     "collection_list_rNKVAP",
     "featured_collection_VXAYCJ"
   ]

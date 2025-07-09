@@ -20,83 +20,11 @@
             </a>
           </li>
         {% endfor %}
-        {% comment %} <li class="top-rec__item">
-          <a href="{{ collection.url }}"><img src="./assets/img/product-img2.png" alt="" class="product-img">
-            <div class="top-rec__tagArea">
-            </div>
-            <div class="top-rec__textArea">
-              <h3 class="product-name">25'BONNEL_TEBURA<br> LEASH_ SET（ベージュ）</h3>
-              <div class="product-color">ベージュ</div>
-              <div class="product-price">26,800<span class="product-emphasis">21,440</span>円（税込）</div>
-              <div class="top-rec__discountArea">
-                <div class="discount-tag">20%off</div>
-              </div>
-            </div>
-          </a>
-        </li> {% endcomment %}
-        {% comment %} <li class="top-rec__item">
-          <a href=""><img src="./assets/img/product-img3.png" alt="" class="product-img">
-            <div class="top-rec__textArea">
-              <h3 class="product-name">25'BONNEL LEASH SET (ブラック) ロング_ショート</h3>
-              <div class="product-color">ブラック</div>
-              <div class="product-sale"><span class="product-emphasis">16,500</span>円（税込）</div>
-              <div class="discount-tag"></div>
-            </div>
-          </a>
-        </li>
-        <li class="top-rec__item">
-          <a href=""><img src="./assets/img/product-img4.png" alt="" class="product-img">
-            <div class="top-rec__textArea">
-              <h3 class="product-name">25'BONNEL LEASH SET (ベージュ) ロング_ショート</h3>
-              <div class="product-color">ベージュ</div>
-              <div class="product-price"><span class="product-emphasis">16,500</span>円（税込）</div>
-              <div class="discount-tag"></div>
-            </div>
-          </a>
-        </li>
-        <li class="top-rec__item">
-          <a href=""><img src="./assets/img/product-img5.png" alt="" class="product-img">
-            <div class="top-rec__textArea">
-              <h3 class="product-name">25'BONNEL HARNESS (L)</h3>
-              <div class="product-color">K10イエローゴールド</div>
-              <div class="product-price"><span class="product-emphasis">16,500</span>円（税込）</div>
-              <div class="discount-tag"></div>
-            </div>
-          </a>
-        </li>
-        <li class="top-rec__item">
-          <a href=""><img src="./assets/img/product-img6.png" alt="" class="product-img">
-            <div class="top-rec__textArea">
-              <h3 class="product-name">25'BONNEL HARNESS (M)</h3>
-              <div class="product-color">K10イエローゴールド</div>
-              <div class="product-price"><span class="product-emphasis">16,500</span>円（税込）</div>
-              <div class="discount-tag"></div>
-            </div>
-          </a>
-        </li>
-        <li class="top-rec__item">
-          <a href=""><img src="./assets/img/product-img7.png" alt="" class="product-img">
-            <div class="top-rec__textArea">
-              <h3 class="product-name">25'BONNEL HARNESS (S)</h3>
-              <div class="product-color">K10イエローゴールド</div>
-              <div class="product-price"><span class="product-emphasis">16,500</span>円（税込）</div>
-              <div class="discount-tag"></div>
-            </div>
-          </a>
-        </li>
-        <li class="top-rec__item">
-          <a href=""><img src="./assets/img/product-img8.png" alt="" class="product-img">
-            <div class="top-rec__textArea">
-              <h3 class="product-name">25'BONNEL HARNESS (XS)</h3>
-              <div class="product-color">K10イエローゴールド</div>
-              <div class="product-price">26,800<span class="product-emphasis">24,120</span>円（税込）</div>
-              <div class="discount-tag">10%off</div>
-            </div>
-          </a>
-        </li> {% endcomment %}
       </ul>
       <div class="top-rec__btnArea">
-        <a href="{{ collection.url }}" class="c-btn">{{ section.settings.button }}</a>
+        {% if section.settings.button != blank%}
+          <a href="{{ collection.url }}" class="c-btn">{{ section.settings.button }}</a>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -106,7 +34,7 @@
 {
   "name": "おすすめ",
   "tag": "section",
-  "class": "top-fv__recommend",
+  "class": "top-recommend",
   "settings": [
     {
       "type": "collection",
@@ -124,37 +52,10 @@
       "label": "サブタイトル"
     },
     {
-      "type": "image_picker",
-      "id":"image",
-      "label": "画像"
-    },
-    {
-      "type": "textarea",
-      "id":"text",
-      "label": "テキスト"
-    },
-    {
       "type": "text",
       "id":"button",
       "label": "ボタンのテキスト"
     },
-  ],
-  "blocks": [
-    {
-      "type": "name_of_block",
-      "name": "ブロック名",
-      "settings": [
-        {
-          "type": "range",
-          "id": "desk_space",
-          "min": 0,
-          "max": 300,
-          "step": 10,
-          "label": "PCサイズのスペーサー",
-          "default": 50
-        }
-      ]
-    }
   ],
   "presets": [
     {
