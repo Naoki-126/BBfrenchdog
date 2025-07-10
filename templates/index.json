@@ -122,89 +122,48 @@
         "subTitle": "カテゴリーから探す"
       }
     },
-    "collection_list_rNKVAP": {
-      "type": "collection-list",
+    "top_sns_rKHjUa": {
+      "type": "top-sns",
       "blocks": {
-        "featured_collection_HKarCj": {
-          "type": "featured_collection",
+        "image_link_rXMpWV": {
+          "type": "image_link",
           "settings": {
-            "collection": "harness"
+            "image": "shopify://shop_images/insta-img1.png",
+            "link": "https://www.instagram.com/?locale=ja_JP"
           }
         },
-        "featured_collection_tAVJgf": {
-          "type": "featured_collection",
+        "image_link_9b4jVw": {
+          "type": "image_link",
           "settings": {
-            "collection": "wear"
+            "image": "shopify://shop_images/insta-img2.png",
+            "link": ""
           }
         },
-        "featured_collection_yaaFBt": {
-          "type": "featured_collection",
+        "image_link_JWF7rE": {
+          "type": "image_link",
           "settings": {
-            "collection": "food"
+            "image": "shopify://shop_images/insta-img3.png",
+            "link": ""
           }
         },
-        "featured_collection_qgq6Xi": {
-          "type": "featured_collection",
+        "image_link_q4j6Pa": {
+          "type": "image_link",
           "settings": {
-            "collection": "floor"
-          }
-        },
-        "featured_collection_Y7UxUq": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "origin"
+            "image": "shopify://shop_images/insta-img4.png",
+            "link": ""
           }
         }
       },
       "block_order": [
-        "featured_collection_HKarCj",
-        "featured_collection_tAVJgf",
-        "featured_collection_yaaFBt",
-        "featured_collection_qgq6Xi",
-        "featured_collection_Y7UxUq"
+        "image_link_rXMpWV",
+        "image_link_9b4jVw",
+        "image_link_JWF7rE",
+        "image_link_q4j6Pa"
       ],
-      "disabled": true,
-      "name": "t:sections.collection-list.presets.name",
+      "name": "Instagramギャラリー",
       "settings": {
-        "title": "Category",
-        "heading_size": "h1",
-        "image_ratio": "square",
-        "columns_desktop": 5,
-        "color_scheme": "scheme-4d86266b-87c9-4367-a268-1c6518285829",
-        "show_view_all": false,
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "featured_collection_VXAYCJ": {
-      "type": "featured-collection",
-      "name": "t:sections.featured-collection.presets.name",
-      "settings": {
-        "collection": "",
-        "products_to_show": 4,
         "title": "Instagram",
-        "heading_size": "h1",
-        "description": "<p>インスタグラム</p>",
-        "show_description": false,
-        "description_style": "body",
-        "columns_desktop": 4,
-        "enable_desktop_slider": false,
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "color_scheme": "scheme-4d86266b-87c9-4367-a268-1c6518285829",
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": false,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "sub_title": "インスタグラム"
       }
     }
   },
@@ -213,7 +172,6 @@
     "top_fv_wFxjJH",
     "top_recommend_MiGqFf",
     "top_category_FWXBT8",
-    "collection_list_rNKVAP",
-    "featured_collection_VXAYCJ"
+    "top_sns_rKHjUa"
   ]
 }
