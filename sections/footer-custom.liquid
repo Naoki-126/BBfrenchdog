@@ -1,0 +1,174 @@
+ <footer class="footer-area">
+  <div class="footer-upper">
+    <div class="page-inner">
+      <div class="page-contents">
+        <div class="footer-nav">
+          <div class="footer-logoArea">
+            <div class="footer-logo">
+              <h1 class="footer-title"><a href="#"><img src="{{ 'B_B-logo.png' | file_img_url: "x177" }}" alt=footer-logo class="footer-logoImg"></a></h1>
+            </div>
+            <div class="footer-snsArea">
+              {% for block in section.blocks %}
+                {% assign type = block.settings.sns_type %}
+                <a href="{{ block.settings.sns_link }}" target="_blank" rel="noopener" class="sns-icon sns-{{ type }}" aria-label="{{ type }}" >
+                  {% case type %}
+                  {% when 'instagram' %}
+                    {% render 'icon-instagram' %}
+                  {% when 'line' %}
+                    {% render 'icon-line' %}
+                  {% when 'x' %}
+                    {% render 'icon-x' %}
+                  {% when 'facebook' %}
+                    {% render 'icon-facebook' %}
+                  {% when 'tiktok' %}
+                    {% render 'icon-tiktok' %}
+                {% endcase %}
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+          <ul class="footer-menuArea">
+            <li><a href="" class="footer-menu">ホーム</a></li>
+            {% for block in section.blocks %}
+              {% if block.type == 'page_link' %}
+                <li><a href="{{ block.settings.link.url }}" class="footer-menu">{{ block.settings.link_title }}</a></li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+          <ul class="footer-catArea">
+            <li><h3 class="footer-catList__main">カテゴリーから探す</h3></li>
+            {% for block in section.blocks %}
+              {% if block.type == 'item' %}
+                <li><a href="{{ block.settings.collection.url }}" class="footer-catList">{{ block.settings.link_collectionTitle }}</a></li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+          <ul class="footer-catArea">
+            <li><h3 href="" class="footer-catList__main">ショッピングガイド</h3></li>
+            {% for block in section.blocks %}
+              {% if block.type == 'guide' %}
+                <li><a href="{{ block.settings.link.url }}" class="footer-catList">{{ block.settings.guide_title }}</a></li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="footer-creditArea">
+          <ul class="footer-credit_items">
+            <li><a href="" class="footer-item"><img src="{{ 'visa.svg' | asset_url }}" alt="visa" class="credit-icon"></a></li>
+            <li><a href="" class="footer-item"><img src="{{ 'mastercard.svg' | asset_url }}" alt="master" class="credit-icon"></a></li>
+            <li><a href="" class="footer-item"><img src="{{ 'amex.svg' | asset_url }}" alt="master" class="credit-icon"></a></li>
+            <li><a href="" class="footer-item"><img src="{{ 'paypal.svg' | asset_url }}" alt="master" class="credit-icon"></a></li>
+            <li><a href="" class="footer-item"><img src="{{ 'diners-club.svg' | asset_url }}" alt="master" class="credit-icon"></a></li>
+            <li><a href="" class="footer-item"><img src="{{ 'discover.svg' | asset_url }}" alt="master" class="credit-icon"></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-middle">
+    <div class="page-contents">
+      <ul class="footer-contents">
+        <li><a href="/pages/terms" class="footer-content">利用規約</a></li>
+        <li><a href="	/pages/privacy-policy" class="footer-content">プライバシーポリシー</a></li>
+        <li><a href="/pages/legal" class="footer-content">特定商取引法に基づく表記</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-lower">
+    <div class="footer-low__textArea">
+      <p class="footer-low__text">© 2025 B&BFrench, All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "customフッター",
+  "tag": "section",
+  "class": "custom-footer",
+  "disabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+
+  ],
+  "blocks": [
+    {
+      "name": "SNSアイコン",
+      "type": "sns_icon",
+      "settings": [
+        {
+          "type": "select",
+          "id": "sns_type",
+          "label": "SNSタイプ",
+          "options": [
+            { "value": "instagram", "label": "Instagram" },
+            { "value": "line", "label": "LINE" },
+            { "value": "x", "label": "X（旧Twitter）" },
+            { "value": "facebook", "label": "Facebook" },
+            { "value": "tiktok", "label": "TikTok" }
+          ],
+        },
+        {
+          "type": "url",
+          "id": "sns_link",
+          "label": "リンク先URL",
+        },
+      ]
+    },
+      {
+      "type": "page_link",
+      "name": "ページリンク",
+      "settings": [
+        {
+          "type": "text",
+          "id": "link_title",
+          "label": "リンクタイトル"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "リンク先URL"
+        }
+      ]
+    },
+    {
+      "type": "item",
+      "name": "カテゴリー",
+      "settings": [
+        {
+          "type": "text",
+          "id": "link_collectionTitle",
+          "label": "コレクションタイトル"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "コレクション",
+        },
+      ]
+    },
+    {
+      "type": "guide",
+      "name": "ショッピングガイド",
+      "settings": [
+        {
+          "type": "text",
+          "id": "guide_title",
+          "label": "ガイドタイトル"
+        },
+        {
+          "type": "url",
+          "id": "guide_url",
+          "label": "リンク先URL"
+        }
+      ]
+    },
+  ],
+  "presets": [
+    {
+      "name":"カスタムフッター"
+    }
+  ]
+}
+{% endschema %}

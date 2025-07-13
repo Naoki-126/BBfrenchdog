@@ -608,11 +608,27 @@ body {
 	gap: 24px 0px;
 }
 
+.footer-logoImg {
+	width: 177px;
+	height: auto;
+}
+
 .footer-snsArea {
 	margin-top: 18px;
 	display: flex;
 	align-items: center;
 	gap: 30px;
+	gap: 12px;
+}
+
+.footer-snsArea .sns-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: #333;
+  transition: fill 0.3s ease;
+}
+.footer-snsArea .sns-icon:hover svg {
+  fill: #888;
 }
 
 .footer-menuArea {
@@ -694,6 +710,7 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: start;
+	justify-content: center;
 	gap: 40px;
 }
 
