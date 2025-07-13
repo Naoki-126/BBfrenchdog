@@ -437,9 +437,26 @@ body {
   width: 100%;
 }
 
+.image-banner {
+	margin: 0 auto;
+	width: 100%;
+}
+
 .top-fv__imgArea {
-	background: url(../img/top-fv.jpg)no-repeat center top /cover;
-	height: 800px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  width: 100%;
+	height: auto;
+  aspect-ratio: 16 / 9;
+}
+
+.top-fv__img--pc {
+  display: block;
+}
+
+.top-fv__img--sp {
+  display: none;
 }
 
 .top-fv__titleArea {
@@ -789,10 +806,16 @@ body {
 	/*  topページ FVセクション
 	=========================== */
 	.top-fv__imgArea {
-		background: url(../img/fv-sp.jpg)no-repeat center top /cover;
-		height: auto;
-		height: 215px;
-	}
+  /* height: 215px; */
+}
+
+.top-fv__img--pc {
+  display: none;
+}
+
+.top-fv__img--sp {
+  display: block;
+}
 
 	.top-fv__titleArea {
 		margin-top: 17px;

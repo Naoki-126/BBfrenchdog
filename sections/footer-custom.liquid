@@ -28,10 +28,10 @@
             </div>
           </div>
           <ul class="footer-menuArea">
-            <li><a href="" class="footer-menu">ホーム</a></li>
+            <li><a href="{{ routes.root_url }}" class="footer-menu">ホーム</a></li>
             {% for block in section.blocks %}
               {% if block.type == 'page_link' %}
-                <li><a href="{{ block.settings.link.url }}" class="footer-menu">{{ block.settings.link_title }}</a></li>
+                <li><a href="{{ block.settings.link_url }}" class="footer-menu">{{ block.settings.link_title }}</a></li>
               {% endif %}
             {% endfor %}
           </ul>
@@ -47,19 +47,19 @@
             <li><h3 href="" class="footer-catList__main">ショッピングガイド</h3></li>
             {% for block in section.blocks %}
               {% if block.type == 'guide' %}
-                <li><a href="{{ block.settings.link.url }}" class="footer-catList">{{ block.settings.guide_title }}</a></li>
+                <li><a href="{{ block.settings.guide_url }}" class="footer-catList">{{ block.settings.guide_title }}</a></li>
               {% endif %}
             {% endfor %}
           </ul>
         </div>
         <div class="footer-creditArea">
           <ul class="footer-credit_items">
-            <li><a href="" class="footer-item"><img src="{{ 'visa.svg' | asset_url }}" alt="visa" class="credit-icon"></a></li>
-            <li><a href="" class="footer-item"><img src="{{ 'mastercard.svg' | asset_url }}" alt="master" class="credit-icon"></a></li>
-            <li><a href="" class="footer-item"><img src="{{ 'amex.svg' | asset_url }}" alt="master" class="credit-icon"></a></li>
-            <li><a href="" class="footer-item"><img src="{{ 'paypal.svg' | asset_url }}" alt="master" class="credit-icon"></a></li>
-            <li><a href="" class="footer-item"><img src="{{ 'diners-club.svg' | asset_url }}" alt="master" class="credit-icon"></a></li>
-            <li><a href="" class="footer-item"><img src="{{ 'discover.svg' | asset_url }}" alt="master" class="credit-icon"></a></li>
+            <li class="footer-item" ><img src="{{ 'visa.svg' | asset_url }}" alt="visa" class="credit-icon"></li>
+            <li class="footer-item" ><img src="{{ 'mastercard.svg' | asset_url }}" alt="master" class="credit-icon"></li>
+            <li class="footer-item" ><img src="{{ 'amex.svg' | asset_url }}" alt="master" class="credit-icon"></li>
+            <li class="footer-item" ><img src="{{ 'paypal.svg' | asset_url }}" alt="master" class="credit-icon"></li>
+            <li class="footer-item" ><img src="{{ 'diners-club.svg' | asset_url }}" alt="master" class="credit-icon"></li>
+            <li class="footer-item" ><img src="{{ 'discover.svg' | asset_url }}" alt="master" class="credit-icon"></li>
           </ul>
         </div>
       </div>
@@ -87,7 +87,7 @@
   "tag": "section",
   "class": "custom-footer",
   "disabled_on": {
-    "groups": ["header"]
+    "groups": ["header","custom.index","custom.product","custom.collection" ]
   },
   "settings": [
 
@@ -116,7 +116,7 @@
         },
       ]
     },
-      {
+    {
       "type": "page_link",
       "name": "ページリンク",
       "settings": [
