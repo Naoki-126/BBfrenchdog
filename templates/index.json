@@ -51,17 +51,16 @@
       }
     },
     "top_fv_banner_7g6Gh4": {
-      "type": "top-fv-banner",
+      "type": "top-fv",
       "name": "トップFV画像",
       "settings": {
         "image": "shopify://shop_images/top-fv.jpg"
       }
     },
-    "top_fv_wFxjJH": {
-      "type": "top-fv",
-      "name": "top-fv",
+    "top_content_79baAE": {
+      "type": "top-content",
+      "name": "トップコンテント",
       "settings": {
-        "fv_image": "shopify://shop_images/top-fv.jpg",
         "title": "BONNEL HARNESS&LEASH",
         "subTitle": "​『最高に優しい。美しい。愛犬との繋がり方』",
         "image": "shopify://shop_images/top-bonnel.png",
@@ -179,7 +178,7 @@
   "order": [
     "image_banner",
     "top_fv_banner_7g6Gh4",
-    "top_fv_wFxjJH",
+    "top_content_79baAE",
     "top_recommend_MiGqFf",
     "top_category_FWXBT8",
     "top_sns_rKHjUa"

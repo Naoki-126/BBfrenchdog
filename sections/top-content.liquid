@@ -1,0 +1,71 @@
+
+<section class="top-fvContent">
+  <div class="page-inner">
+    <div class="page-contents">
+      <div class="top-fv__titleArea">
+        <h2 class="section-title__fv">{{ section.settings.title }}</h2>
+        <h3 class="section-subTitle">{{ section.settings.subTitle }}</h3>
+      </div>
+      <div class="top-fv__contents">
+        <div class="top-fv__imgArea">
+          {% if section.settings.image %}
+            <img src="{{ section.settings.image | image_url: width: 640 }}" class="top-fv__img" alt="{{ section.settings.image.alt | default: 'メイン画像' | escape }}">
+          {% else %}
+            <img src="{{ 'no-image.png' | asset_url }}" class="top-fv__img" alt="代替画像">
+          {% endif %}
+          </div>
+        <div class="top-fv__textArea">
+          <p class="top-fv__text">{{ section.settings.text }}</p>
+        </div>
+      </div>
+      <div class="top-fv__btnArea">
+        {% if section.settings.button != blank%}
+          <a href="{{ collection.url }}" class="c-btn">{{ section.settings.button }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "トップcontent",
+  "tag": "section",
+  "class": "top-content",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id":"title",
+      "label": "タイトル"
+    },
+    {
+      "type": "text",
+      "id":"subTitle",
+      "label": "サブタイトル"
+    },
+    {
+      "type": "image_picker",
+      "id":"image",
+      "label": "画像"
+    },
+    {
+      "type": "textarea",
+      "id":"text",
+      "label": "テキスト"
+    },
+    {
+      "type": "text",
+      "id":"button",
+      "label": "ボタンのテキスト"
+    },
+  ],
+  "presets": [
+    {
+      "name":"トップコンテント"
+    }
+  ]
+}
+{% endschema %}
