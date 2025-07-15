@@ -1,14 +1,21 @@
 
 <section class="top-fv">
-  {% if section.settings.image %}
+  {% if section.settings.image or section.settings.sp_image %}
     <div class="top-image">
-      <img class="top-img"
-        src="{{ section.settings.image | image_url: width: 2000 }}"
-        alt="{{ section.settings.image.alt | escape }}"
-        loading="lazy"
-        width="{{ section.settings.image.width }}"
-        height="{{ section.settings.image.height }}"
-      >
+      <picture>
+        {% if section.settings.sp_image %}
+          <source srcset="{{ section.settings.sp_image | image_url: width:800 }} " media="( max-width: 767px )">
+        {% endif  %}
+        {% if section.settings.image %}
+          <img
+            class="top-img"
+            src="{{ section.settings.image | image_url: width: 2000 }}"
+            alt="{{ section.settings.image.alt | escape }}"
+            loading="lazy"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}">
+        {% endif  %}
+      </picture>
     </div>
   {% endif %}
 </section>
@@ -22,7 +29,12 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "画像を選択"
+      "label": "PC用画像"
+    },
+    {
+      "type": "image_picker",
+      "id": "sp_image",
+      "label": "スマホ用画像"
     }
   ],
   "presets": [

@@ -9,52 +9,12 @@
  */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "",
-            "heading_size": "h0"
-          }
-        },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "button"
-      ],
-      "disabled": true,
-      "settings": {
-        "image": "shopify://shop_images/top-fv.png",
-        "image_overlay_opacity": 0,
-        "image_height": "large",
-        "image_behavior": "none",
-        "desktop_content_position": "middle-center",
-        "desktop_content_alignment": "center",
-        "show_text_box": false,
-        "color_scheme": "scheme-4d86266b-87c9-4367-a268-1c6518285829",
-        "stack_images_on_mobile": false,
-        "mobile_content_alignment": "center",
-        "show_text_below": false
-      }
-    },
     "top_fv_banner_7g6Gh4": {
       "type": "top-fv",
       "name": "トップFV画像",
       "settings": {
-        "image": "shopify://shop_images/top-fv.jpg"
+        "image": "shopify://shop_images/top-fv.jpg",
+        "sp_image": "shopify://shop_images/fv-sp.jpg"
       }
     },
     "top_content_79baAE": {
@@ -176,7 +136,6 @@
     }
   },
   "order": [
-    "image_banner",
     "top_fv_banner_7g6Gh4",
     "top_content_79baAE",
     "top_recommend_MiGqFf",
