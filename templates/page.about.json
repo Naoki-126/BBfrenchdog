@@ -9,53 +9,12 @@
  */
 {
   "sections": {
-    "image_banner_Dfeipf": {
-      "type": "image-banner",
-      "blocks": {
-        "heading_QR8RYr": {
-          "type": "heading",
-          "settings": {
-            "heading": "",
-            "heading_size": "h1"
-          }
-        },
-        "text_BWtqX4": {
-          "type": "text",
-          "settings": {
-            "text": "",
-            "text_style": "body"
-          }
-        },
-        "buttons_mbrrTJ": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "",
-            "button_link_1": "",
-            "button_style_secondary_1": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_QR8RYr",
-        "text_BWtqX4",
-        "buttons_mbrrTJ"
-      ],
-      "name": "t:sections.image-banner.presets.name",
+    "main": {
+      "type": "main-page",
+      "disabled": true,
       "settings": {
-        "image": "shopify://shop_images/fv-sp.jpg",
-        "image_overlay_opacity": 20,
-        "image_height": "small",
-        "image_behavior": "none",
-        "desktop_content_position": "bottom-left",
-        "desktop_content_alignment": "center",
-        "show_text_box": false,
-        "color_scheme": "",
-        "stack_images_on_mobile": true,
-        "mobile_content_alignment": "center",
-        "show_text_below": true
+        "padding_top": 28,
+        "padding_bottom": 28
       }
     },
     "about_fv_6gihY6": {
@@ -68,62 +27,32 @@
         "message-text": "\"愛犬も人も喜べる\"をテーマとしたもの作り・場所作りをご案内します。<br><br>文章が入ります"
       }
     },
-    "main": {
-      "type": "main-page",
-      "disabled": true,
-      "settings": {
-        "padding_top": 28,
-        "padding_bottom": 28
-      }
-    },
-    "rich_text_x7ibxM": {
-      "type": "rich-text",
+    "about_comiit_tx8HXe": {
+      "type": "about-comiit",
       "blocks": {
-        "heading_DPnytP": {
-          "type": "heading",
+        "image_Bm4DnM": {
+          "type": "image",
           "settings": {
-            "heading": "ブランドについて説明する",
-            "heading_size": "h1"
-          }
-        },
-        "text_hcdnGR": {
-          "type": "text",
-          "settings": {
-            "text": "<p>ブランドに関する情報をお客様と共有します。商品を説明したり、告知をしたり、ストアへのお客様を歓迎したりします。</p>"
-          }
-        },
-        "button_keNcxm": {
-          "type": "button",
-          "settings": {
-            "button_label": "ボタンのラベル",
-            "button_link": "",
-            "button_style_secondary": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "image": "shopify://shop_images/about-img1.jpg",
+            "image-2": "shopify://shop_images/about-img2.jpg"
           }
         }
       },
       "block_order": [
-        "heading_DPnytP",
-        "text_hcdnGR",
-        "button_keNcxm"
+        "image_Bm4DnM"
       ],
-      "name": "t:sections.rich-text.presets.name",
+      "name": "アバウトコミット",
       "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 52
+        "title-1": "B&BFRENCH　3",
+        "title-2": "つのこだわり",
+        "message-title": "",
+        "message-text": ""
       }
     }
   },
   "order": [
-    "image_banner_Dfeipf",
-    "about_fv_6gihY6",
     "main",
-    "rich_text_x7ibxM"
+    "about_fv_6gihY6",
+    "about_comiit_tx8HXe"
   ]
 }
