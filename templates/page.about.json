@@ -30,23 +30,31 @@
     "about_comiit_tx8HXe": {
       "type": "about-comiit",
       "blocks": {
-        "image_Bm4DnM": {
-          "type": "image",
+        "item_CrG4eq": {
+          "type": "item",
           "settings": {
             "image": "shopify://shop_images/about-img1.jpg",
-            "image-2": "shopify://shop_images/about-img2.jpg"
+            "theme-1": "遊びへのこだわり",
+            "text-1": "文章が入ります",
+            "button": "詳しく見る",
+            "image-2": "shopify://shop_images/about-img2.jpg",
+            "theme-2": "品質のこだわり",
+            "text-2": "文章が入ります",
+            "button-2": "詳しく見る",
+            "image-3": "shopify://shop_images/about-img3.jpg",
+            "theme-3": "フードへのこだわり",
+            "text-3": "文章が入ります",
+            "button-3": "詳しく見る"
           }
         }
       },
       "block_order": [
-        "image_Bm4DnM"
+        "item_CrG4eq"
       ],
       "name": "アバウトコミット",
       "settings": {
         "title-1": "B&BFRENCH　3",
-        "title-2": "つのこだわり",
-        "message-title": "",
-        "message-text": ""
+        "title-2": "つのこだわり"
       }
     }
   },

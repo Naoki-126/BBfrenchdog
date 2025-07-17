@@ -41,48 +41,48 @@
     "top_category_FWXBT8": {
       "type": "top-category",
       "blocks": {
-        "item_bjdie9": {
-          "type": "item",
+        "image_YMwHPA": {
+          "type": "image",
           "settings": {
             "image": "shopify://shop_images/cat-img1.png",
-            "collection": "harness"
+            "collection": ""
           }
         },
-        "item_JcJUMt": {
-          "type": "item",
+        "image_MYzRbR": {
+          "type": "image",
           "settings": {
             "image": "shopify://shop_images/cat-img2.png",
-            "collection": "wear"
+            "collection": ""
           }
         },
-        "item_RQQaKm": {
-          "type": "item",
+        "image_HggVqj": {
+          "type": "image",
           "settings": {
             "image": "shopify://shop_images/cat-img3.png",
-            "collection": "food"
+            "collection": ""
           }
         },
-        "item_XyeW48": {
-          "type": "item",
+        "image_hBYRYk": {
+          "type": "image",
           "settings": {
             "image": "shopify://shop_images/cat-img4.png",
-            "collection": "floor"
+            "collection": ""
           }
         },
-        "item_NYAkRH": {
-          "type": "item",
+        "image_8Tgigq": {
+          "type": "image",
           "settings": {
             "image": "shopify://shop_images/cat-img5.png",
-            "collection": "origin"
+            "collection": ""
           }
         }
       },
       "block_order": [
-        "item_bjdie9",
-        "item_JcJUMt",
-        "item_RQQaKm",
-        "item_XyeW48",
-        "item_NYAkRH"
+        "image_YMwHPA",
+        "image_MYzRbR",
+        "image_HggVqj",
+        "image_hBYRYk",
+        "image_8Tgigq"
       ],
       "name": "カテゴリー",
       "settings": {

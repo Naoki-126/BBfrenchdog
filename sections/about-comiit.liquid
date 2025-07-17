@@ -9,7 +9,7 @@
         <div class="about-com__content">
           <div class="about-com__left">
             <div class="about-com__imgArea">
-            {% for block in section.blocks %}
+              {% for block in section.blocks %}
                 {% if block.settings.image %}
                   <img src="{{ block.settings.image | image_url: width: 576 }}" class="about-com__img" alt="{{ block.settings.image.alt | default: '画像1' | escape }}">
                   {% else %}
@@ -20,19 +20,21 @@
           </div>
           <div class="about-com__right">
             <div class="about-com__rightArea">
-              <div class="about-com__ttlArea">
-                <div class="about-com__number">01</div>
-                <h3 class="about-com__title">遊びへのこだわり</h3>
-              </div>
-              <div class="about-com__textArea">
-                <div class="about-message__text">文章が入ります</div>
-              </div>
-              <div class="about-com__bottom">
-                <div class="about-message__text">こだわり</div>
-              </div>
-              <div class="about-com__btnArea">
-                <button class="c-btn__about">詳しく見る</button>
-              </div>
+              {% for block in section.blocks %}
+                <div class="about-com__ttlArea">
+                  <div class="about-com__number">01</div>
+                  <h3 class="about-com__title">{{ block.settings.theme-1 }}</h3>
+                </div>
+                <div class="about-com__textArea">
+                  <div class="about-message__text">{{ block.settings.theme-1 }}</div>
+                </div>
+                <div class="about-com__bottom">
+                  <div class="about-message__text">{{ block.settings.theme-1 }}</div>
+                  </div>
+                  <div class="about-com__btnArea">
+                    <button class="c-btn__about">{{ block.settings.button }}</button>
+                </div>
+              {% endfor %}
             </div>
           </div>
         </div>
@@ -50,19 +52,21 @@
           </div>
           <div class="about-com__right">
             <div class="about-com__rightArea">
-              <div class="about-com__ttlArea">
-                <div class="about-com__number">02</div>
-                <h3 class="about-com__title">品質のこだわり</h3>
-              </div>
-              <div class="about-com__textArea">
-                <div class="about-message__text">文章が入ります</div>
-              </div>
-              <div class="about-com__bottom">
-                <div class="about-message__text">こだわり</div>
-              </div>
-              <div class="about-com__btnArea">
-                <button class="c-btn__about">詳しく見る</button>
-              </div>
+              {% for block in section.blocks %}
+                <div class="about-com__ttlArea">
+                  <div class="about-com__number">02</div>
+                  <h3 class="about-com__title">{{ block.settings.theme-2 }}</h3>
+                </div>
+                <div class="about-com__textArea">
+                  <div class="about-message__text">{{ block.settings.theme-2 }}</div>
+                </div>
+                <div class="about-com__bottom">
+                  <div class="about-message__text">{{ block.settings.theme-2 }}</div>
+                  </div>
+                  <div class="about-com__btnArea">
+                    <button class="c-btn__about">{{ block.settings.button-2 }}</button>
+                </div>
+              {% endfor %}
             </div>
           </div>
         </div>
@@ -79,20 +83,22 @@
               </div>
           </div>
           <div class="about-com__right">
-              <div class="about-com__rightArea">
-                <div class="about-com__ttlArea">
-                  <div class="about-com__number">03</div>
-                  <h3 class="about-com__title">フードへのこだわり</h3>
-                </div>
+            <div class="about-com__rightArea">
+              {% for block in section.blocks %}
+              <div class="about-com__ttlArea">
+                <div class="about-com__number">03</div>
+                <h3 class="about-com__title">{{ block.settings.theme-3 }}</h3>
+              </div>
               <div class="about-com__textArea">
-                <div class="about-message__text">文章が入ります</div>
+                <div class="about-message__text">{{ block.settings.theme-3 }}</div>
               </div>
               <div class="about-com__bottom">
-                <div class="about-message__text">こだわり</div>
+                <div class="about-message__text">{{ block.settings.theme-3 }}</div>
+                </div>
+                <div class="about-com__btnArea">
+                  <button class="c-btn__about">{{ block.settings.button-3 }}</button>
               </div>
-              <div class="about-com__btnArea">
-                <button class="c-btn__about">詳しく見る</button>
-              </div>
+              {% endfor %}
             </div>
           </div>
         </div>
@@ -122,26 +128,11 @@
       "label": "後半タイトル",
       "default": "つのこだわり"
     },
-    {
-      "type": "image_picker",
-      "id":"image",
-      "label": "画像"
-    },
-    {
-      "type": "text",
-      "id":"message-title",
-      "label": "メッセージタイトル"
-    },
-    {
-      "type": "textarea",
-      "id":"message-text",
-      "label": "メッセージ本文"
-    }
   ],
   "blocks": [
     {
-      "type": "image",
-      "name": "画像",
+      "type": "item",
+      "name": "アイテム",
       "settings": [
         {
           "type": "image_picker",
@@ -149,14 +140,68 @@
           "label": "画像1"
         },
         {
+        "type": "text",
+        "id":"theme-1",
+        "label": "テーマ1",
+        "default": "遊びへのこだわり"
+        },
+        {
+          "type": "textarea",
+          "id":"text-1",
+          "label": "テキスト1",
+          "default": "文章が入ります"
+        },
+        {
+          "type": "text",
+          "id":"button",
+          "label": "ボタンのテキスト",
+          "default": "詳しく見る"
+        },
+        {
           "type": "image_picker",
           "id": "image-2",
           "label": "画像-2"
         },
         {
+        "type": "text",
+        "id":"theme-2",
+        "label": "テーマ2",
+        "default": "品質のこだわり"
+        },
+        {
+          "type": "textarea",
+          "id":"text-2",
+          "label": "テキスト2",
+          "default": "文章が入ります"
+        },
+        {
+          "type": "text",
+          "id":"button-2",
+          "label": "ボタン2のテキスト",
+          "default": "詳しく見る"
+        },
+        {
           "type": "image_picker",
           "id": "image-3",
           "label": "画像-3"
+        },
+        {
+        "type": "text",
+        "id":"theme-3",
+        "label": "テーマ3",
+        "default": "フードへのこだわり"
+        },
+        {
+          "type": "textarea",
+          "id":"text-3",
+          "label": "テキスト3",
+          "default": "文章が入ります"
+        },
+        {
+          "type": "text",
+          "id":"button-3",
+          "label": "ボタン3のテキスト",
+          "default": "詳しく見る"
         },
       ]
     }
