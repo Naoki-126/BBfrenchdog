@@ -316,7 +316,18 @@
     {% sections 'header-group' %}
 
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
-      {{ content_for_layout }}
+      {% if template contains 'main-collection-product-grid'%}
+        <div class="col-area">
+          <aside class="col-aside">
+          {% sections 'aside-group' %}
+        </aside>
+      </div>
+      <div class="col-main">
+        {{ content_for_layout }}
+        </div>
+        {% else %}
+        {{ content_for_layout }}
+    {% endif %}
     </main>
 
     {% sections 'footer-group' %}
