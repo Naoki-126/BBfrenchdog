@@ -2,26 +2,12 @@
   <div class="page-inner">
     <div class="page-contents">
       <div class="col-area">
-
         <div class="col-aside">
           <div class="col-headArea">
             <p class="col-caption">対象商品数</p>
             <p class="col-result"><span class="-strong">{{ collection.products_count }}</span>件</p>
           </div>
           <div class="col-bodyArea">
-            <div class="aside-narrowDown">
-              <div class="aside-nar__titleArea">
-                <p class="aside-nar__display">絞り込み</p>
-                <p class="aside-nar__delete">すべてを削除する</p>
-              </div>
-            </div>
-            <ul class="aside-tagArea">
-              <li><a href="" class="product-tag">ハーネス</a></li>
-              <li><a href="" class="product-tag">ウェア</a></li>
-              <li><a href="" class="product-tag">フード</a></li>
-              <li><a href="" class="product-tag">滑らない床</a></li>
-              <li><a href="" class="product-tag">オリジナル</a></li>
-            </ul>
             {%- for block in section.blocks -%}
               {% if block.type == 'custom_link' %}
                 {% if block.settings.collection %}

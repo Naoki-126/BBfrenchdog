@@ -39,10 +39,6 @@ ul, ol {
   list-style:none;
 }
 
-li, dd {
-  list-style-type: none;
-}
-
 img {
   border: none;
   vertical-align: bottom;
@@ -861,6 +857,82 @@ body {
 	margin-top: auto;
 }
 
+/* サイドバー
+=========================== */
+.col-aside {
+  width: 244px;
+}
+
+.side-narrowDown {
+	width: 100%;
+}
+
+.aside-nar__titleArea {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.aside-nar__display {
+	font-size: 14px;
+	line-height: 1.7;
+}
+
+.aside-nar__delete {
+	font-size: 12px;
+	font-weight: 700;
+	text-decoration: underline;
+}
+
+.aside-tagArea {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.aside-category {
+  margin-top: 10px;
+}
+
+.aside-category:nth-child(n + 2) {
+  margin-top: 20px;
+}
+
+.aside-cat__title {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 2;
+  padding-bottom: 10px;
+  padding-left: 16px;
+  border-bottom: 1px solid #999999
+}
+
+.aside-cat__lists {
+  margin-top: 10px;
+  padding-left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.aside-cat__list {
+  padding-left: 31px;
+  position: relative;
+}
+
+.aside-cat__list::before {
+  content: "";
+  position: absolute;
+  border: 1px solid #292929 ;
+  width: 12px;
+  height: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+}
+
 /* collection(一覧)ページ
 =========================== */
 .col-fv {
@@ -921,7 +993,6 @@ body {
 .col-headArea__mainSp {
   display: none;
 }
-
 
 .col-caption {
   font-size: 12px;
@@ -1029,83 +1100,6 @@ body {
   transform: rotate(180deg);
 }
 
-/* サイドバー
-=========================== */
-.col-aside {
-  width: 244px;
-}
-
-.side-narrowDown {
-	width: 100%;
-}
-
-.aside-nar__titleArea {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	flex-wrap: wrap;
-}
-
-.aside-nar__display {
-	font-size: 14px;
-	line-height: 1.7;
-}
-
-.aside-nar__delete {
-	font-size: 12px;
-	font-weight: 700;
-	text-decoration: underline;
-}
-
-.aside-tagArea {
-  margin-top: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.aside-category {
-  margin-top: 10px;
-}
-
-.aside-category:nth-child(n + 2) {
-  margin-top: 20px;
-}
-
-.aside-cat__title {
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 2;
-  padding-bottom: 10px;
-  padding-left: 16px;
-  border-bottom: 1px solid #999999
-}
-
-.aside-cat__lists {
-  margin-top: 10px;
-  padding-left: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.aside-cat__list {
-  padding-left: 31px;
-  position: relative;
-}
-
-.aside-cat__list::before {
-  content: "";
-  position: absolute;
-  border: 1px solid #292929 ;
-  width: 12px;
-  height: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 0;
-}
-
-
 /* ページネーション
 =========================== */
 .col-paginationArea {
@@ -1142,6 +1136,245 @@ body {
   color: #fff;
 }
 
+/* guide ページ
+=========================== */
+.guide {
+  margin: 72px auto 0;
+  width: 100%;
+  max-width: 720px;
+}
+
+.guide-titleArea {
+	margin-top: 72px;
+}
+
+.guideFv-title {
+	font-size: 28px;
+	font-weight: 700;
+}
+
+.guideFv-text {
+	margin-top: 32px;
+	font-size: 14px;
+	line-height: 2.0;
+}
+
+.guide-contents {
+  margin-top: 24px;
+}
+
+.guide-content {
+  margin-top: 24px;
+}
+
+.guide-content:first-of-type {
+  margin-top: 0px;
+}
+
+.guide-text {
+  font-size: 14px;
+  line-height: 2;
+}
+
+.guide-title {
+  margin-top: 24px;
+  width: 100%;
+  background: #292929;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  padding: 14px 24px;
+  border-radius: 8px;
+}
+
+.guide-textArea {
+  margin-top: 24px;
+}
+
+.guide-lists {
+  margin-top: 24px;
+}
+
+.guide-list {
+  font-size: 14px;
+  line-height: 2;
+  padding-left: 18px;
+  position: relative;
+}
+
+.guide-numbers {
+	margin-top: 24px;
+	padding-left: 18px;
+  list-style: decimal;
+}
+
+.guide-number {
+	font-size: 14px;
+	line-height: 2;
+}
+
+.guide-list::before {
+  content: "";
+  position: absolute;
+  background: #AB8572;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+}
+
+.guide-linkArea {
+  margin-top: 24px;
+}
+
+.guide-link {
+  font-size: 14px;
+  line-height: 2;
+  color: #AB8572;
+  text-decoration: underline;
+}
+
+.guide-table {
+  margin-top: 24px;
+  border-collapse:  collapse;
+}
+
+.guide-table__th,
+.guide-table__td {
+  border: 1px solid #292929;
+  max-width: 240px;
+  font-size: 14px;
+  line-height: 2;
+  font-weight: 400;
+  text-align-last: left;
+}
+
+.guide-imgArea {
+  margin-top: 40px;
+}
+
+.guide-img {
+  width: 100%;
+  max-width: 720px;
+  height: auto;
+}
+
+.guide-captionArea {
+  margin-top: 40px;
+}
+
+.guide-caption__h3 {
+  font-size: 20px;
+  line-height: 2.8;
+  font-weight: 700;
+  padding-left: 25px;
+  position: relative
+}
+
+.guide-caption__h3::before {
+  content: "";
+  position: absolute;
+  background: #CDC2B5;
+  width: 4px;
+  height: 56px;
+  border-radius: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+}
+
+.guide-caption__h4 {
+  font-size: 18px;
+  font-weight: 700;
+  padding-left: 24px;
+  padding-bottom: 11px;
+  border-bottom:1px solid #CDC2B5;
+}
+
+.guide-btnArea {
+  margin: 76px auto 0;
+  text-align: center;
+}
+
+/* faqセクション
+=========================== */
+.faq {
+  margin: 72px auto 0;
+  width: 100%;
+  max-width: 720px;
+}
+
+.faq-contents {
+  margin-top: 32px;
+}
+
+.faq-content {
+  margin-top: 72px;
+}
+
+.faq-content:first-of-type {
+  margin-top: 0;
+}
+
+.faq-accordionArea {
+  width: 100%;
+}
+
+.accordion-q {
+  background: #DCD7CF;
+  padding: 14px 24px 14px 57px;
+  font-size: 14px;
+  line-height: 2;
+  border-bottom: 1px solid #959595;
+  position: relative;
+}
+
+.accordion-q:first-of-type {
+  border-top: 1px solid #959595;
+}
+
+.accordion-q::before {
+  content: "";
+  position: absolute;
+  background: url(../img/icon-q.png)no-repeat center center /contain;
+  width: 17px;
+  height: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 16px;
+}
+
+.accordion-q::after {
+  content: "";
+  position: absolute;
+  background: url(../img/arrow-down.png)no-repeat center center /contain;
+  width: 8px;
+  height: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 16px;
+}
+
+.accordion-a {
+  background: #EDE8E2;
+  padding: 14px 24px 14px 57px;
+  font-size: 14px;
+  line-height: 2;
+  border-bottom: 1px solid #959595;
+  position: relative;
+}
+
+.accordion-a::before {
+    content: "";
+  position: absolute;
+  background: url(../img/icon-a.png)no-repeat center center /contain;
+  width: 17px;
+  height: 24px;
+  top: 25%;
+  left: 16px;
+}
 
 
 

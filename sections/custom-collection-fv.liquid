@@ -2,13 +2,7 @@
   <div class="page-inner">
     <div class="page-contents">
       <div class="col-fv__inner">
-        <nav  role="navigation" aria-label="breadcrumb">
-          <ol class="col-breadcrumb">
-            <li><a href="{{ routes.root_url }}">ホーム</a></li>
-            <li><a href="{{ routes.collections_url }}">コレクション</a></li>
-            <li>{{ collection.title }}</li>
-          </ol>
-        </nav>
+        
         <div class="col-fv__titleArea">
           <h2 class="section-title">{{- collection.title | escape -}}</h2>
           <h3 class="section-subTitle">{{- collection.description -}}</h3>

@@ -1,0 +1,275 @@
+ <main class="guide-page">
+  <div class="page-inner">
+    <div class="page-contents">
+      <div class="breadcrumbs-area">
+        <nav  role="navigation" aria-label="breadcrumb">
+          <ol class="col-breadcrumb">
+            <li><a href="{{ routes.root_url }}">ホーム</a></li>
+            <li><a href="{{ routes.collections_url }}">コレクション</a></li>
+            <li>{{ collection.title }}</li>
+          </ol>
+        </nav>
+      </div>
+      <section class="guide">
+        <div class="guide-titleArea">
+          <h1 class="guideFv-title">{{ section.settings.title }}</h1>
+          <p class="guideFv-text">{{ section.settings.explain }}</p>
+        </div>
+        <div class="guide-contents">
+          {% for block in section.blocks %}
+            <div class="guide-content">
+              {% if block.settings.title != blank %}
+                <h2 class="guide-title">{{ block.settings.title }}</h2>
+              {% endif %}
+              <div class="guide-textArea">
+                {% if block.settings.text != blank %}
+                  <p class="guide-text">{{ block.settings.text | newline_to_br }}</p>
+                {% endif %}
+                {% if block.type == 'bullet_list' and block.settings.list_items != blank %}
+                  <ul class="guide-lists">
+                    {% assign items = block.settings.list_items | split: ',' %}
+                    {% for item in items %}
+                      <li class="guide-list">{{ item }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+                {% if block.type == 'numbered_list' and block.settings.list_items != blank %}
+                  {% assign items = block.settings.list_items | split: ',' %}
+                  <ol class="guide-numbers">
+                    {% for item in items %}
+                      <li class="guide-number">{{ item }}</li>
+                    {% endfor %}
+                  </ol>
+                {% endif %}
+                {% if block.type == 'link' and block.settings.link_url != blank %}
+                  <div class="guide-linkArea">
+                    <a href="{{ block.settings.link_url }}" class="guide-link" target="_blank" rel="noopener" >{{ block.settings.link_text }}</a>
+                    </div>
+                {% endif %}
+                {% if block.type == 'table' %}
+                  {% if block.settings.table_html != blank %}
+                    <div class="guide-tableArea">{{ block.settings.table_html }}</div>
+                  {% endif %}
+                  {% if block.settings.image %}
+                    <div class="guide-imgArea">
+                      <img src="{{ block.settings.image | image_url: width: 720 }}" alt="{{ block.settings.image.alt | escape }}" class="guide-img">
+                    </div>
+                  {% endif %}
+                {% endif %}
+                {% if block.type == 'caption' %}
+                  <div class="guide-captionArea">
+                    <h3 class="guide-caption__h3">{{ block.settings.caption_title }}</h3>
+                    <div class="guide-textArea">
+                      <p class="guide-text">{{ block.settings.caption_text | newline_to_br }}</p>
+                    </div>
+                  </div>
+                {% endif %}
+                {% if block.type == 'caption-h4' %}
+                  <div class="guide-captionArea">
+                    <h3 class="guide-caption__h4">{{ block.settings.caption_title4 }}</h3>
+                    <div class="guide-textArea">
+                      <p class="guide-text">{{ block.settings.caption_text | newline_to_br }}</p>
+                    </div>
+                  </div>
+                {% endif %}
+                {% if  block.type == 'guide-btn' and block.settings.button_link != blank %}
+                  <div class="guide-btnArea">
+                    <a class="c-btn" href="{{ block.settings.button_link }}">{{ block.settings.button_text }}</a>
+                  </div>
+                {% endif %}
+
+              </div>
+            </div>
+
+
+
+            {% comment %} </div> {% endcomment %}
+          {% comment %} </div> {% endcomment %}
+
+          {% endfor %}
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+
+{% schema %}
+{
+  "name": "ショッピングGuide",
+  "tag": "section",
+  "class": "guide__page",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id":"title",
+      "label": "セクションタイトル",
+      "default": "ショッピングガイド"
+    },
+    {
+      "type": "text",
+      "id":"explain",
+      "label": "導入説明文",
+      "default": "ショッピングガイドの内容"
+    }
+  ],
+   "blocks": [
+    {
+      "type": "bullet_list",
+      "name": "箇条書きリスト",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "タイトル"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "説明文"
+        },
+        {
+          "type": "textarea",
+          "id": "list_items",
+          "label": "リスト項目（カンマ区切り）",
+          "info": "例：項目1, 項目2, 項目3"
+        },
+      ]
+    },
+    {
+      "type": "numbered_list",
+      "name": "番号付きリスト",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "タイトル"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "説明文"
+        },
+        {
+          "type": "textarea",
+          "id": "list_items",
+          "label": "リスト項目（カンマ区切り）",
+          "info": "例：手順1, 手順2, 手順3"
+        }
+      ]
+    },
+    {
+      "type": "link",
+      "name": "テキストリンク",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "タイトル"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "説明文"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "リンクテキスト"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "リンクURL"
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "name": "テーブル",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "タイトル"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "説明文"
+        },
+        {
+          "type": "textarea",
+          "id": "table_html",
+          "label": "テーブルHTML"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "画像"
+        }
+      ]
+    },
+    {
+      "type": "caption",
+      "name": "見出し＋テキスト",
+      "settings": [
+        {
+          "type": "text",
+          "id": "caption_title4",
+          "label": "見出し3タイトル",
+          "default": "見出し3見出し3"
+        },
+        {
+          "type": "textarea",
+          "id": "caption_text",
+          "label": "本文テキスト",
+          "default": "ここにテキストが入ります。"
+        }
+      ]
+    },
+    {
+      "type": "caption-h4",
+      "name": "見出し4＋テキスト",
+      "settings": [
+        {
+          "type": "text",
+          "id": "caption_title4",
+          "label": "見出し4タイトル",
+          "default": "見出し4見出し4"
+        },
+        {
+          "type": "textarea",
+          "id": "caption_text",
+          "label": "本文テキスト",
+          "default": "ここにテキストが入ります。"
+        }
+      ]
+    },
+    {
+      "type": "guide-btn",
+      "name": "ガイドボタン",
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "ボタンのテキスト",
+          "default": "ショッピングガイド一覧を見る"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "ボタンのリンク先"
+        }
+      ],
+    }
+  ],
+  "presets": [
+    {
+      "name":"ショッピングガイド"
+    }
+  ]
+}
+{% endschema %}
