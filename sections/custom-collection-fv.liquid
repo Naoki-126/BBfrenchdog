@@ -17,3 +17,75 @@
     </div>
   </div>
 </section>
+
+<style>
+  .col-fv__inner {
+    padding-top: {{ section.settings.pc_padding_top }}px;
+    padding-bottom: {{ section.settings.pc_padding_bottom }}px;
+    background: {{ section.settings.spacer_bg }};
+  }
+  @media screen and (max-width: 768px ) {
+    .col-fv__inner {
+      padding-top: {{ section.settings.sp_padding_top }}px;
+      padding-bottom: {{ section.settings.sp_padding_bottom }}px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "コレクションFV",
+  "tag": "section",
+  "class": "collection__fv",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "range",
+      "id": "pc_padding_top",
+      "label": "PC：上スペース",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "pc_padding_bottom",
+      "label": "PC下：スペース",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "sp_padding_top",
+      "label": "モバイル：上スペース",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "sp_padding_bottom",
+      "label": "モバイル下：スペース",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 0,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name":"コレクションFV"
+    }
+  ]
+}
+{% endschema %}

@@ -11,21 +11,99 @@
   "sections": {
     "banner": {
       "type": "custom-collection-fv",
-      // "type": "main-collection-banner",
-      "settings": {}
-    },
-    "aside": {
-      "type": "aside",
-      "settings": {}
+      "settings": {
+        "pc_padding_top": 60,
+        "pc_padding_bottom": 0,
+        "sp_padding_top": 16,
+        "sp_padding_bottom": 0
+      }
     },
     "product-grid": {
-      "type": "custom-collection",
-      "settings": {}
+      "type": "collection-flex",
+      "blocks": {
+        "custom_link_W8bYhU": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "カテゴリー",
+            "collection": "harness",
+            "title": "ハーネス"
+          }
+        },
+        "custom_link_ijQDDA": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "",
+            "collection": "wear",
+            "title": "ウェア"
+          }
+        },
+        "custom_link_GfYkrd": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "",
+            "collection": "food",
+            "title": "フード"
+          }
+        },
+        "custom_link_9Yt9QH": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "",
+            "collection": "floor",
+            "title": "すべらない床"
+          }
+        },
+        "category_group_FXXjBn": {
+          "type": "category_group",
+          "settings": {
+            "heading": "素材",
+            "prefix": "material",
+            "values": "プラチナ,K18,K14,K10,シルバー"
+          }
+        },
+        "category_group_rAbVFK": {
+          "type": "category_group",
+          "settings": {
+            "heading": "カラー",
+            "prefix": "color",
+            "values": "ブラック, ベージュ, ピンク"
+          }
+        },
+        "category_group_YxNF3X": {
+          "type": "category_group",
+          "settings": {
+            "heading": "ブランド",
+            "prefix": "brand",
+            "values": "BONNEL,NUKENAI,ONETOUCH,TEBURA,AAAAA,BBBBB"
+          }
+        },
+        "category_group_JXQFHi": {
+          "type": "category_group",
+          "settings": {
+            "heading": "テーマ",
+            "prefix": "theme",
+            "values": ""
+          }
+        }
+      },
+      "block_order": [
+        "custom_link_W8bYhU",
+        "custom_link_ijQDDA",
+        "custom_link_GfYkrd",
+        "custom_link_9Yt9QH",
+        "category_group_FXXjBn",
+        "category_group_rAbVFK",
+        "category_group_YxNF3X",
+        "category_group_JXQFHi"
+      ],
+      "name": "商品インデックス",
+      "settings": {
+        "index": ""
+      }
     }
   },
   "order": [
     "banner",
-    "aside",
     "product-grid"
   ]
 }

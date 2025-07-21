@@ -9,12 +9,23 @@
  */
 {
   "sections": {
+    "custom_collection_fv_e3xNfG": {
+      "type": "custom-collection-fv",
+      "name": "コレクションFV",
+      "settings": {
+        "col-fv__inner": 60,
+        "pc_padding_bottom": 0,
+        "sp_padding_top": 30,
+        "sp_padding_bottom": 30
+      }
+    },
     "main": {
       "type": "main-404",
       "settings": {}
     }
   },
   "order": [
+    "custom_collection_fv_e3xNfG",
     "main"
   ]
 }

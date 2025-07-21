@@ -1,0 +1,207 @@
+<section class="col">
+  <div class="page-inner">
+    <div class="page-contents">
+      <div class="col-area">
+
+        <div class="col-aside">
+          <div class="col-headArea">
+            <p class="col-caption">対象商品数</p>
+            <p class="col-result"><span class="-strong">{{ collection.products_count }}</span>件</p>
+          </div>
+          <div class="col-bodyArea">
+            <div class="aside-narrowDown">
+              <div class="aside-nar__titleArea">
+                <p class="aside-nar__display">絞り込み</p>
+                <p class="aside-nar__delete">すべてを削除する</p>
+              </div>
+            </div>
+            <ul class="aside-tagArea">
+              <li><a href="" class="product-tag">ハーネス</a></li>
+              <li><a href="" class="product-tag">ウェア</a></li>
+              <li><a href="" class="product-tag">フード</a></li>
+              <li><a href="" class="product-tag">滑らない床</a></li>
+              <li><a href="" class="product-tag">オリジナル</a></li>
+            </ul>
+            {%- for block in section.blocks -%}
+              {% if block.type == 'custom_link' %}
+                {% if block.settings.collection %}
+                  <div class="aside-category">
+                    <h3 class="aside-cat__title">{{ block.settings.theme-title }}</h3>
+                    <ul class="aside-cat__lists">
+                      <li><a href="{{ block.settings.collection.url }}" class="aside-cat__list">{{ block.settings.title }}</a></li>
+                    </ul>
+                  </div>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+            {%- for block in section.blocks -%}
+              {% if block.type == 'category_group' %}
+                <div class="aside-category">
+                  <h3 class="aside-cat__title">{{ block.settings.heading }}</h3>
+                  <ul class="aside-cat__lists">
+                    {% assign items = block.settings.values | split: ',' %}
+                    {% for item in items %}
+                      <li>
+                        <a href="/collections/all/{{ block.settings.prefix | strip }}/{{ item | strip | handleize }}" class="aside-cat__list">
+                          {{ item | strip }}
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% endif %}
+            {%- endfor -%}
+          </div>
+        </div>
+
+        <div class="col-main">
+          {% paginate collection.products by 16 %}
+            <div class="col-headArea__main">
+              <p class="col-caption">
+                <span>{{ paginate.items }}</span>件中
+                <span>{{ paginate.current_offset | plus: 1 }}</span>件〜
+                <span>{{ paginate.current_offset | plus: paginate.page_size | at_most: paginate.items }}</span>件を表示
+              </p>
+              <div class="col-search" >
+                <p class="col-filters">並び替え</p>
+                <img src="../assets/arrow-down.png" alt="arrow-down" class="arrow-down" id="js-toggle-sort">
+
+                <div class="sort-options" id="js-sort-options">
+                  <a href="?sort_by=title-ascending">アルファベット順, A-Z</a>
+                  <a href="?sort_by=title-descending">アルファベット順, Z-A</a>
+                  <a href="?sort_by=price-ascending">価格が安い順</a>
+                  <a href="?sort_by=price-descending">価格が高い順</a>
+                  <a href="?sort_by=created-descending">新着順</a>
+                </div>
+              </div>
+              <div class="col-headArea__mainSp">
+                <div class="col-search__sp">
+                  <img src="./assets/img/icon-filters.png" alt="icon-filter" class="col-filter__icon">
+                  <p class="col-filters__sp">絞り込みと並び替え</p>
+                  <p class="col-filtersQuantity__sp">1-20件 / 24件</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-bodyArea">
+              <ul class="col-items">
+                {% for product in collection.products %}
+                  <li class="col-item">
+                    <a href="{{ product.url }}"><img src="{{ product |  image_url: width: 213  }}" alt="index-img" class="col-product__img">
+                      <div class="top-news__textArea">
+                        <h3 class="product-name">{{ product.title }}</h3>
+                        {% if product.metafields.custom.color != blank %}
+                          <div class="product-item"> {{ product.metafields.custom.color | metafield_text }}</div>
+                        {% endif %}
+                        {% if product.metafields.custom.capacity != blank %}
+                          <div class="product-item"> {{ product.metafields.custom.capacity | metafield_text }}</div>
+                        {% endif %}
+                        {% if product.metafields.custom.dimension != blank %}
+                          <div class="product-item"> {{ product.metafields.custom.dimension | metafield_text }}</div>
+                        {% endif %}
+                        <div class="product-price"><span class="product-emphasis">{{ product.price | money }}</span>円（税込）</div>
+                        <div class="discount-tag"></div>
+                      </div>
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+
+              {% if paginate.pages > 1 %}
+                <div class="col-paginationArea">
+                  <ul class="product-paginations">
+                    {% for part in paginate.parts %}
+                      <li>
+                        {% if part.is_link %}
+                          <a href="{{ part.url }}" class="product-pagination">{{ part.title }}</a>
+                          {% elsif part.title == '...' %}
+                            <span class="product-pagination">…</span>
+                          {% else %}
+                            <span class="product-pagination is-current">{{ part.title }}</span>
+                        {% endif %}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% endif %}
+            </div>
+          {% endpaginate %}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "一覧",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "collection",
+      "id":"index",
+      "label": "商品一覧"
+    },
+  ],
+  "blocks": [
+    {
+      "type": "custom_link",
+      "name": "コレクションリンク",
+      "settings": [
+        {
+          "type": "text",
+          "id": "theme-title",
+          "label": "テーマタイトル"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "リンク先コレクション"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "リンク名"
+        },
+      ]
+    },
+    {
+      "type": "category_group",
+      "name": "カテゴリグループ",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "見出し（例：カラー、ブランド、テーマなど）"
+        },
+        {
+          "type": "text",
+          "id": "prefix",
+          "label": "prefix（URLに含めるパラメータ。例：color, brand など）"
+        },
+        {
+          "type": "textarea",
+          "id": "values",
+          "label": "項目（カンマ区切りで入力：例：ブラック,ベージュ,ピンク）"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "商品インデックス",
+      "blocks": [
+        {
+          "type": "custom_link",
+          "settings": {
+            "title": "カラー別",
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
