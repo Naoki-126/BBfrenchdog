@@ -1,0 +1,90 @@
+<main class="faq-page">
+      <div class="page-fv__pro"></div>
+      <div class="page-inner">
+        <div class="page-contents">
+          <div class="breadcrumbs-area">
+            <p class="breadcrumb-text">ホーム</p>
+          </div>
+          <section class="faq">
+            <div class="faq-contents">
+              <div class="com-titleArea">
+                <h2 class="com-title">よくあるご質問</h2>
+              </div>
+              <div class="faq-content">
+                <h2 class="guide-title">配送・送料</h2>
+                <div class="faq-accordionArea">
+                  <div class="accordion-q">配送方法は何がありますか？</div>
+                  <div class="accordion-q">配送料はいくらですか？</div>
+                  <div class="accordion-q">配送にかかる日数はどのくらいですか？</div>
+                  <div class="accordion-a">ご注文確定後、通常3～5営業日以内に発送いたします。<br>ただし、繁忙期や天候不良等の影響で遅れる場合がございます。</div>
+                  <div class="accordion-q">配送日時の指定はできますか？</div>
+                  <div class="accordion-q">海外への配送は可能ですか？</div>
+                </div>
+              </div>
+              <div class="faq-content">
+                <h2 class="guide-title">見出し2見出し2</h2>
+                <div class="faq-accordionArea">
+                  <div class="accordion-q">質問テキスト</div>
+                  <div class="accordion-q">質問テキスト</div>
+                  <div class="accordion-q">質問テキスト</div>
+                  <div class="accordion-q">質問テキスト</div>
+                </div>
+              </div>
+              <div class="faq-content">
+                <h2 class="guide-title">見出し2見出し2</h2>
+              </div>
+              <div class="faq-content">
+                <h2 class="guide-title">見出し2見出し2</h2>
+              </div>
+              <div class="faq-content">
+                <h2 class="guide-title">見出し2見出し2</h2>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+
+
+<div class="faq">
+  {% for block in section.blocks %}
+    <div class="faq-item">
+      <h3>{{ block.settings.question }}</h3>
+      <p>{{ block.settings.answer }}</p>
+    </div>
+  {% endfor %}
+</div>
+
+
+{% schema %}
+{
+  "name": "FAQセクション",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "question_answer",
+      "name": "質問と回答",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "質問"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "回答"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "FAQセクション",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}
