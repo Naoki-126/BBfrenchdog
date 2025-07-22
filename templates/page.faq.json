@@ -11,6 +11,7 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "padding_top": 28,
         "padding_bottom": 28
@@ -18,8 +19,67 @@
     },
     "faq_jDnLpR": {
       "type": "faq",
+      "blocks": {
+        "faq_group_CWDtwQ": {
+          "type": "faq_group",
+          "settings": {
+            "sub-title": "配送・送料",
+            "question1": "配送方法は何がありますか？",
+            "answer1": "回答1",
+            "question2": "配送料はいくらですか？",
+            "answer2": "回答2",
+            "question3": "配送にかかる日数はどのくらいですか？",
+            "answer3": "ご注文確定後、通常3〜5営業日内に発送いたします。\nただし、繁忙期や天候不良等の影響で遅れる場合がございます。",
+            "question4": "配送の日時指定はできますか？",
+            "answer4": "回答4",
+            "question5": "海外の発送は可能ですか？",
+            "answer5": "回答5"
+          }
+        },
+        "faq_group_PWUAWy": {
+          "type": "faq_group",
+          "settings": {
+            "sub-title": "見出し2見出し2",
+            "question1": "質問テキスト1",
+            "answer1": "回答テキスト1",
+            "question2": "質問テキスト2",
+            "answer2": "回答テキスト2",
+            "question3": "質問テキスト3",
+            "answer3": "回答テキスト3",
+            "question4": "質問テキスト4",
+            "answer4": "回答テキスト4",
+            "question5": "質問テキスト5",
+            "answer5": "回答テキスト5"
+          }
+        },
+        "faq_group_JR4UjB": {
+          "type": "faq_group",
+          "settings": {
+            "sub-title": "見出し3見出し3",
+            "question1": "",
+            "answer1": "",
+            "question2": "",
+            "answer2": "",
+            "question3": "",
+            "answer3": "",
+            "question4": "",
+            "answer4": "",
+            "question5": "",
+            "answer5": "",
+            "question6": "",
+            "answer6": ""
+          }
+        }
+      },
+      "block_order": [
+        "faq_group_CWDtwQ",
+        "faq_group_PWUAWy",
+        "faq_group_JR4UjB"
+      ],
       "name": "FAQセクション",
-      "settings": {}
+      "settings": {
+        "title": "よくあるご質問"
+      }
     }
   },
   "order": [
