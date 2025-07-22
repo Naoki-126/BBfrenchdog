@@ -1,0 +1,41 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "page_policy_LidPVM": {
+      "type": "page-policy",
+      "blocks": {
+        "commerce_block_bPmn7b": {
+          "type": "commerce_block",
+          "settings": {
+            "subtitle": "見出し2",
+            "text": "ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。\n\nここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。",
+            "list_1": "番号付きリストが入ります",
+            "list_2": "番号付きリストが入ります",
+            "list_3": "",
+            "list_4": "",
+            "list_5": "",
+            "list_6": ""
+          }
+        }
+      },
+      "block_order": [
+        "commerce_block_bPmn7b"
+      ],
+      "name": "policyテンプレート",
+      "settings": {
+        "title": "特定商取引法に基づく表記"
+      }
+    }
+  },
+  "order": [
+    "page_policy_LidPVM"
+  ]
+}

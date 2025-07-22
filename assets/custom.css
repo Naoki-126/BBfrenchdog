@@ -1399,6 +1399,53 @@ body {
   transform: translateY(-50%) rotate(180deg);
 }
 
+/* commerce ページ
+=========================== */
+.com {
+  margin: 72px auto 0;
+  width: 100%;
+  max-width: 720px;
+}
+
+.com-title {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.com-content {
+  margin-top: 32px;
+
+}
+
+.com-subTitle {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.com-textArea {
+  margin-top: 16px;
+}
+
+.com-text {
+  font-size: 14px;
+  line-height: 2;
+}
+
+.com-lists {
+  margin-top: 16px;
+}
+
+.com-list {
+  margin-top: 8px;
+  list-style: decimal inside;
+  font-size: 14px;
+  line-height: 2;
+}
+
+.com-list:first-of-type {
+  margin-top: 0;
+}
+
 
 /* ===========================
 # レスポンシブ対応

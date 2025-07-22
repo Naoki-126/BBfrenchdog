@@ -1,0 +1,166 @@
+<main class="commerce">
+  <div class="page-inner">
+    <div class="page-contents">
+      <div class="breadcrumbs-area">
+        <nav  role="navigation" aria-label="breadcrumb">
+          <ol class="col-breadcrumb">
+            <li><a href="{{ routes.root_url }}">ホーム</a></li>
+            <li><a href="{{ routes.collections_url }}">コレクション</a></li>
+            <li>{{ collection.title }}</li>
+          </ol>
+        </nav>
+      </div>
+      <section class="com">
+        <div class="com-titleArea">
+          <h2 class="com-title">{{ section.settings.title }}</h2>
+        </div>
+        <div class="com-contents">
+          {% for block in section.blocks %}
+            <div class="com-content">
+              <h3 class="com-subTitle">{{ block.settings.subtitle }}</h3>
+              <div class="com-textArea">
+                <p class="com-text">{{ block.settings.text | newline_to_br }}</p>
+                {% assign lists = '' | split: ',' %}
+                {% for i in (1..6) %}
+                  {% assign key = 'list_' | append: i %}
+                  {% assign item = block.settings[key] %}
+                  {% if item != blank %}
+                    {% assign lists = lists | push: item %}
+                  {% endif %}
+                {% endfor %}
+                {% if lists.size > 0 %}
+                  <ol class="com-lists">
+                    <li class="com-list">{{ item }}</li>
+                    </ol>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+
+{% schema %}
+{
+  "name": "policyページ",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "ページタイトル",
+      "default": "特定商取引法に基づく表記"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "commerce_block",
+      "name": "番号付きブロック",
+      "settings": [
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "見出し",
+          "default": "見出し（箇条書き）"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "本文テキスト",
+          "default": "ここにテキストが入ります。改行は反映されます。"
+        },
+        {
+          "type": "text",
+          "id": "list_1",
+          "label": "リスト1（省略可）"
+        },
+        {
+          "type": "text",
+          "id": "list_2",
+          "label": "リスト2（省略可）"
+        },
+        {
+          "type": "text",
+          "id": "list_3",
+          "label": "リスト3（省略可）"
+        },
+        {
+          "type": "text",
+          "id": "list_4",
+          "label": "リスト4（省略可）"
+        },
+        {
+          "type": "text",
+          "id": "list_5",
+          "label": "リスト5（省略可）"
+        },
+        {
+          "type": "text",
+          "id": "list_6",
+          "label": "リスト6（省略可）"
+        }
+      ]
+    },
+    {
+      "type": "commerce_block2",
+      "name": "箇条書きブロック",
+      "settings": [
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "見出し",
+          "default": "見出し（箇条書き）"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "本文テキスト",
+          "default": "ここにテキストが入ります。改行は反映されます。"
+        },
+        {
+          "type": "text",
+          "id": "list_1",
+          "label": "リスト1（省略可）"
+        },
+        {
+          "type": "text",
+          "id": "list_2",
+          "label": "リスト2（省略可）"
+        },
+        {
+          "type": "text",
+          "id": "list_3",
+          "label": "リスト3（省略可）"
+        },
+        {
+          "type": "text",
+          "id": "list_4",
+          "label": "リスト4（省略可）"
+        },
+        {
+          "type": "text",
+          "id": "list_5",
+          "label": "リスト5（省略可）"
+        },
+        {
+          "type": "text",
+          "id": "list_6",
+          "label": "リスト6（省略可）"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "policyテンプレート",
+      "blocks": [
+        {
+          "type": "commerce_block"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
