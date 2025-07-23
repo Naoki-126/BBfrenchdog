@@ -1,0 +1,52 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "page_policy_MGqkgn": {
+      "type": "page-policy",
+      "blocks": {
+        "commerce_block_dc3mQV": {
+          "type": "commerce_block",
+          "settings": {
+            "subtitle": "利用規約見出し（番号付き）",
+            "text": "利用規約\nここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。\n\nここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。",
+            "num-list": "利用規約ページ,\n番号付きリスト,\n番号付きリスト,\n番号付きリスト,"
+          }
+        },
+        "commerce_bullet_VwXW9G": {
+          "type": "commerce_bullet",
+          "settings": {
+            "subtitle": "利用規約見出し（箇条書き）",
+            "text": "ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。\n\nここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。",
+            "bull-list": "利用規約,\n箇条書きリスト,\n箇条書きリスト,\n箇条書きリスト,"
+          }
+        }
+      },
+      "block_order": [
+        "commerce_block_dc3mQV",
+        "commerce_bullet_VwXW9G"
+      ],
+      "name": "policyテンプレート",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "page_policy_MGqkgn"
+  ]
+}

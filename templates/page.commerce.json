@@ -1,0 +1,52 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "page_policy_aLCBk9": {
+      "type": "page-policy",
+      "blocks": {
+        "commerce_block_tQWPeN": {
+          "type": "commerce_block",
+          "settings": {
+            "subtitle": "商取引法見出し（番号付き）",
+            "text": "商取引法ページ\nここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。\n\nここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。",
+            "num-list": "商取引法ページ,\n番号付きリスト,\n番号付きリスト,\n番号付きリスト,"
+          }
+        },
+        "commerce_bullet_dgM9Dy": {
+          "type": "commerce_bullet",
+          "settings": {
+            "subtitle": "商取引法見出し（箇条書き）",
+            "text": "",
+            "bull-list": "商取引法リスト,商取引法リスト,商取引法リスト,"
+          }
+        }
+      },
+      "block_order": [
+        "commerce_block_tQWPeN",
+        "commerce_bullet_dgM9Dy"
+      ],
+      "name": "policyテンプレート",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "page_policy_aLCBk9"
+  ]
+}

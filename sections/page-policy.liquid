@@ -12,7 +12,7 @@
       </div>
       <section class="com">
         <div class="com-titleArea">
-          <h2 class="com-title">{{ section.settings.title }}</h2>
+          <h2 class="com-title">{{ page.title }}</h2>
         </div>
         <div class="com-contents">
           {% for block in section.blocks %}
@@ -48,14 +48,7 @@
 {% schema %}
 {
   "name": "policyページ",
-  "settings": [
-    {
-      "type": "text",
-      "id": "title",
-      "label": "ページタイトル",
-      "default": "特定商取引法に基づく表記"
-    }
-  ],
+  "settings": [],
   "blocks": [
     {
       "type": "commerce_block",
@@ -106,11 +99,7 @@
   "presets": [
     {
       "name": "policyテンプレート",
-      "blocks": [
-        {
-          "type": "commerce_block"
-        }
-      ]
+      "category": "ページ"
     }
   ]
 }
