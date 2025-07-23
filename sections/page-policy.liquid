@@ -20,18 +20,21 @@
               <h3 class="com-subTitle">{{ block.settings.subtitle }}</h3>
               <div class="com-textArea">
                 <p class="com-text">{{ block.settings.text | newline_to_br }}</p>
-                {% assign lists = '' | split: ',' %}
-                {% for i in (1..6) %}
-                  {% assign key = 'list_' | append: i %}
-                  {% assign item = block.settings[key] %}
-                  {% if item != blank %}
-                    {% assign lists = lists | push: item %}
-                  {% endif %}
-                {% endfor %}
-                {% if lists.size > 0 %}
-                  <ol class="com-lists">
-                    <li class="com-list">{{ item }}</li>
-                    </ol>
+                {% if block.type == 'commerce_block' and block.settings.num-list != blank %}
+                  {% assign items = block.settings.num-list | split: ',' %}
+                  <ol class="guide-numbers">
+                    {% for item in items %}
+                      <li class="com-list">{{ item }}</li>
+                    {% endfor %}
+                  </ol>
+                {% endif %}
+                {% if block.type == 'commerce_bullet' and block.settings.bull-list != blank %}
+                  {% assign items = block.settings.bull-list | split: ',' %}
+                  <ul class="guide-lists">
+                    {% for item in items %}
+                      <li class="guide-list">{{ item }}</li>
+                    {% endfor %}
+                  </ul>
                 {% endif %}
               </div>
             </div>
@@ -62,48 +65,22 @@
           "type": "text",
           "id": "subtitle",
           "label": "見出し",
-          "default": "見出し（箇条書き）"
+          "default": "見出し（番号付き）"
         },
         {
           "type": "textarea",
           "id": "text",
           "label": "本文テキスト",
-          "default": "ここにテキストが入ります。改行は反映されます。"
         },
         {
-          "type": "text",
-          "id": "list_1",
-          "label": "リスト1（省略可）"
+          "type": "textarea",
+          "id": "num-list",
+          "label": "番号付きリスト（カンマ区切り）"
         },
-        {
-          "type": "text",
-          "id": "list_2",
-          "label": "リスト2（省略可）"
-        },
-        {
-          "type": "text",
-          "id": "list_3",
-          "label": "リスト3（省略可）"
-        },
-        {
-          "type": "text",
-          "id": "list_4",
-          "label": "リスト4（省略可）"
-        },
-        {
-          "type": "text",
-          "id": "list_5",
-          "label": "リスト5（省略可）"
-        },
-        {
-          "type": "text",
-          "id": "list_6",
-          "label": "リスト6（省略可）"
-        }
       ]
     },
     {
-      "type": "commerce_block2",
+      "type": "commerce_bullet",
       "name": "箇条書きブロック",
       "settings": [
         {
@@ -116,38 +93,12 @@
           "type": "textarea",
           "id": "text",
           "label": "本文テキスト",
-          "default": "ここにテキストが入ります。改行は反映されます。"
         },
         {
-          "type": "text",
-          "id": "list_1",
-          "label": "リスト1（省略可）"
+          "type": "textarea",
+          "id": "bull-list",
+          "label": "箇条書きリスト（カンマ区切り）"
         },
-        {
-          "type": "text",
-          "id": "list_2",
-          "label": "リスト2（省略可）"
-        },
-        {
-          "type": "text",
-          "id": "list_3",
-          "label": "リスト3（省略可）"
-        },
-        {
-          "type": "text",
-          "id": "list_4",
-          "label": "リスト4（省略可）"
-        },
-        {
-          "type": "text",
-          "id": "list_5",
-          "label": "リスト5（省略可）"
-        },
-        {
-          "type": "text",
-          "id": "list_6",
-          "label": "リスト6（省略可）"
-        }
       ]
     }
   ],
