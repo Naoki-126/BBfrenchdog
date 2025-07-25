@@ -10,99 +10,23 @@
 {
   "sections": {
     "main": {
-      "type": "main-product",
+      "type": "custom-product",
       "blocks": {
-        "vendor": {
-          "type": "text",
+        "image_text_GP4Qiq": {
+          "type": "image_text",
           "settings": {
-            "text": "{{ product.vendor }}",
-            "text_style": "uppercase"
-          }
-        },
-        "title": {
-          "type": "title",
-          "settings": {}
-        },
-        "price": {
-          "type": "price",
-          "settings": {}
-        },
-        "variant_picker": {
-          "type": "variant_picker",
-          "settings": {
-            "picker_type": "button",
-            "swatch_shape": "circle"
-          }
-        },
-        "quantity_selector": {
-          "type": "quantity_selector",
-          "settings": {}
-        },
-        "buy_buttons": {
-          "type": "buy_buttons",
-          "settings": {
-            "show_dynamic_checkout": true,
-            "show_gift_card_recipient": true
-          }
-        },
-        "description": {
-          "type": "description",
-          "settings": {}
-        },
-        "share": {
-          "type": "share",
-          "settings": {
-            "share_label": "Share"
+            "text1": "商品説明が入ります\nすべらない床リノベーションで使用している\n『すべらない！洗える！抗菌！安心快適カーペット  』のカット販売\n \n※送料無料でお届けします。（沖縄県は除く）\n \nカラー: ホワイトオーク\nサイズ：200cm×100cm/ 200cm×150cm \nご希望のサイズをお選びください。\n \n※200cm×150cm以上の長さもご注文可能です。\nお部屋に合わせたオーダーメイドの\nお見積りしますのでお問い合わせください。\n \n　\n※ご注文に際して\n・お届けは4~7日前後となります。\n・シートの固定には別売りの専用テープがおすすめです。",
+            "text2": ""
           }
         }
       },
       "block_order": [
-        "vendor",
-        "title",
-        "price",
-        "variant_picker",
-        "quantity_selector",
-        "buy_buttons",
-        "description",
-        "share"
+        "image_text_GP4Qiq"
       ],
-      "settings": {
-        "enable_sticky_info": true,
-        "color_scheme": "scheme-1",
-        "media_size": "large",
-        "constrain_to_viewport": true,
-        "media_fit": "contain",
-        "gallery_layout": "stacked",
-        "mobile_thumbnails": "hide",
-        "media_position": "left",
-        "image_zoom": "lightbox",
-        "hide_variants": true,
-        "enable_video_looping": false,
-        "padding_top": 36,
-        "padding_bottom": 12
-      }
-    },
-    "related-products": {
-      "type": "related-products",
-      "settings": {
-        "heading": "You may also like",
-        "heading_size": "h2",
-        "products_to_show": 4,
-        "columns_desktop": 4,
-        "columns_mobile": "2",
-        "color_scheme": "scheme-1",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "padding_top": 36,
-        "padding_bottom": 28
-      }
+      "settings": {}
     }
   },
   "order": [
-    "main",
-    "related-products"
+    "main"
   ]
 }

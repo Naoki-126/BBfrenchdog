@@ -1,0 +1,224 @@
+{% assign product = product | default: null %}
+
+<main class="product">
+    <div class="page-inner">
+      <div class="page-contents">
+        <div class="breadcrumbs-area">
+          <p class="col-breadcrumb">
+            <a href="{{ routes.root_url }}">ホーム</a> &gt;
+            <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a> &gt;
+            {{ product.title }}
+          </p>
+        </div>
+        <section class="pro">
+          <div class="pro-area">
+            <div class="pro-imgArea">
+              <div class="pro-img__mainArea"><img src="{{ product.featured_image | image_url: width: 540 }}" alt="(( product.title))" class="pro-img__main"></div>
+              <ul class="pro-img__thumbArea">
+                {% for image in product.images %}
+                  <li class="pro-img__thumbnails"><img src="{{ product.featured_image |  image_url: width: 71  }}" alt="{{ image.alt | escape }}" class="pro-img__thumbnail"></li>
+                {% endfor %}
+              </ul>
+              {% for block in section.blocks %}
+                {% if block.type == 'image_text' %}
+                  <div class="pro-img__textArea">
+                    <p class="pro-img__text1">{{ block.settings.text1 |  newline_to_br }}</p>
+                    <p class="pro-img__text1">{{ block.settings.text2 |  newline_to_br }}</p>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+
+            <div class="pro-contentsArea">
+              <div class="pro-contents__titleArea">
+                <h3 class="pro-title">{{ product.title }}</h3>
+              </div>
+              <ul class="pro-contents">
+                <li class="pro-price">{{ product.price | money }}<span class="pro-emphasis">{{ product.price | money }}</span>（税込）</li>
+                {% if product.options_with_values.size > 0 %}
+                  {% for option in product.options_with_values %}
+                    <li class="pro-name">{{ option.name }}</li>
+                  {% endfor %}
+                {% endif %}
+                <li class="pro-name">数　量</li>
+              </ul>
+              <div class="pro-detail">
+                <p class="pro-name">詳　細</p>
+                
+                <div class="pro-detail__area">
+                  {% for key in product.metafields.custom %}
+                    <dl class="pro-detail__dl">
+                      <dt class="pro-detail__dt">
+                        {% case key[0] %}
+                          {% when 'dimension' %}寸法
+                          {% when 'material' %}素材
+                          {% comment %} {% when 'size' %}サイズ {% endcomment %}
+                          {% when 'color' %}カラー
+                          {% else %}{{ key[0] }}
+                        {% endcase %}
+                      </dt>
+                      <dd class="pro-detail__dd">{{ key[1].value }}</dd>
+                    </dl>
+                  {% endfor %}
+                  <dl class="pro-detail__dl">
+                    <dt class="pro-detail__dt">品番</dt>
+                    <dd class="pro-detail__dd">{{ product.variants.first.sku }}</dd>
+                  </dl>
+                </div>
+
+              </div>
+              <p class="pro-contents__note">※注意書きテキストが入ります。注意書きテキストが入ります。注意書きテキストが入ります。注意書きテキストが入ります。</p>
+              <div class="pro-btnArea">
+                <div class="product-form">
+                  {% form 'product', product %}
+                    <button type="submit" class="c-btn__pro">カートに入れる</button>
+                  {% endform %}
+                </div>
+                <button class="c-btn__byNow">今すぐ購入する</button>
+              </div>
+              {% comment %} <div class="pro-contents__explain">
+                <h3 class="pro-contents__theme">テーマ 【四季】</h3>
+                <h3 class="pro-contents__theme">名前の由来</h3>
+                <p class="pro-contents__text">長い冬が明けた瞬間に芽吹く命の息吹と、それを優しく包み込む春の風を象徴する宝石。<br>
+                  「再生」と「新しい始まり」のエネルギーが宿ると信じられています。</p><br>
+                <h3 class="pro-contents__theme">こんな人に似合います</h3>
+                <p class="pro-contents__text">新たな挑戦に踏み出し、自分を成長させたいと願う人</p>
+              </div> {% endcomment %}
+              <div class="pro-labelArea">
+                <div class="pro-labels">
+                  <div class="pro-label">
+                    <img src="{{ 'icon-delver.png' | asset_url }}" alt="" class="note-icon">
+                    <p class="pro-label__text">お届け時期</p>
+                  </div>
+                  <div class="pro-label">
+                    <img src="{{ 'icon-notice.png' | asset_url }}" alt="" class="note-icon">
+                    <p class="pro-label__text">返品・交換について</p>
+                  </div>
+                </div>
+                <p class="pro-contents__note">お客様都合による返品、交換はお受けできません。（イメージ違い・注文間違い・金属アレルギーなど）<br>
+                  ・キャンセル・返品・交換については <a href="/pages/returns">こちら</a> <br>
+                  ・サイズが合わなかった場合については<a href="/pages/size">こちら</a>
+                </p>
+                <div class="pro-label">
+                  <img src="{{ 'icon-wrap.png' | asset_url }}" alt="" class="note-icon">
+                  <p class="pro-label__text">ラッピング・梱包について</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="pro-checked">
+          <div class="pro-checked__titleArea">
+            <he class="pro-title">最近チェックした商品</he>
+          </div>
+          <ul class="pro-checked__items">
+            {% for i in (1..4) %}
+              <li class="pro-checked__item">
+                <a href=""><img src="{{ 'product-img2.png' | asset_url }}" alt="" class="product-img">
+                  <div class="top-news__tagArea">
+                    <div class="pro-checked__textArea">
+                      <h3 class="product-name">25'BONNEL_TEBURA<br> LEASH_ SET（ベージュ）</h3>
+                      <div class="product-color">ベージュ</div>
+                      <div class="product-price">26,800<span class="product-emphasis">21,440</span>円（税込）</div>
+                      <div class="pro-checked__discountArea">
+                        <div class="discount-tag">20%off</div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </li>
+                      {% comment %} <li class="pro-checked__item">
+                        <a href=""><img src="./assets/img/product-img2.png" alt="" class="product-img">
+                        <div class="top-news__tagArea">
+                          </div>
+                          <div class="pro-checked__textArea">
+                            <h3 class="product-name">25'BONNEL_TEBURA<br> LEASH_ SET（ベージュ）</h3>
+                            <div class="product-color">ベージュ</div>
+                            <div class="product-price">26,800<span class="product-emphasis">21,440</span>円（税込）</div>
+                            <div class="pro-checked__discountArea">
+                              <div class="discount-tag">20%off</div>
+                              </div>
+                              </div>
+                              </a>
+                              </li>
+                              <li class="pro-checked__item">
+                      <a href=""><img src="./assets/img/product-img2.png" alt="" class="product-img">
+                      <div class="top-news__tagArea">
+                        </div>
+                <div class="pro-checked__textArea">
+                  <h3 class="product-name">25'BONNEL_TEBURA<br> LEASH_ SET（ベージュ）</h3>
+                  <div class="product-color">ベージュ</div>
+                  <div class="product-price">26,800<span class="product-emphasis">21,440</span>円（税込）</div>
+                  <div class="pro-checked__discountArea">
+                    <div class="discount-tag">20%off</div>
+                    </div>
+                    </div>
+                    </a>
+                    </li>
+                    <li class="pro-checked__item">
+                      <a href=""><img src="./assets/img/product-img2.png" alt="" class="product-img">
+                      <div class="top-news__tagArea">
+                        </div>
+                <div class="pro-checked__textArea">
+                  <h3 class="product-name">25'BONNEL_TEBURA<br> LEASH_ SET（ベージュ）</h3>
+                  <div class="product-color">ベージュ</div>
+                  <div class="product-price">26,800<span class="product-emphasis">21,440</span>円（税込）</div>
+                  <div class="pro-checked__discountArea">
+                    <div class="discount-tag">20%off</div>
+                  </div>
+                </div>
+              </a>
+            </li> {% endcomment %}
+
+          {% endfor %}
+          </ul>
+        </section>
+        <section class="pro-cat">
+          <div class="pro-cat__titleArea">
+            <h3 class="pro-title">カテゴリー</h3>
+          </div>
+          <ul class="pro-cat__items">
+          {% assign categories = collections.all.products | limit: 5 %}
+          {% for i in (1..5) %}
+            <li class="pro-cat__item"><a href=""><img src="{{ 'cat-img' | append: i | append: '.png' | asset_url }}" alt="category-img1{{ i }}" class="cat-img"></a></li>
+          {% endfor %}
+            {% comment %} <li class="pro-cat__item"><a href=""><img src="./assets/img/cat-img2.png" alt="category-img2" class="cat-img"></a></li>
+            <li class="pro-cat__item"><a href=""><img src="./assets/img/cat-img3.png" alt="category-img3" class="cat-img"></a></li>
+            <li class="pro-cat__item"><a href=""><img src="./assets/img/cat-img4.png" alt="category-img4" class="cat-img"></a></li>
+            <li class="pro-cat__item"><a href=""><img src="./assets/img/cat-img5.png" alt="category-img5" class="cat-img"></a></li> {% endcomment %}
+          </ul>
+        </section>
+      </div>
+    </div>
+  </main>
+
+{% schema %}
+{
+  "name": "Custom Product",
+  "tag": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "image_text",
+      "name": "Image Text Block",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text1",
+          "label": "1行目のテキスト"
+        },
+        {
+          "type": "textarea",
+          "id": "text2",
+          "label": "2行目のテキスト"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "商品情報（カスタム）"
+    }
+  ]
+}
+{% endschema %}
