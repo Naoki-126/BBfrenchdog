@@ -83,31 +83,59 @@
                   </div>
                 {% endif %}
               {% endfor %}
+
+              {% assign feature = product.metafields.spec.feature %}
+              {% assign delivery = product.metafields.spec.delivery %}
+              {% assign note = product.metafields.spec.note %}
+              {% assign return = product.metafields.spec.return %}
+              {% assign stock = product.metafields.spec.stock %}
+              {% assign shipping = product.metafields.spec.shipping %}
               <div class="pro-labelArea">
-                <div  class="pro-labels">
-                  {% assign label_blocks = section.blocks | where: "type", "accordion-note" %}
-                  {% for block in label_blocks %}
-                    <div class="pro-label
-                                {% if label_blocks.size == 1 %}
-                                  is-single
-                                {% elsif forloop.first %}
-                                  is-first
-                                {% elsif forloop.last %}
-                                  is-last
-                                {% endif %}">
-                      <img src="{{ block.settings.icon | image_url }}" alt="" class="note-icon">
-                      <p class="pro-label__text">{{ block.settings.label }}</p>
+                <div class="pro-labels">
+                  {%- if feature != blank -%}
+                    <div class="pro-label js-accordion-trigger">
+                      <img src="{{ 'icon-notice.png' | asset_url }}" alt="" class="note-icon">
+                      <p class="pro-label__text">フードの特徴・与え方</p>
                     </div>
-                    <div class="pro-text__note  js-accordion-content">{{ block.settings.content | newline_to_br }}</div>
-                  {% endfor %}
+                    <div class="js-accordion-content pro-text__note">{{ feature }}</div>
+                  {%- endif -%}
+                  {%- if delivery != blank -%}
+                    <div class="pro-label js-accordion-trigger">
+                      <img src="{{ 'icon-deliver.png' | asset_url }}" alt="" class="note-icon">
+                      <p class="pro-label__text">お届け時期</p>
+                    </div>
+                    <div class="js-accordion-content pro-text__note">{{ delivery }}</div>
+                  {%- endif -%}
+                  {%- if note != blank -%}
+                    <div class="pro-label js-accordion-trigger">
+                      <img src="{{ 'icon-notice.png' | asset_url }}" alt="" class="note-icon">
+                      <p class="pro-label__text">取扱上の注意</p>
+                    </div>
+                    <div class="js-accordion-content pro-text__note">{{ note }}</div>
+                  {%- endif -%}
+                  {%- if return != blank -%}
+                    <div class="pro-label js-accordion-trigger">
+                      <img src="{{ 'icon-notice.png' | asset_url }}" alt="" class="note-icon">
+                      <p class="pro-label__text">返品・交換・サポート</p>
+                    </div>
+                    <div class="js-accordion-content pro-text__note">{{ return }}</div>
+                  {%- endif -%}
+                  {%- if stock != blank -%}
+                    <div class="pro-label js-accordion-trigger">
+                      <img src="{{ 'icon-wrap.png' | asset_url }}" alt="" class="note-icon">
+                      <p class="pro-label__text">在庫について</p>
+                    </div>
+                    <div class="js-accordion-content pro-text__note">{{ stock }}</div>
+                  {%- endif -%}
+                  {%- if shipping != blank -%}
+                    <div class="pro-label js-accordion-trigger">
+                      <img src="{{ 'icon-wrap.png' | asset_url }}" alt="" class="note-icon">
+                      <p class="pro-label__text">送料について</p>
+                    </div>
+                    <div class="js-accordion-content pro-text__note">{{ shipping }}</div>
+                  {%- endif -%}
+
                 </div>
-
-
-                {% comment %} <div class="pro-label">
-                  <img src="{{ 'icon-wrap.png' | asset_url }}" alt="" class="note-icon">
-                  <p class="pro-label__text">ラッピング・梱包について</p>
-                </div> {% endcomment %}
-
               </div>
             </div>
           </div>
@@ -153,21 +181,25 @@
       </div>
     </div>
   </main>
-  
-<script>
+
+  <script>
   document.addEventListener('DOMContentLoaded', function () {
-    const labels = document.querySelectorAll('.pro-label');
-    labels.forEach(function (label) {
-      label.addEventListener('click', function () {
-        this.classList.toggle('active');
-        const content = this.nextElementSibling;
-        if (content && content.classList.contains('js-accordion-content')) {
-          content.classList.toggle('open');
-        }
-      });
+  const triggers = document.querySelectorAll('.js-accordion-trigger');
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', function () {
+      this.classList.toggle('is-open');
+      const content = this.nextElementSibling;
+      if (content && content.classList.contains('js-accordion-content')) {
+        const isVisible = content.style.display === 'block';
+        content.style.display = isVisible ? 'none' : 'block';
+      }
     });
   });
+});
 </script>
+
+
 
 {% schema %}
 {

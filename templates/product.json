@@ -19,37 +19,41 @@
             "text2": ""
           }
         },
-        "content_note_LCneng": {
-          "type": "content-note",
-          "settings": {
-            "note": "※注意書きテキストが入ります。注意書きテキストが入ります。注意書きテキストが入ります。注意書きテキストが入ります。\nhoge"
-          }
-        },
-        "cart_button_gk8mnK": {
+        "cart_button_PNJjiB": {
           "type": "cart-button",
           "settings": {}
         },
-        "label_note_xcB4pc": {
-          "type": "label-note",
+        "accordion_note_V67h9H": {
+          "type": "accordion-note",
           "settings": {
             "icon": "shopify://shop_images/icon-deliver.png",
-            "label": "お届け時期"
+            "label": "取り扱い上の注意",
+            "content": "ここに注意文が入ります。"
           }
         },
-        "label_note_7J7z7R": {
-          "type": "label-note",
+        "accordion_note_ygnrjA": {
+          "type": "accordion-note",
           "settings": {
             "icon": "shopify://shop_images/icon-notice.png",
-            "label": "返品・交換について"
+            "label": "返品・交換・サポート",
+            "content": "初期不良についての交換につきましてはご対応致しますのでご安心ください。ご購入後の破損などの修理にもご対応します。\n※商品返送は送料お客様負担にてお願い致します。\n※お客様都合の返品はお受けできませんのでご了承ください。"
+          }
+        },
+        "accordion_note_AjhM69": {
+          "type": "accordion-note",
+          "settings": {
+            "icon": "shopify://shop_images/icon-wrap.png",
+            "label": "送料について",
+            "content": "※メーカー直送品\n※送料は無料です\n※ご注文より2~3日で発送"
           }
         }
       },
       "block_order": [
         "image_text_GP4Qiq",
-        "content_note_LCneng",
-        "cart_button_gk8mnK",
-        "label_note_xcB4pc",
-        "label_note_7J7z7R"
+        "cart_button_PNJjiB",
+        "accordion_note_V67h9H",
+        "accordion_note_ygnrjA",
+        "accordion_note_AjhM69"
       ],
       "settings": {}
     }
