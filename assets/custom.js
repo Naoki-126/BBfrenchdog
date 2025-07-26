@@ -26,27 +26,4 @@ document.getElementById('js-faq').addEventListener('click', function (e) {
   }
 });
 
-/* 商品ページ アコーディオン
-=========================== */
-document.addEventListener('DOMContentLoaded', function () {
-    const triggers = document.querySelectorAll('.js-accordion-trigger');
 
-    triggers.forEach(trigger => {
-      trigger.addEventListener('click', function () {
-        const isOpen = this.classList.contains('is-open');
-
-        // 全て閉じる
-        document.querySelectorAll('.js-accordion-trigger').forEach(el => el.classList.remove('is-open'));
-        document.querySelectorAll('.js-accordion-content').forEach(el => el.style.display = 'none');
-
-        // 自分だけ開く
-        if (!isOpen) {
-          this.classList.add('is-open');
-          const content = this.nextElementSibling;
-          if (content && content.classList.contains('js-accordion-content')) {
-            content.style.display = 'block';
-          }
-        }
-      });
-    });
-  });

@@ -19,15 +19,21 @@
                   <li class="pro-img__thumbnails"><img src="{{ product.featured_image |  image_url: width: 71  }}" alt="{{ image.alt | escape }}" class="pro-img__thumbnail"></li>
                 {% endfor %}
               </ul>
-              {% for block in section.blocks %}
-                {% if block.type == 'image_text' %}
-                  <div class="pro-img__textArea">
-                    <p class="pro-img__text1">{{ block.settings.text1 |  newline_to_br }}</p>
-                    <p class="pro-img__text1">{{ block.settings.text2 |  newline_to_br }}</p>
-                  </div>
+
+              <div class="pro-img__textArea">
+                  {% if product.description != blank %}
+                  <p class="pro-img__text1">
+                    {{ product.description | newline_to_br }}
+                  </p>
                 {% endif %}
-              {% endfor %}
+                {% if product.metafields.detail.product_description %}
+                  <p class="pro-img__text2">
+                    {{ product.metafields.detail.product_description | metafield_tag }}
+                  </p>
+                {% endif %}
+              </div>
             </div>
+
 
             <div class="pro-contentsArea">
               <div class="pro-contents__titleArea">
@@ -64,8 +70,8 @@
                     <dd class="pro-detail__dd">{{ product.variants.first.sku }}</dd>
                   </dl>
                 </div>
-
               </div>
+
               {% for block in section.blocks %}
                 {% if block.type == 'content-note' %}
                   <p class="pro-contents__note">{{ block.settings.note | newline_to_br }}</p>
@@ -134,12 +140,13 @@
                     </div>
                     <div class="js-accordion-content pro-text__note">{{ shipping }}</div>
                   {%- endif -%}
-
                 </div>
               </div>
+
             </div>
           </div>
         </section>
+
         <section class="pro-checked">
           <div class="pro-checked__titleArea">
             <he class="pro-title">最近チェックした商品</he>
@@ -172,10 +179,6 @@
           {% for i in (1..5) %}
             <li class="pro-cat__item"><a href=""><img src="{{ 'cat-img' | append: i | append: '.png' | asset_url }}" alt="category-img1{{ i }}" class="cat-img"></a></li>
           {% endfor %}
-            {% comment %} <li class="pro-cat__item"><a href=""><img src="./assets/img/cat-img2.png" alt="category-img2" class="cat-img"></a></li>
-            <li class="pro-cat__item"><a href=""><img src="./assets/img/cat-img3.png" alt="category-img3" class="cat-img"></a></li>
-            <li class="pro-cat__item"><a href=""><img src="./assets/img/cat-img4.png" alt="category-img4" class="cat-img"></a></li>
-            <li class="pro-cat__item"><a href=""><img src="./assets/img/cat-img5.png" alt="category-img5" class="cat-img"></a></li> {% endcomment %}
           </ul>
         </section>
       </div>
@@ -200,67 +203,17 @@
 </script>
 
 
-
 {% schema %}
 {
-  "name": "Custom Product",
+  "name": "商品情報（カスタム）",
   "tag": "section",
   "settings": [],
   "blocks": [
-    {
-      "type": "image_text",
-      "name": "Image Text Block",
-      "settings": [
-        {
-          "type": "textarea",
-          "id": "text1",
-          "label": "1行目のテキスト"
-        },
-        {
-          "type": "textarea",
-          "id": "text2",
-          "label": "2行目のテキスト"
-        }
-      ]
-    },
-    {
-      "type": "content-note",
-      "name": "注意文",
-      "settings":[
-        {
-          "type": "textarea",
-          "id" : "note",
-          "label": "コメント"
-        }
-      ]
-    },
     {
       "type": "cart-button",
       "name": "カートボタン",
       "settings":[]
     },
-    {
-      "type": "accordion-note",
-      "name": "アコーディオン注意文",
-      "settings":[
-        {
-          "type": "image_picker",
-          "id" : "icon",
-          "label": "アイコン画像"
-        },
-        {
-          "type": "text",
-          "id" : "label",
-          "label": "ラベルタイトル"
-        },
-        {
-          "type": "textarea",
-          "id" : "content",
-          "label": "表示される注意文",
-          "default": "ここに注意文が入ります。"
-        }
-      ]
-    }
   ],
   "presets": [
     {
