@@ -23,4 +23,3 @@ document.getElementById('js-faq').addEventListener('click', function (e) {
     clicked.classList.toggle('active');
   }
 });
-

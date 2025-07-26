@@ -44,7 +44,7 @@
               </ul>
               <div class="pro-detail">
                 <p class="pro-name">詳　細</p>
-                
+
                 <div class="pro-detail__area">
                   {% for key in product.metafields.custom %}
                     <dl class="pro-detail__dl">
@@ -52,7 +52,6 @@
                         {% case key[0] %}
                           {% when 'dimension' %}寸法
                           {% when 'material' %}素材
-                          {% comment %} {% when 'size' %}サイズ {% endcomment %}
                           {% when 'color' %}カラー
                           {% else %}{{ key[0] }}
                         {% endcase %}
@@ -67,42 +66,48 @@
                 </div>
 
               </div>
-              <p class="pro-contents__note">※注意書きテキストが入ります。注意書きテキストが入ります。注意書きテキストが入ります。注意書きテキストが入ります。</p>
-              <div class="pro-btnArea">
-                <div class="product-form">
-                  {% form 'product', product %}
-                    <button type="submit" class="c-btn__pro">カートに入れる</button>
-                  {% endform %}
-                </div>
-                <button class="c-btn__byNow">今すぐ購入する</button>
-              </div>
-              {% comment %} <div class="pro-contents__explain">
-                <h3 class="pro-contents__theme">テーマ 【四季】</h3>
-                <h3 class="pro-contents__theme">名前の由来</h3>
-                <p class="pro-contents__text">長い冬が明けた瞬間に芽吹く命の息吹と、それを優しく包み込む春の風を象徴する宝石。<br>
-                  「再生」と「新しい始まり」のエネルギーが宿ると信じられています。</p><br>
-                <h3 class="pro-contents__theme">こんな人に似合います</h3>
-                <p class="pro-contents__text">新たな挑戦に踏み出し、自分を成長させたいと願う人</p>
-              </div> {% endcomment %}
+              {% for block in section.blocks %}
+                {% if block.type == 'content-note' %}
+                  <p class="pro-contents__note">{{ block.settings.note | newline_to_br }}</p>
+                {% endif %}
+              {% endfor %}
+              {% for block in section.blocks %}
+                {% if block.type == 'cart-button' %}
+                  <div class="pro-btnArea">
+                    <div class="product-form">
+                      {% form 'product', product %}
+                        <button type="submit" class="c-btn__pro">カートに入れる</button>
+                      {% endform %}
+                    </div>
+                    <button class="c-btn__byNow">今すぐ購入する</button>
+                  </div>
+                {% endif %}
+              {% endfor %}
               <div class="pro-labelArea">
-                <div class="pro-labels">
-                  <div class="pro-label">
-                    <img src="{{ 'icon-delver.png' | asset_url }}" alt="" class="note-icon">
-                    <p class="pro-label__text">お届け時期</p>
-                  </div>
-                  <div class="pro-label">
-                    <img src="{{ 'icon-notice.png' | asset_url }}" alt="" class="note-icon">
-                    <p class="pro-label__text">返品・交換について</p>
-                  </div>
+                <div  class="pro-labels">
+                  {% assign label_blocks = section.blocks | where: "type", "accordion-note" %}
+                  {% for block in label_blocks %}
+                    <div class="pro-label
+                                {% if label_blocks.size == 1 %}
+                                  is-single
+                                {% elsif forloop.first %}
+                                  is-first
+                                {% elsif forloop.last %}
+                                  is-last
+                                {% endif %}">
+                      <img src="{{ block.settings.icon | image_url }}" alt="" class="note-icon">
+                      <p class="pro-label__text">{{ block.settings.label }}</p>
+                    </div>
+                    <div class="pro-text__note  js-accordion-content">{{ block.settings.content | newline_to_br }}</div>
+                  {% endfor %}
                 </div>
-                <p class="pro-contents__note">お客様都合による返品、交換はお受けできません。（イメージ違い・注文間違い・金属アレルギーなど）<br>
-                  ・キャンセル・返品・交換については <a href="/pages/returns">こちら</a> <br>
-                  ・サイズが合わなかった場合については<a href="/pages/size">こちら</a>
-                </p>
-                <div class="pro-label">
+
+
+                {% comment %} <div class="pro-label">
                   <img src="{{ 'icon-wrap.png' | asset_url }}" alt="" class="note-icon">
                   <p class="pro-label__text">ラッピング・梱包について</p>
-                </div>
+                </div> {% endcomment %}
+
               </div>
             </div>
           </div>
@@ -127,50 +132,7 @@
                   </div>
                 </a>
               </li>
-                      {% comment %} <li class="pro-checked__item">
-                        <a href=""><img src="./assets/img/product-img2.png" alt="" class="product-img">
-                        <div class="top-news__tagArea">
-                          </div>
-                          <div class="pro-checked__textArea">
-                            <h3 class="product-name">25'BONNEL_TEBURA<br> LEASH_ SET（ベージュ）</h3>
-                            <div class="product-color">ベージュ</div>
-                            <div class="product-price">26,800<span class="product-emphasis">21,440</span>円（税込）</div>
-                            <div class="pro-checked__discountArea">
-                              <div class="discount-tag">20%off</div>
-                              </div>
-                              </div>
-                              </a>
-                              </li>
-                              <li class="pro-checked__item">
-                      <a href=""><img src="./assets/img/product-img2.png" alt="" class="product-img">
-                      <div class="top-news__tagArea">
-                        </div>
-                <div class="pro-checked__textArea">
-                  <h3 class="product-name">25'BONNEL_TEBURA<br> LEASH_ SET（ベージュ）</h3>
-                  <div class="product-color">ベージュ</div>
-                  <div class="product-price">26,800<span class="product-emphasis">21,440</span>円（税込）</div>
-                  <div class="pro-checked__discountArea">
-                    <div class="discount-tag">20%off</div>
-                    </div>
-                    </div>
-                    </a>
-                    </li>
-                    <li class="pro-checked__item">
-                      <a href=""><img src="./assets/img/product-img2.png" alt="" class="product-img">
-                      <div class="top-news__tagArea">
-                        </div>
-                <div class="pro-checked__textArea">
-                  <h3 class="product-name">25'BONNEL_TEBURA<br> LEASH_ SET（ベージュ）</h3>
-                  <div class="product-color">ベージュ</div>
-                  <div class="product-price">26,800<span class="product-emphasis">21,440</span>円（税込）</div>
-                  <div class="pro-checked__discountArea">
-                    <div class="discount-tag">20%off</div>
-                  </div>
-                </div>
-              </a>
-            </li> {% endcomment %}
-
-          {% endfor %}
+            {% endfor %}
           </ul>
         </section>
         <section class="pro-cat">
@@ -191,6 +153,21 @@
       </div>
     </div>
   </main>
+  
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const labels = document.querySelectorAll('.pro-label');
+    labels.forEach(function (label) {
+      label.addEventListener('click', function () {
+        this.classList.toggle('active');
+        const content = this.nextElementSibling;
+        if (content && content.classList.contains('js-accordion-content')) {
+          content.classList.toggle('open');
+        }
+      });
+    });
+  });
+</script>
 
 {% schema %}
 {
@@ -211,6 +188,44 @@
           "type": "textarea",
           "id": "text2",
           "label": "2行目のテキスト"
+        }
+      ]
+    },
+    {
+      "type": "content-note",
+      "name": "注意文",
+      "settings":[
+        {
+          "type": "textarea",
+          "id" : "note",
+          "label": "コメント"
+        }
+      ]
+    },
+    {
+      "type": "cart-button",
+      "name": "カートボタン",
+      "settings":[]
+    },
+    {
+      "type": "accordion-note",
+      "name": "アコーディオン注意文",
+      "settings":[
+        {
+          "type": "image_picker",
+          "id" : "icon",
+          "label": "アイコン画像"
+        },
+        {
+          "type": "text",
+          "id" : "label",
+          "label": "ラベルタイトル"
+        },
+        {
+          "type": "textarea",
+          "id" : "content",
+          "label": "表示される注意文",
+          "default": "ここに注意文が入ります。"
         }
       ]
     }

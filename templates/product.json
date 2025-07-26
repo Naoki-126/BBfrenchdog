@@ -18,10 +18,38 @@
             "text1": "商品説明が入ります\nすべらない床リノベーションで使用している\n『すべらない！洗える！抗菌！安心快適カーペット  』のカット販売\n \n※送料無料でお届けします。（沖縄県は除く）\n \nカラー: ホワイトオーク\nサイズ：200cm×100cm/ 200cm×150cm \nご希望のサイズをお選びください。\n \n※200cm×150cm以上の長さもご注文可能です。\nお部屋に合わせたオーダーメイドの\nお見積りしますのでお問い合わせください。\n \n　\n※ご注文に際して\n・お届けは4~7日前後となります。\n・シートの固定には別売りの専用テープがおすすめです。",
             "text2": ""
           }
+        },
+        "content_note_LCneng": {
+          "type": "content-note",
+          "settings": {
+            "note": "※注意書きテキストが入ります。注意書きテキストが入ります。注意書きテキストが入ります。注意書きテキストが入ります。\nhoge"
+          }
+        },
+        "cart_button_gk8mnK": {
+          "type": "cart-button",
+          "settings": {}
+        },
+        "label_note_xcB4pc": {
+          "type": "label-note",
+          "settings": {
+            "icon": "shopify://shop_images/icon-deliver.png",
+            "label": "お届け時期"
+          }
+        },
+        "label_note_7J7z7R": {
+          "type": "label-note",
+          "settings": {
+            "icon": "shopify://shop_images/icon-notice.png",
+            "label": "返品・交換について"
+          }
         }
       },
       "block_order": [
-        "image_text_GP4Qiq"
+        "image_text_GP4Qiq",
+        "content_note_LCneng",
+        "cart_button_gk8mnK",
+        "label_note_xcB4pc",
+        "label_note_7J7z7R"
       ],
       "settings": {}
     }

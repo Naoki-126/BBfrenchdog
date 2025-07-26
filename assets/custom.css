@@ -1272,10 +1272,15 @@ body {
   line-height: 1.3;
 }
 
-.pro-contents__note {
+.pro-contents__note,
+.pro-contents__note2 {
   margin-top: 16px;
   font-size: 14px;
   line-height: 2;
+}
+
+.pro-contents__note2 {
+  margin-top: 8px;
 }
 
 .pro-btnArea {
@@ -1306,17 +1311,50 @@ body {
 
 .pro-label {
   background: #dcd7cf;
-  border-block: .5px solid #999;
   padding: 10px 16px;
   display: flex;
   align-items: center;
   gap: 40px;
+	position: relative;
+	cursor: pointer;
+	border-top: 0.5px solid #999;
 }
 
-.pro-label:first-child {
-  border-bottom: 0px;
+.pro-label::after {
+	content: "";
+	position: absolute;
+	background: url(../assets/icon-plus.svg) no-repeat center center /contain;
+	width: 12px;
+	height: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 10px;
+	transition: transform .3s ease;
 }
 
+.pro-label.active::after {
+  background: url(../assets/icon-minus.svg) no-repeat center center / contain;
+}
+
+/* 単独のとき：上下どちらも */
+.pro-label.is-single {
+	border-block: .5px solid #999;
+}
+
+/* 最初だけ：上線あり */
+.pro-label.is-first {
+  border-top: 0.5px solid #999;
+}
+
+/* 最後だけ：下線あり */
+.pro-label.is-last {
+	border-bottom: 0.5px solid #999;
+}
+
+/* 中間：線なし（上下とも他の要素が担当） */
+.pro-label:not(.is-single):not(.is-first):not(.is-last) {
+  border-bottom: none;
+}
 
 .note-icon {
   width: 16px;
@@ -1334,6 +1372,16 @@ body {
   padding: 8px 0;
 }
 
+.js-accordion-content {
+  display: none;
+  font-size: 14px;
+  line-height: 2;
+  padding: 8px 16px;
+}
+
+.js-accordion-content.open {
+  display: block;
+}
 
 /* pro-checkedセクション
 =========================== */
