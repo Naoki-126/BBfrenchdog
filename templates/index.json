@@ -38,58 +38,6 @@
         "button": "新着商品を全てみる"
       }
     },
-    "top_category_FWXBT8": {
-      "type": "top-category",
-      "blocks": {
-        "image_YMwHPA": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/cat-img1.png",
-            "collection": ""
-          }
-        },
-        "image_MYzRbR": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/cat-img2.png",
-            "collection": ""
-          }
-        },
-        "image_HggVqj": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/cat-img3.png",
-            "collection": ""
-          }
-        },
-        "image_hBYRYk": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/cat-img4.png",
-            "collection": ""
-          }
-        },
-        "image_8Tgigq": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/cat-img5.png",
-            "collection": ""
-          }
-        }
-      },
-      "block_order": [
-        "image_YMwHPA",
-        "image_MYzRbR",
-        "image_HggVqj",
-        "image_hBYRYk",
-        "image_8Tgigq"
-      ],
-      "name": "カテゴリー",
-      "settings": {
-        "title": "Category",
-        "subTitle": "カテゴリーから探す"
-      }
-    },
     "top_sns_rKHjUa": {
       "type": "top-sns",
       "blocks": {
@@ -133,13 +81,65 @@
         "title": "Instagram",
         "sub_title": "インスタグラム"
       }
+    },
+    "top_category_ttHNr9": {
+      "type": "top-category",
+      "blocks": {
+        "image_cG8Aze": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/cat-img1.png",
+            "collection": "harness"
+          }
+        },
+        "image_4VU4i9": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/cat-img2.png",
+            "collection": "wear"
+          }
+        },
+        "image_944ibV": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/cat-img3.png",
+            "collection": "food"
+          }
+        },
+        "image_7zjyfe": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/cat-img4.png",
+            "collection": "floor"
+          }
+        },
+        "image_WW6kVe": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/cat-img5.png",
+            "collection": "origin"
+          }
+        }
+      },
+      "block_order": [
+        "image_cG8Aze",
+        "image_4VU4i9",
+        "image_944ibV",
+        "image_7zjyfe",
+        "image_WW6kVe"
+      ],
+      "name": "トップカテゴリー",
+      "settings": {
+        "title": "Category",
+        "subTitle": "カテゴリーから探す"
+      }
     }
   },
   "order": [
     "top_fv_banner_7g6Gh4",
     "top_content_79baAE",
     "top_recommend_MiGqFf",
-    "top_category_FWXBT8",
+    "top_category_ttHNr9",
     "top_sns_rKHjUa"
   ]
 }

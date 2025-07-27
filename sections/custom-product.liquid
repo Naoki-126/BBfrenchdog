@@ -19,10 +19,9 @@
                   <li class="pro-img__thumbnails"><img src="{{ product.featured_image |  image_url: width: 71  }}" alt="{{ image.alt | escape }}" class="pro-img__thumbnail"></li>
                 {% endfor %}
               </ul>
-
               <div class="pro-img__textArea">
                   {% if product.description != blank %}
-                  <p class="pro-img__text1">
+                  <p class="pro-img__text">
                     {{ product.description | newline_to_br }}
                   </p>
                 {% endif %}
@@ -34,23 +33,62 @@
               </div>
             </div>
 
-
             <div class="pro-contentsArea">
               <div class="pro-contents__titleArea">
                 <h3 class="pro-title">{{ product.title }}</h3>
               </div>
-              <ul class="pro-contents">
-                <li class="pro-price">{{ product.price | money }}<span class="pro-emphasis">{{ product.price | money }}</span>（税込）</li>
-                {% if product.options_with_values.size > 0 %}
-                  {% for option in product.options_with_values %}
-                    <li class="pro-name">{{ option.name }}</li>
-                  {% endfor %}
-                {% endif %}
-                <li class="pro-name">数　量</li>
-              </ul>
+              <div class="pro-contents">
+                <ul class="pro-content">
+                  {% assign current_variant = product.selected_or_first_available_variant %}
+                  <li class="pro-price">
+                    {% if current_variant.compare_at_price > current_variant.price %}
+                      <div class="pro-old-price" >
+                        {{ current_variant.compare_at_price | money_without_currency }}
+                      </div>
+                      <div class="pro-emphasis" >
+                        {{ current_variant.price | money_without_currency }}
+                      </div>円（税込）
+                      {% else %}
+                      <span class="pro-emphasis">
+                        {{ current_variant.price | money_without_currency }}
+                      </span>円（税込）
+                    {% endif %}
+                  </li>
+                  <li class="pro-cont__wrap">
+                    <h4 class="pro-name">色</h4>
+                    <div class="pro-cont__colorArea">
+                      <div class="pro-cont__color"> </div>
+                      <div class="pro-cont__color2"> </div>
+                      <div class="pro-cont__color3"> </div>
+                      <div class="pro-cont__color4"> </div>
+                      <div class="pro-cont__color5"> </div>
+                    </div>
+                  </li>
+
+                    {% for product in collections['origin'].products %}
+                      {{ product.title }}
+                      {% for variant in product.variants%}
+                        {{ variant.title }}
+                      {% endfor %}
+                    {% endfor %}
+
+                  <li class="pro-cont__wrap">
+                    <h4 class="pro-name">サイズ</h4>
+                    <div class="pro-cont__sizeArea">
+                      <div class="pro-cont__size">L</div>
+                    </div>
+                  </li>
+                  <li class="pro-cont__wrap">
+                    <h4 class="pro-name">数　量</h4>
+                    <div class="pro-cont__quantityArea">
+                      <div class="pro-cont__quantity">1</div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
               <div class="pro-detail">
                 <p class="pro-name">詳　細</p>
-
                 <div class="pro-detail__area">
                   {% for key in product.metafields.custom %}
                     <dl class="pro-detail__dl">
@@ -142,35 +180,25 @@
                   {%- endif -%}
                 </div>
               </div>
-
+              <div class="pro-cont__shareArea">
+                {% for block in section.blocks %}
+                  {% case block.type %}
+                    {% when 'share' %}
+                      {% liquid
+                        assign share_url = product.selected_variant.url | default: product.url | prepend: request.origin
+                      %}
+                      <div class="custom-share-style">
+                        {% render 'share-button', block: block, share_link: share_url %}
+                        <span class="share-text">Share</span>
+                      </div>
+                  {% endcase %}
+                {% endfor %}
+              </div>
             </div>
           </div>
         </section>
 
-        <section class="pro-checked">
-          <div class="pro-checked__titleArea">
-            <he class="pro-title">最近チェックした商品</he>
-          </div>
-          <ul class="pro-checked__items">
-            {% for i in (1..4) %}
-              <li class="pro-checked__item">
-                <a href=""><img src="{{ 'product-img2.png' | asset_url }}" alt="" class="product-img">
-                  <div class="top-news__tagArea">
-                    <div class="pro-checked__textArea">
-                      <h3 class="product-name">25'BONNEL_TEBURA<br> LEASH_ SET（ベージュ）</h3>
-                      <div class="product-color">ベージュ</div>
-                      <div class="product-price">26,800<span class="product-emphasis">21,440</span>円（税込）</div>
-                      <div class="pro-checked__discountArea">
-                        <div class="discount-tag">20%off</div>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
-        </section>
-        <section class="pro-cat">
+        {% comment %} <section class="pro-cat">
           <div class="pro-cat__titleArea">
             <h3 class="pro-title">カテゴリー</h3>
           </div>
@@ -180,7 +208,8 @@
             <li class="pro-cat__item"><a href=""><img src="{{ 'cat-img' | append: i | append: '.png' | asset_url }}" alt="category-img1{{ i }}" class="cat-img"></a></li>
           {% endfor %}
           </ul>
-        </section>
+        </section> {% endcomment %}
+
       </div>
     </div>
   </main>
@@ -214,6 +243,11 @@
       "name": "カートボタン",
       "settings":[]
     },
+    {
+      "type": "share",
+      "name": "シェアボタン",
+      "settings": []
+    }
   ],
   "presets": [
     {

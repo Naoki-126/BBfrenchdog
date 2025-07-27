@@ -12,53 +12,94 @@
     "main": {
       "type": "custom-product",
       "blocks": {
-        "image_text_GP4Qiq": {
-          "type": "image_text",
-          "settings": {
-            "text1": "商品説明が入ります\nすべらない床リノベーションで使用している\n『すべらない！洗える！抗菌！安心快適カーペット  』のカット販売\n \n※送料無料でお届けします。（沖縄県は除く）\n \nカラー: ホワイトオーク\nサイズ：200cm×100cm/ 200cm×150cm \nご希望のサイズをお選びください。\n \n※200cm×150cm以上の長さもご注文可能です。\nお部屋に合わせたオーダーメイドの\nお見積りしますのでお問い合わせください。\n \n　\n※ご注文に際して\n・お届けは4~7日前後となります。\n・シートの固定には別売りの専用テープがおすすめです。",
-            "text2": ""
-          }
-        },
         "cart_button_PNJjiB": {
           "type": "cart-button",
           "settings": {}
         },
-        "accordion_note_V67h9H": {
-          "type": "accordion-note",
+        "share_tC9mAq": {
+          "type": "share",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "cart_button_PNJjiB",
+        "share_tC9mAq"
+      ],
+      "settings": {}
+    },
+    "top_category_e6UAkB": {
+      "type": "top-category",
+      "disabled": true,
+      "name": "カテゴリー",
+      "settings": {
+        "title": "",
+        "subTitle": ""
+      }
+    },
+    "custom_recent_Exmc9c": {
+      "type": "custom-recent",
+      "name": "最近チェックした商品",
+      "settings": {
+        "title": "最近チェックした製品",
+        "recent": "recent"
+      }
+    },
+    "custom_category_DrA6Gt": {
+      "type": "custom-category",
+      "blocks": {
+        "image_fTGTWa": {
+          "type": "image",
           "settings": {
-            "icon": "shopify://shop_images/icon-deliver.png",
-            "label": "取り扱い上の注意",
-            "content": "ここに注意文が入ります。"
+            "image": "shopify://shop_images/cat-img1.png",
+            "collection": "wear"
           }
         },
-        "accordion_note_ygnrjA": {
-          "type": "accordion-note",
+        "image_znbGQy": {
+          "type": "image",
           "settings": {
-            "icon": "shopify://shop_images/icon-notice.png",
-            "label": "返品・交換・サポート",
-            "content": "初期不良についての交換につきましてはご対応致しますのでご安心ください。ご購入後の破損などの修理にもご対応します。\n※商品返送は送料お客様負担にてお願い致します。\n※お客様都合の返品はお受けできませんのでご了承ください。"
+            "image": "shopify://shop_images/cat-img2.png",
+            "collection": ""
           }
         },
-        "accordion_note_AjhM69": {
-          "type": "accordion-note",
+        "image_x83ecC": {
+          "type": "image",
           "settings": {
-            "icon": "shopify://shop_images/icon-wrap.png",
-            "label": "送料について",
-            "content": "※メーカー直送品\n※送料は無料です\n※ご注文より2~3日で発送"
+            "image": "shopify://shop_images/cat-img3.png",
+            "collection": ""
+          }
+        },
+        "image_mNXkA8": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/cat-img4.png",
+            "collection": ""
+          }
+        },
+        "image_3Gzfip": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/cat-img5.png",
+            "collection": ""
           }
         }
       },
       "block_order": [
-        "image_text_GP4Qiq",
-        "cart_button_PNJjiB",
-        "accordion_note_V67h9H",
-        "accordion_note_ygnrjA",
-        "accordion_note_AjhM69"
+        "image_fTGTWa",
+        "image_znbGQy",
+        "image_x83ecC",
+        "image_mNXkA8",
+        "image_3Gzfip"
       ],
-      "settings": {}
+      "name": "カスタムカテゴリー",
+      "settings": {
+        "title": "カテゴリー"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "top_category_e6UAkB",
+    "custom_recent_Exmc9c",
+    "custom_category_DrA6Gt"
   ]
 }

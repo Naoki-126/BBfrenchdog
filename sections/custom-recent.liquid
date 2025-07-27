@@ -1,0 +1,53 @@
+{% assign collection = section.settings.recent %}
+
+<section class="pro-checked">
+  <div class="page-inner">
+    <div class="page-contents">
+
+      <div class="pro-checked__titleArea">
+        <h2 class="pro-title">{{ section.settings.title }}</h2>
+      </div>
+      <ul class="top-rec__items">
+        {% for product in collection.products limit: 8 %}
+          <li class="top-rec__item">
+            <a href="{{ product.url }}" class=""><img src="{{ product | image_url: width: 282 }}" alt="product" class="top-rec__img">
+              <div class="top-rec__textArea">
+                <h3 class="product-name">{{ product.title }}</h3>
+                <div class="product-color">  {{ product.metafields.custom.color | metafield_text }}</div>
+                <div class="product-price"><span class="product-emphasis">{{ product.price | money }}</span>円（税込）</div>
+                <div class="discount-tag"></div>
+              </div>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "最近チェックした商品",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id":"title",
+      "label": "タイトル"
+    },
+    {
+      "type": "collection",
+      "id": "recent",
+      "label": "表示するコレクション",
+    },
+  ],
+  "presets": [
+    {
+      "name": "最近チェックした商品"
+    }
+  ]
+}
+{% endschema %}
