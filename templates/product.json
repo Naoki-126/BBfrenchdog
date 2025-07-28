@@ -94,12 +94,28 @@
       "settings": {
         "title": "カテゴリー"
       }
+    },
+    "1753650806d72ac5b6": {
+      "type": "apps",
+      "blocks": {
+        "justviewed_recently_products_app_block_YarNfw": {
+          "type": "shopify://apps/justviewed-recently-products/blocks/app-block/80a91fd8-2907-4af6-b142-fe30fd256c36",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "justviewed_recently_products_app_block_YarNfw"
+      ],
+      "settings": {
+        "include_margins": true
+      }
     }
   },
   "order": [
     "main",
     "top_category_e6UAkB",
     "custom_recent_Exmc9c",
-    "custom_category_DrA6Gt"
+    "custom_category_DrA6Gt",
+    "1753650806d72ac5b6"
   ]
 }

@@ -1,0 +1,259 @@
+{% assign product = product | default: null %}
+
+<main class="product">
+    <div class="page-inner">
+      <div class="page-contents">
+        <div class="breadcrumbs-area">
+          <p class="col-breadcrumb">
+            <a href="{{ routes.root_url }}">ホーム</a> &gt;
+            <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a> &gt;
+            {{ product.title }}
+          </p>
+        </div>
+        <section class="pro">
+          <div class="pro-area">
+            <div class="pro-imgArea">
+              <div class="pro-img__mainArea"><img src="{{ product.featured_image | image_url: width: 540 }}" alt="(( product.title))" class="pro-img__main"></div>
+              <ul class="pro-img__thumbArea">
+                {% for image in product.images %}
+                  <li class="pro-img__thumbnails"><img src="{{ product.featured_image |  image_url: width: 71  }}" alt="{{ image.alt | escape }}" class="pro-img__thumbnail"></li>
+                {% endfor %}
+              </ul>
+              <div class="pro-img__textArea">
+                  {% if product.description != blank %}
+                  <p class="pro-img__text">
+                    {{ product.description | newline_to_br }}
+                  </p>
+                {% endif %}
+                {% if product.metafields.detail.product_description %}
+                  <p class="pro-img__text2">
+                    {{ product.metafields.detail.product_description | metafield_tag }}
+                  </p>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="pro-contentsArea">
+              <div class="pro-contents__titleArea">
+                <h3 class="pro-title">{{ product.title }}</h3>
+              </div>
+              <div class="pro-contents">
+                <ul class="pro-content">
+                  {% assign current_variant = product.selected_or_first_available_variant %}
+                  <li class="pro-price">
+                    {% if current_variant.compare_at_price > current_variant.price %}
+                      <div class="pro-old-price" >
+                        {{ current_variant.compare_at_price | money_without_currency }}
+                      </div>
+                      <div class="pro-emphasis" >
+                        {{ current_variant.price | money_without_currency }}
+                      </div>円（税込）
+                      {% else %}
+                      <span class="pro-emphasis">
+                        {{ current_variant.price | money_without_currency }}
+                      </span>円（税込）
+                    {% endif %}
+                  </li>
+                  <li class="pro-cont__wrap">
+                    <h4 class="pro-name">色</h4>
+                    <div class="pro-cont__colorArea">
+                      <div class="pro-cont__color"> </div>
+                      <div class="pro-cont__color2"> </div>
+                      <div class="pro-cont__color3"> </div>
+                      <div class="pro-cont__color4"> </div>
+                      <div class="pro-cont__color5"> </div>
+                    </div>
+                  </li>
+
+                    {% for product in collections['origin'].products %}
+                      {{ product.title }}
+                      {% for variant in product.variants%}
+                        {{ variant.title }}
+                      {% endfor %}
+                    {% endfor %}
+
+                  <li class="pro-cont__wrap">
+                    <h4 class="pro-name">サイズ</h4>
+                    <div class="pro-cont__sizeArea">
+                      <div class="pro-cont__size">L</div>
+                    </div>
+                  </li>
+                  <li class="pro-cont__wrap">
+                    <h4 class="pro-name">数　量</h4>
+                    <div class="pro-cont__quantityArea js-quantity-area">
+                      <input type="hidden" name="quantity" value="1" class="js-quantity-input">
+                      <div class="pro-cont__quantity js-quantity-display">1</div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="pro-detail">
+                <p class="pro-name">詳　細</p>
+                <div class="pro-detail__area">
+                  {% for key in product.metafields.custom %}
+                    <dl class="pro-detail__dl">
+                      <dt class="pro-detail__dt">
+                        {% case key[0] %}
+                          {% when 'dimension' %}寸法
+                          {% when 'material' %}素材
+                          {% when 'color' %}カラー
+                          {% else %}{{ key[0] }}
+                        {% endcase %}
+                      </dt>
+                      <dd class="pro-detail__dd">{{ key[1].value }}</dd>
+                    </dl>
+                  {% endfor %}
+                  <dl class="pro-detail__dl">
+                    <dt class="pro-detail__dt">品番</dt>
+                    <dd class="pro-detail__dd">{{ product.variants.first.sku }}</dd>
+                  </dl>
+                </div>
+              </div>
+
+              {% for block in section.blocks %}
+                {% if block.type == 'content-note' %}
+                  <p class="pro-contents__note">{{ block.settings.note | newline_to_br }}</p>
+                {% endif %}
+              {% endfor %}
+              {% for block in section.blocks %}
+                {% if block.type == 'cart-button' %}
+                  <div class="pro-btnArea">
+                    <div class="product-form">
+                      {% form 'product', product %}
+                        <button type="submit" class="c-btn__pro">カートに入れる</button>
+                      {% endform %}
+                    </div>
+                    <button class="c-btn__byNow">今すぐ購入する</button>
+                  </div>
+                {% endif %}
+              {% endfor %}
+
+              {% assign feature = product.metafields.spec.feature %}
+              {% assign delivery = product.metafields.spec.delivery %}
+              {% assign note = product.metafields.spec.note %}
+              {% assign return = product.metafields.spec.return %}
+              {% assign stock = product.metafields.spec.stock %}
+              {% assign shipping = product.metafields.spec.shipping %}
+              <div class="pro-labelArea">
+                <div class="pro-labels">
+                  {%- if feature != blank -%}
+                    <div class="pro-label js-accordion-trigger">
+                      <img src="{{ 'icon-notice.png' | asset_url }}" alt="" class="note-icon">
+                      <p class="pro-label__text">フードの特徴・与え方</p>
+                    </div>
+                    <div class="js-accordion-content pro-text__note">{{ feature }}</div>
+                  {%- endif -%}
+                  {%- if delivery != blank -%}
+                    <div class="pro-label js-accordion-trigger">
+                      <img src="{{ 'icon-deliver.png' | asset_url }}" alt="" class="note-icon">
+                      <p class="pro-label__text">お届け時期</p>
+                    </div>
+                    <div class="js-accordion-content pro-text__note">{{ delivery }}</div>
+                  {%- endif -%}
+                  {%- if note != blank -%}
+                    <div class="pro-label js-accordion-trigger">
+                      <img src="{{ 'icon-notice.png' | asset_url }}" alt="" class="note-icon">
+                      <p class="pro-label__text">取扱上の注意</p>
+                    </div>
+                    <div class="js-accordion-content pro-text__note">{{ note }}</div>
+                  {%- endif -%}
+                  {%- if return != blank -%}
+                    <div class="pro-label js-accordion-trigger">
+                      <img src="{{ 'icon-notice.png' | asset_url }}" alt="" class="note-icon">
+                      <p class="pro-label__text">返品・交換・サポート</p>
+                    </div>
+                    <div class="js-accordion-content pro-text__note">{{ return }}</div>
+                  {%- endif -%}
+                  {%- if stock != blank -%}
+                    <div class="pro-label js-accordion-trigger">
+                      <img src="{{ 'icon-wrap.png' | asset_url }}" alt="" class="note-icon">
+                      <p class="pro-label__text">在庫について</p>
+                    </div>
+                    <div class="js-accordion-content pro-text__note">{{ stock }}</div>
+                  {%- endif -%}
+                  {%- if shipping != blank -%}
+                    <div class="pro-label js-accordion-trigger">
+                      <img src="{{ 'icon-wrap.png' | asset_url }}" alt="" class="note-icon">
+                      <p class="pro-label__text">送料について</p>
+                    </div>
+                    <div class="js-accordion-content pro-text__note">{{ shipping }}</div>
+                  {%- endif -%}
+                </div>
+              </div>
+              <div class="pro-cont__shareArea">
+                {% for block in section.blocks %}
+                  {% case block.type %}
+                    {% when 'share' %}
+                      {% liquid
+                        assign share_url = product.selected_variant.url | default: product.url | prepend: request.origin
+                      %}
+                      <div class="custom-share-style">
+                        {% render 'share-button', block: block, share_link: share_url %}
+                        <span class="share-text">Share</span>
+                      </div>
+                  {% endcase %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {% comment %} <section class="pro-cat">
+          <div class="pro-cat__titleArea">
+            <h3 class="pro-title">カテゴリー</h3>
+          </div>
+          <ul class="pro-cat__items">
+          {% assign categories = collections.all.products | limit: 5 %}
+          {% for i in (1..5) %}
+            <li class="pro-cat__item"><a href=""><img src="{{ 'cat-img' | append: i | append: '.png' | asset_url }}" alt="category-img1{{ i }}" class="cat-img"></a></li>
+          {% endfor %}
+          </ul>
+        </section> {% endcomment %}
+
+      </div>
+    </div>
+  </main>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+  const triggers = document.querySelectorAll('.js-accordion-trigger');
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', function () {
+      this.classList.toggle('is-open');
+      const content = this.nextElementSibling;
+      if (content && content.classList.contains('js-accordion-content')) {
+        const isVisible = content.style.display === 'block';
+        content.style.display = isVisible ? 'none' : 'block';
+      }
+    });
+  });
+});
+</script>
+
+
+{% schema %}
+{
+  "name": "商品情報（カスタム）",
+  "tag": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "cart-button",
+      "name": "カートボタン",
+      "settings":[]
+    },
+    {
+      "type": "share",
+      "name": "シェアボタン",
+      "settings": []
+    }
+  ],
+  "presets": [
+    {
+      "name": "商品情報（カスタム）"
+    }
+  ]
+}
+{% endschema %}

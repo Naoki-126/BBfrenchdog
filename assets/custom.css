@@ -1497,7 +1497,7 @@ body {
 .pro-text__note {
   font-size: 14px;
   line-height: 2;
-  padding: 8px 0;
+  padding: 8px 30px 64px 0;
 }
 
 .js-accordion-content {
