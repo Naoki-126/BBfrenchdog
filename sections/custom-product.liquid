@@ -111,10 +111,10 @@
                 {%- when '@app' -%}
                 {% render block %}
                 {%- when 'title' -%}
-                <div class="pro-contents__titleArea" >
-                    <h2 class="pro-title">{{ product.title | escape }}</h2>
-                </div>
-                {% assign current_variant = product.selected_or_first_available_variant %}
+                  <div class="pro-contents__titleArea" >
+                      <h2 class="pro-title">{{ product.title | escape }}</h2>
+                  </div>
+                  {% assign current_variant = product.selected_or_first_available_variant %}
                   <div class="pro-price">
                     {% if current_variant.compare_at_price > current_variant.price %}
                       <div class="pro-old-price" >
@@ -130,28 +130,45 @@
                     {% endif %}
                   </div>
 
-                  {% when 'variant_selector' %}
+                {% when 'variant_selector' %}
                   <div class="pro-cont__wrap">
-                    <h3 class="pro-name">色を選択</h3>
+                    <h3 class="pro-name">色</h3>
                     <div class="pro-cont__colorArea">
                       {% for option in product.options_with_values %}
                         {% if option.name == '色' %}
                           {% assign option_index = forloop.parentloop.index0 %}
                           {% for value in option.values %}
-                            <label class="pro-color__option">
+                            {% assign bg_color = '#ccc' %}
+                            {% if value == 'ブラック' %}
+                              {% assign bg_color = '#000' %}
+                            {% elsif value == 'ホワイト' %}
+                              {% assign bg_color = '#D9D9D9' %}
+                            {% elsif value == 'ピンク' %}
+                              {% assign bg_color = '#F438CF' %}
+                            {% elsif value == 'ブルー' %}
+                              {% assign bg_color = '#41BDE6' %}
+                            {% elsif value == 'イエロー' %}
+                              {% assign bg_color = '#F3E229' %}
+                            {% endif %}
+
+                            <label class="pro-color__option" style="position: relative; display: inline-block; margin-right: 8px;">
                               <input
                                 type="radio"
                                 name="option-{{ option_index }}"
                                 value="{{ value }}"
                                 {% if product.selected_or_first_available_variant.options contains value %}checked{% endif %}
                                 required
+                                style="display: none;"
                               >
-                              <span class="pro-color__dot" style="background-color:
-                                {% if value == '黒' %}#000
-                                {% elsif value == '白' %}#d9d9d9
-                                {% else %}#ccc{% endif %}">
-                              </span>
-                              {{ value }}
+                              <span class="pro-cont__colorDot" style="
+                                width: 14px;
+                                height: 14px;
+                                background-color: {{ bg_color }};
+                                border-radius: 50%;
+                                display: inline-block;
+                                cursor: pointer;
+                                border: 1px solid #999;
+                              "></span>
                             </label>
                           {% endfor %}
                         {% endif %}
@@ -214,6 +231,8 @@
                       {{ form | payment_terms }}
                     {%- endform -%}
                   </div>
+
+
                 {%- when 'inventory' -%}
                   <p
                     class="product__inventory{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
