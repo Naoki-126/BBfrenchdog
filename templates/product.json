@@ -9,22 +9,6 @@
  */
 {
   "sections": {
-    "top_category_e6UAkB": {
-      "type": "top-category",
-      "name": "カテゴリー",
-      "settings": {
-        "title": "",
-        "subTitle": ""
-      }
-    },
-    "custom_recent_Exmc9c": {
-      "type": "custom-recent",
-      "name": "最近チェックした商品",
-      "settings": {
-        "title": "最近チェックした製品",
-        "recent": "recent"
-      }
-    },
     "custom_product_xwVxeB": {
       "type": "custom-product",
       "blocks": {
@@ -40,6 +24,10 @@
           "type": "variant_selector",
           "settings": {}
         },
+        "size_pKbVdq": {
+          "type": "size",
+          "settings": {}
+        },
         "buy_buttons_8zCfef": {
           "type": "buy_buttons",
           "settings": {}
@@ -49,10 +37,27 @@
         "title_MyAgLY",
         "price_XrqiQR",
         "variant_selector_JU4BUC",
+        "size_pKbVdq",
         "buy_buttons_8zCfef"
       ],
       "name": "カスタム商品ページ",
       "settings": {}
+    },
+    "custom_recent_Exmc9c": {
+      "type": "custom-recent",
+      "name": "最近チェックした商品",
+      "settings": {
+        "title": "最近チェックした製品",
+        "recent": "recent"
+      }
+    },
+    "top_category_e6UAkB": {
+      "type": "top-category",
+      "name": "カテゴリー",
+      "settings": {
+        "title": "",
+        "subTitle": ""
+      }
     },
     "custom_category_DrA6Gt": {
       "type": "custom-category",

@@ -1300,13 +1300,8 @@ body {
 }
 
 .pro-color__option input:checked + .pro-cont__colorDot {
-  outline: 2px solid #000;
+  outline: 2px solid #d9d9d9;
   outline-offset: 2px;
-}
-
-.pro-cont__colorArea {
-	width: 100%;
-	position: relative;
 }
 
 .pro-cont__sizeArea {
@@ -1325,12 +1320,18 @@ body {
 	top: 50%;
 	transform: translateY(-50%);
 	right: 10px;
+	cursor: pointer;
 }
 
 .pro-cont__size {
 	font-size: 16px;
 	line-height: 1;
 	font-weight: 700;
+  background-color: transparent;
+  border: none;
+  width: 100%;
+  padding-right: 20px;
+
 }
 
 .pro-cont__quantityArea {
