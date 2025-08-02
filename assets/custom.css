@@ -245,6 +245,7 @@ body {
 .c-btn__byNow {
 	background: #dcd7cf;
 	border: 1px solid #292929;
+	color: #292929;
 	font-weight: 700;
 	line-height: 1.68;
 	padding: 18px;
@@ -1431,21 +1432,6 @@ body {
   gap: 16px;
 }
 
-/* .pro-contents__explain {
-  margin-top: 32px;
-}
-
-.pro-contents__theme {
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 2;
-}
-
-.pro-contents__text {
-  font-size: 14px;
-  line-height: 2;
-} */
-
 .pro-labels {
   margin-top: 32px;
 }
@@ -1515,7 +1501,7 @@ body {
 
 .js-accordion-content {
   display: none;
-  transition: all 0.3s ease;
+  transition: all .3s ease;
 }
 
 .pro-label.is-open + .js-accordion-content {

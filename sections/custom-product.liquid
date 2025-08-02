@@ -179,7 +179,7 @@
 
                 {%- when 'size' -%}
                 <div class="pro-cont__wrap">
-                  <h4 class="pro-name">サイズ</h4>
+                  <h3 class="pro-name">サイズ</h3>
                   <div class="pro-cont__sizeArea">
                     {% for option in product.options_with_values %}
                       {% if option.name == 'サイズ'%}
@@ -198,8 +198,101 @@
                   </div>
                 </div>
 
-              
+                {% when 'product_detail' %}
+                <div class="pro-detail" {{ block.shopify_attributes }} >
+                <h3 class="pro-name">詳　細</h3>
+                <div class="pro-detail__area">
+                  {% assign custom = product.metafields.custom %}
+                  {% if custom.material and custom.material.value != blank %}
+                  <dl class="pro-detail__dl">
+                    <dt class="pro-detail__dt">素材</dt>
+                    <dd class="pro-detail__dd">{{ custom.material.value }}</dd>
+                  </dl>
+                {% endif %}
+                {% if custom.capacity and custom.capacity.value != blank %}
+                  <dl class="pro-detail__dl">
+                    <dt class="pro-detail__dt">サイズ</dt>
+                    <dd class="pro-detail__dd">{{ custom.capacity.value }}</dd>
+                  </dl>
+                {% endif %}
+                {% if custom.dimension and custom.dimension.value != blank %}
+                  <dl class="pro-detail__dl">
+                    <dt class="pro-detail__dt">寸法</dt>
+                    <dd class="pro-detail__dd">{{ custom.dimension.value }}</dd>
+                  </dl>
+                {% endif %}
+                {% if custom.color and custom.color.value != blank %}
+                  <dl class="pro-detail__dl">
+                    <dt class="pro-detail__dt">カラー</dt>
+                    <dd class="pro-detail__dd">{{ custom.color.value }}</dd>
+                  </dl>
+                {% endif %}
+                {% if product.variants.first.sku != blank %}
+                  <dl class="pro-detail__dl">
+                    <dt class="pro-detail__dt">品番</dt>
+                    <dd class="pro-detail__dd">{{ product.variants.first.sku }}</dd>
+                  </dl>
+                {% endif %}
+                </div>
+                {% for block in section.blocks %}
+                  {% if block.type == 'content-note' %}
+                    <p class="pro-contents__note">{{ block.settings.note | newline_to_br }}</p>
+                  {% endif %}
+                {% endfor %}
 
+                {% assign feature = product.metafields.spec.feature %}
+                {% assign delivery = product.metafields.spec.delivery %}
+                {% assign note = product.metafields.spec.note %}
+                {% assign return = product.metafields.spec.return %}
+                {% assign stock = product.metafields.spec.stock %}
+                {% assign shipping = product.metafields.spec.shipping %}
+                {% when 'accordion-info' %}
+                <div class="pro-labelArea">
+                  <div class="pro-labels">
+                    {% if feature != blank %}
+                      <div class="pro-label js-accordion-trigger">
+                        <img src="{{ 'icon-notice.png' | asset_url }}" alt="" class="note-icon">
+                        <p class="pro-label__text">フードの特徴・与え方</p>
+                      </div>
+                      <div class="js-accordion-content pro-text__note">{{ feature }}</div>
+                    {% endif %}
+                    {% if delivery != blank %}
+                      <div class="pro-label js-accordion-trigger">
+                        <img src="{{ 'icon-deliver.png' | asset_url }}" alt="" class="note-icon">
+                        <p class="pro-label__text">お届け時期</p>
+                      </div>
+                      <div class="js-accordion-content pro-text__note">{{ delivery }}</div>
+                    {% endif %}
+                    {% if note != blank %}
+                      <div class="pro-label js-accordion-trigger">
+                        <img src="{{ 'icon-notice.png' | asset_url }}" alt="" class="note-icon">
+                        <p class="pro-label__text">取扱上の注意</p>
+                      </div>
+                      <div class="js-accordion-content pro-text__note">{{ note }}</div>
+                    {% endif %}
+                    {% if return != blank %}
+                      <div class="pro-label js-accordion-trigger">
+                        <img src="{{ 'icon-notice.png' | asset_url }}" alt="" class="note-icon">
+                        <p class="pro-label__text">返品・交換・サポート</p>
+                      </div>
+                      <div class="js-accordion-content pro-text__note">{{ return }}</div>
+                    {% endif %}
+                    {% if stock != blank %}
+                      <div class="pro-label js-accordion-trigger">
+                        <img src="{{ 'icon-wrap.png' | asset_url }}" alt="" class="note-icon">
+                        <p class="pro-label__text">在庫について</p>
+                      </div>
+                      <div class="js-accordion-content pro-text__note">{{ stock }}</div>
+                    {% endif %}
+                    {% if shipping != blank %}
+                      <div class="pro-label js-accordion-trigger">
+                        <img src="{{ 'icon-wrap.png' | asset_url }}" alt="" class="note-icon">
+                        <p class="pro-label__text">送料について</p>
+                      </div>
+                      <div class="js-accordion-content pro-text__note">{{ shipping }}</div>
+                    {% endif %}
+                  </div>
+                </div>
 
 
 
@@ -301,12 +394,14 @@
                       {%- endif -%}
                     {%- endif -%}
                   </p>
+
                 {%- when 'description' -%}
                   {%- if product.description != blank -%}
                     <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
                       {{ product.description }}
                     </div>
                   {%- endif -%}
+
                 {%- when 'sku' -%}
                   <p
                     class="product__sku{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hidden{% endif %}"
@@ -317,8 +412,10 @@
                     <span class="visually-hidden">{{ 'products.product.sku' | t }}:</span>
                     {{- product.selected_or_first_available_variant.sku -}}
                   </p>
+
                 {%- when 'custom_liquid' -%}
                   {{ block.settings.custom_liquid }}
+
                 {%- when 'collapsible_tab' -%}
                   <div class="product__accordion accordion quick-add-hidden" {{ block.shopify_attributes }}>
                     <details id="Details-{{ block.id }}-{{ section.id }}">
@@ -579,14 +676,31 @@
 
                 {%- when 'variant_picker' -%}
                   {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+
                 {%- when 'buy_buttons' -%}
-                  {%- render 'buy-buttons',
+                  {% comment %} {%- render 'buy-buttons',
                     block: block,
                     product: product,
                     product_form_id: product_form_id,
                     section_id: section.id,
                     show_pickup_availability: true
-                  -%}
+                  -%} {% endcomment %}
+                  {% if product.available %}
+                  <div class="pro-btnArea">
+                    <div class="product-form">
+                      {% form 'product', product %}
+                        <button type="submit" class="c-btn c-btn__pro">
+                          カートに入れる
+                        </button>
+                      {% endform %}
+                    </div>
+                    <button class="c-btn c-btn__byNow">
+                      今すぐ購入する
+                    </button>
+                  </div>
+                {% endif %}
+
+
                 {%- when 'rating' -%}
                   {%- if product.metafields.reviews.rating.value != blank -%}
                     <div class="rating-wrapper">
@@ -625,6 +739,7 @@
                       </p>
                     </div>
                   {%- endif -%}
+
                 {%- when 'complementary' -%}
                   <product-recommendations
                     class="complementary-products quick-add-hidden{% if block.settings.make_collapsible_row %} is-accordion{% endif %}{% if block.settings.enable_quick_add %} complementary-products-contains-quick-add{% endif %}"
@@ -712,6 +827,7 @@
                                 </div>
                               {%- endfor -%}
                             </div>
+
                             {%- if number_of_slides > 1 -%}
                               <div class="slider-buttons">
                                 <button
@@ -877,9 +993,29 @@
     {
       "type": "quantity_selector",
       "name": "数量セレクター"
+    },
+    {
+      "type": "product_detail",
+      "name": "商品詳細（メタフィールド）"
+    },
+    {
+      "type": "content-note",
+      "name": "注意書き",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "note",
+          "label": "注意書きテキスト",
+        }
+      ]
+    },
+    {
+      "type": "accordion-info",
+      "name": "アコーディオン表示ブロック",
+      "limit": 1,
+      "settings": []
     }
   ],
-  "max_blocks": 10,
   "presets": [
     {
       "name": "カスタム商品ページ",
@@ -887,7 +1023,8 @@
         { "type": "title" },
         { "type": "price" },
         { "type": "variant_selector" },
-        { "type": "buy_buttons" }
+        { "type": "buy_buttons" },
+        { "type": "accordion-info" }
       ]
     }
   ]

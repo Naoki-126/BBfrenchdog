@@ -32,8 +32,22 @@
           "type": "quantity_selector",
           "settings": {}
         },
+        "product_detail_cRMqGj": {
+          "type": "product_detail",
+          "settings": {}
+        },
+        "content_note_EXXLmb": {
+          "type": "content-note",
+          "settings": {
+            "note": "※注意書きテキストが入ります。注意書きテキストが入ります。注意書きテキストが入ります。注意書きテキストが入ります。"
+          }
+        },
         "buy_buttons_8zCfef": {
           "type": "buy_buttons",
+          "settings": {}
+        },
+        "accordion_info_r9ehbW": {
+          "type": "accordion-info",
           "settings": {}
         }
       },
@@ -43,7 +57,10 @@
         "variant_selector_JU4BUC",
         "size_pKbVdq",
         "quantity_selector_A7Vfcx",
-        "buy_buttons_8zCfef"
+        "product_detail_cRMqGj",
+        "content_note_EXXLmb",
+        "buy_buttons_8zCfef",
+        "accordion_info_r9ehbW"
       ],
       "name": "カスタム商品ページ",
       "settings": {}

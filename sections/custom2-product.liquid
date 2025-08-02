@@ -79,7 +79,7 @@
                       <div class="pro-cont__quantity js-quantity-display">1</div>
                     </div>
                   </div>
-                  
+
                 </div>
               </div>
 
@@ -111,6 +111,7 @@
                   <p class="pro-contents__note">{{ block.settings.note | newline_to_br }}</p>
                 {% endif %}
               {% endfor %}
+              
               {% for block in section.blocks %}
                 {% if block.type == 'cart-button' %}
                   <div class="pro-btnArea">
