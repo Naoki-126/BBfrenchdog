@@ -111,7 +111,7 @@
                   <p class="pro-contents__note">{{ block.settings.note | newline_to_br }}</p>
                 {% endif %}
               {% endfor %}
-              
+
               {% for block in section.blocks %}
                 {% if block.type == 'cart-button' %}
                   <div class="pro-btnArea">
@@ -228,28 +228,3 @@
 });
 </script>
 
-
-{% schema %}
-{
-  "name": "商品情報（カスタム）",
-  "tag": "section",
-  "settings": [],
-  "blocks": [
-    {
-      "type": "cart-button",
-      "name": "カートボタン",
-      "settings":[]
-    },
-    {
-      "type": "share",
-      "name": "シェアボタン",
-      "settings": []
-    }
-  ],
-  "presets": [
-    {
-      "name": "商品情報（カスタム）"
-    }
-  ]
-}
-{% endschema %}

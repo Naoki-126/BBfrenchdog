@@ -104,8 +104,8 @@
             id="ProductInfo-{{ section.id }}"
             class="product__info-container{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}"
             >
-            {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
+            {%- assign product_form_id = 'product-form-' | append: section.id -%}
             {%- for block in section.blocks -%}
               {%- case block.type -%}
                 {%- when '@app' -%}
@@ -131,77 +131,92 @@
                 </div>
 
                 {% when 'variant_selector' %}
-                <div class="pro-cont__wrap">
-                  <h3 class="pro-name">色</h3>
-                  <div class="pro-cont__colorArea">
-                    {% for option in product.options_with_values %}
-                      {% if option.name == '色' %}
-                        {% assign option_index = forloop.parentloop.index0 %}
-                        {% for value in option.values %}
-                          {% assign bg_color = '#ccc' %}
-                          {% if value == 'ブラック' %}
-                            {% assign bg_color = '#000' %}
-                          {% elsif value == 'ホワイト' %}
-                            {% assign bg_color = '#D9D9D9' %}
-                          {% elsif value == 'ピンク' %}
-                            {% assign bg_color = '#F438CF' %}
-                          {% elsif value == 'ブルー' %}
-                            {% assign bg_color = '#41BDE6' %}
-                          {% elsif value == 'イエロー' %}
-                            {% assign bg_color = '#F3E229' %}
-                          {% endif %}
-
-                          <label class="pro-color__option" style="position: relative; display: inline-block; margin-right: 8px;">
-                            <input
-                              type="radio"
-                              name="option-{{ option_index }}"
-                              value="{{ value }}"
-                              {% if product.selected_or_first_available_variant.options contains value %}checked{% endif %}
-                              required
-                              style="display: none;"
-                            >
-                            <span class="pro-cont__colorDot" style="
-                              width: 14px;
-                              height: 14px;
-                              background-color: {{ bg_color }};
-                              border-radius: 50%;
-                              display: inline-block;
-                              cursor: pointer;
-                              border: 1px solid #fff;
-                              transition: transform 0.3s ease;
-                            "></span>
-                          </label>
-                        {% endfor %}
-                      {% endif %}
-                    {% endfor %}
+                {%- assign color_values = '' -%}
+                {% for option in product.options_with_values %}
+                  {% if option.name == '色' %}
+                    {% assign color_values = option.values | join: '' %}
+                  {% endif %}
+                {% endfor %}
+                {% unless color_values == '' %}
+                  <div class="pro-cont__wrap">
+                    <h3 class="pro-name">色</h3>
+                    <div class="pro-cont__colorArea">
+                      {% for option in product.options_with_values %}
+                        {% if option.name == '色' %}
+                          {% assign option_index = forloop.parentloop.index0 %}
+                          {% for value in option.values %}
+                            {% assign bg_color = '#ccc' %}
+                            {% if value == 'ブラック' %}
+                              {% assign bg_color = '#000' %}
+                            {% elsif value == 'ホワイト' %}
+                              {% assign bg_color = '#D9D9D9' %}
+                            {% elsif value == 'ピンク' %}
+                              {% assign bg_color = '#F438CF' %}
+                            {% elsif value == 'ブルー' %}
+                              {% assign bg_color = '#41BDE6' %}
+                            {% elsif value == 'イエロー' %}
+                              {% assign bg_color = '#F3E229' %}
+                            {% endif %}
+                            <label class="pro-color__option" style="position: relative; display: inline-block; margin-right: 8px;">
+                              <input
+                                type="radio"
+                                name="option-{{ option_index }}"
+                                value="{{ value }}"
+                                {% if product.selected_or_first_available_variant.options contains value %}checked{% endif %}
+                                required
+                                style="display: none;"
+                              >
+                              <span class="pro-cont__colorDot" style="
+                                width: 14px;
+                                height: 14px;
+                                background-color: {{ bg_color }};
+                                border-radius: 50%;
+                                display: inline-block;
+                                cursor: pointer;
+                                border: 1px solid #fff;
+                                transition: transform 0.3s ease;
+                              "></span>
+                            </label>
+                          {% endfor %}
+                        {% endif %}
+                      {% endfor %}
+                    </div>
                   </div>
-                </div>
+                {% endunless %}
 
                 {%- when 'size' -%}
-                <div class="pro-cont__wrap">
-                  <h3 class="pro-name">サイズ</h3>
-                  <div class="pro-cont__sizeArea">
-                    {% for option in product.options_with_values %}
-                      {% if option.name == 'サイズ'%}
-                        {% assign option_index = forloop.index0 %}
-                        <select name="options[サイズ]" class="pro-cont__size" id="ProductSelect-Size">
-                          {% for value in option.values %}
-                            {% assign is_selected = false %}
-                            {% if product.selected_or_first_available_variant.options[option_index] == value %}
-                              {% assign is_selected = true %}
-                            {% endif %}
-                            <option value="{{ value | escape }}"{% if is_selected %}selected{% endif %} >{{ value }}</option>
-                          {% endfor %}
-                        </select>
-                      {% endif %}
-                    {% endfor %}
+                {%- assign size_values = '' -%}
+                {% for option in product.options_with_values %}
+                  {% if option.name == 'サイズ' %}
+                    {% assign size_values = option.values | join: '' %}
+                  {% endif %}
+                {% endfor %}
+                {% unless size_values == '' %}
+                  <div class="pro-cont__wrap">
+                    <h3 class="pro-name">サイズ</h3>
+                    <div class="pro-cont__sizeArea">
+                      {% for option in product.options_with_values %}
+                        {% if option.name == 'サイズ'%}
+                          {% assign option_index = forloop.index0 %}
+                          <select name="options[サイズ]" class="pro-cont__size" id="ProductSelect-Size">
+                            {% for value in option.values %}
+                              {% assign is_selected = false %}
+                              {% if product.selected_or_first_available_variant.options[option_index] == value %}
+                                {% assign is_selected = true %}
+                              {% endif %}
+                              <option value="{{ value | escape }}"{% if is_selected %} selected{% endif %}>{{ value }}</option>
+                            {% endfor %}
+                          </select>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
                   </div>
-                </div>
+                {% endunless %}
 
                 {% when 'product_detail' %}
                 <div class="pro-detail" {{ block.shopify_attributes }} >
                 <h3 class="pro-name">詳　細</h3>
-                <div class="pro-detail__area">
+                <div class="pro-detailArea">
                   {% assign custom = product.metafields.custom %}
                   {% if custom.material and custom.material.value != blank %}
                   <dl class="pro-detail__dl">
@@ -254,49 +269,45 @@
                         <img src="{{ 'icon-notice.png' | asset_url }}" alt="" class="note-icon">
                         <p class="pro-label__text">フードの特徴・与え方</p>
                       </div>
-                      <div class="js-accordion-content pro-text__note">{{ feature }}</div>
+                      <div class="js-accordion-content pro-label__note">{{ feature }}</div>
                     {% endif %}
                     {% if delivery != blank %}
                       <div class="pro-label js-accordion-trigger">
                         <img src="{{ 'icon-deliver.png' | asset_url }}" alt="" class="note-icon">
                         <p class="pro-label__text">お届け時期</p>
                       </div>
-                      <div class="js-accordion-content pro-text__note">{{ delivery }}</div>
+                      <div class="js-accordion-content pro-label__note">{{ delivery }}</div>
                     {% endif %}
                     {% if note != blank %}
                       <div class="pro-label js-accordion-trigger">
                         <img src="{{ 'icon-notice.png' | asset_url }}" alt="" class="note-icon">
                         <p class="pro-label__text">取扱上の注意</p>
                       </div>
-                      <div class="js-accordion-content pro-text__note">{{ note }}</div>
+                      <div class="js-accordion-content pro-label__note">{{ note }}</div>
                     {% endif %}
                     {% if return != blank %}
                       <div class="pro-label js-accordion-trigger">
                         <img src="{{ 'icon-notice.png' | asset_url }}" alt="" class="note-icon">
                         <p class="pro-label__text">返品・交換・サポート</p>
                       </div>
-                      <div class="js-accordion-content pro-text__note">{{ return }}</div>
+                      <div class="js-accordion-content pro-label__note">{{ return }}</div>
                     {% endif %}
                     {% if stock != blank %}
                       <div class="pro-label js-accordion-trigger">
                         <img src="{{ 'icon-wrap.png' | asset_url }}" alt="" class="note-icon">
                         <p class="pro-label__text">在庫について</p>
                       </div>
-                      <div class="js-accordion-content pro-text__note">{{ stock }}</div>
+                      <div class="js-accordion-content pro-label__note">{{ stock }}</div>
                     {% endif %}
                     {% if shipping != blank %}
                       <div class="pro-label js-accordion-trigger">
                         <img src="{{ 'icon-wrap.png' | asset_url }}" alt="" class="note-icon">
                         <p class="pro-label__text">送料について</p>
                       </div>
-                      <div class="js-accordion-content pro-text__note">{{ shipping }}</div>
+                      <div class="js-accordion-content pro-label__note">{{ shipping }}</div>
                     {% endif %}
                   </div>
                 </div>
-
-
-
-
 
                 {%- when 'text' -%}
                   <p
@@ -306,7 +317,7 @@
                     {{- block.settings.text -}}
                   </p>
 
-                {%- when 'price' -%}
+                {% comment %} {%- when 'price' -%}
                   <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                     {%- render 'price',
                       product: product,
@@ -314,7 +325,8 @@
                       show_badges: true,
                       price_class: 'price--large'
                     -%}
-                  </div>
+                  </div> {% endcomment %}
+
                   {%- if product.quantity_price_breaks_configured? -%}
                     <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
                       <span>{{ 'products.product.volume_pricing.note' | t }}</span>
@@ -341,7 +353,6 @@
                       {{ form | payment_terms }}
                     {%- endform -%}
                   </div>
-
 
                 {%- when 'inventory' -%}
                   <p
@@ -668,11 +679,17 @@
                       {{ block.settings.text | default: block.settings.page.title | escape }}
                     </button>
                   </modal-opener>
+
                 {%- when 'share' -%}
-                  {% liquid
-                    assign share_url = product.selected_variant.url | default: product.url | prepend: request.origin
-                    render 'share-button', block: block, share_link: share_url
-                  %}
+                  <div class="pro-cont__shareArea">
+                    {% liquid
+                      assign share_url = product.selected_variant.url | default: product.url | prepend: request.origin
+                    %}
+                    <div class="custom-share-style">
+                      {% render 'share-button', block: block, share_link: share_url %}
+                      <span class="share-text">Share</span>
+                    </div>
+                  </div>
 
                 {%- when 'variant_picker' -%}
                   {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
@@ -699,7 +716,6 @@
                     </button>
                   </div>
                 {% endif %}
-
 
                 {%- when 'rating' -%}
                   {%- if product.metafields.reviews.rating.value != blank -%}
@@ -827,7 +843,6 @@
                                 </div>
                               {%- endfor -%}
                             </div>
-
                             {%- if number_of_slides > 1 -%}
                               <div class="slider-buttons">
                                 <button
@@ -894,13 +909,13 @@
                   {% render 'icon-with-text', block: block %}
               {%- endcase -%}
             {%- endfor -%}
-            <a href="{{ product.url }}" class="link product__view-details animate-arrow">
+
+            {% comment %} <a href="{{ product.url }}" class="link product__view-details animate-arrow">
               {{ 'products.product.view_full_details' | t }}
               {{- 'icon-arrow.svg' | inline_asset_content -}}
-            </a>
+            </a> {% endcomment %}
           </section>
         </div>
-
         {% comment %} </div> {% endcomment %}
       </div>
 
@@ -982,13 +997,7 @@
     },
     {
       "type": "size",
-      "name": "サイズ選択",
-      "limit": 1,
-      "settings": []
-    },
-    {
-      "type": "buy_buttons",
-      "name": "購入ボタン"
+      "name": "サイズ選択"
     },
     {
       "type": "quantity_selector",
@@ -1010,10 +1019,16 @@
       ]
     },
     {
+      "type": "buy_buttons",
+      "name": "購入ボタン"
+    },
+    {
       "type": "accordion-info",
-      "name": "アコーディオン表示ブロック",
-      "limit": 1,
-      "settings": []
+      "name": "アコーディオン表示ブロック"
+    },
+    {
+      "type": "share",
+      "name": "シェアボタン"
     }
   ],
   "presets": [
@@ -1023,8 +1038,13 @@
         { "type": "title" },
         { "type": "price" },
         { "type": "variant_selector" },
+        { "type": "size" },
+        { "type": "quantity_selector" },
+        { "type": "product_detail" },
+        { "type": "content-note" },
         { "type": "buy_buttons" },
-        { "type": "accordion-info" }
+        { "type": "accordion-info" },
+        { "type": "share" }
       ]
     }
   ]

@@ -146,11 +146,6 @@
       "settings": {
         "include_margins": true
       }
-    },
-    "custom2_product_tAzY9c": {
-      "type": "custom2-product",
-      "name": "商品情報（カスタム）",
-      "settings": {}
     }
   },
   "order": [
@@ -158,7 +153,6 @@
     "custom_recent_Exmc9c",
     "top_category_e6UAkB",
     "custom_category_DrA6Gt",
-    "1753650806d72ac5b6",
-    "custom2_product_tAzY9c"
+    "1753650806d72ac5b6"
   ]
 }
