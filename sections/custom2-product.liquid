@@ -65,26 +65,21 @@
                     </div>
                   </div>
 
-                    {% for product in collections['origin'].products %}
-                      {{ product.title }}
-                      {% for variant in product.variants%}
-                        {{ variant.title }}
-                      {% endfor %}
-                    {% endfor %}
-
                   <div class="pro-cont__wrap">
                     <h4 class="pro-name">サイズ</h4>
                     <div class="pro-cont__sizeArea">
                       <div class="pro-cont__size">L</div>
                     </div>
                   </div>
-                  <li class="pro-cont__wrap">
+
+                  <div class="pro-cont__wrap">
                     <h4 class="pro-name">数　量</h4>
                     <div class="pro-cont__quantityArea js-quantity-area">
                       <input type="hidden" name="quantity" value="1" class="js-quantity-input">
                       <div class="pro-cont__quantity js-quantity-display">1</div>
                     </div>
-                  </li>
+                  </div>
+                  
                 </div>
               </div>
 

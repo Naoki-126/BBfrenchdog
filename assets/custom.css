@@ -1299,28 +1299,31 @@ body {
 	background-color: #F3E229;
 }
 
-.pro-color__option input:checked + .pro-cont__colorDot {
+.pro-cont__colorArea .pro-color__option input:checked + .pro-cont__colorDot {
   outline: 2px solid #d9d9d9;
   outline-offset: 2px;
 }
 
 .pro-cont__sizeArea {
 	width: 140px;
-	border: 1px solid #000;
+	border: 1px solid #292929;
 	padding: 6px 10px;
 	position: relative;
+	cursor: pointer;
+	background-color: transparent;
 }
 
 .pro-cont__sizeArea::after {
 	content: "";
 	position: absolute;
-	background: url(../assets/icon-arrow-down.png) no-repeat center center /contain;
+	background: url(../assets/icon-arrow-down.png) no-repeat center center / contain;
 	width: 17px;
 	height: 17px;
 	top: 50%;
 	transform: translateY(-50%);
 	right: 10px;
 	cursor: pointer;
+	pointer-events: none;
 }
 
 .pro-cont__size {
@@ -1331,36 +1334,40 @@ body {
   border: none;
   width: 100%;
   padding-right: 20px;
+	cursor: pointer;
+}
 
+.pro-cont__size:focus {
+  background-color: transparent;
+  outline: 2px solid #fff;
 }
 
 .pro-cont__quantityArea {
 	width: 140px;
 	border: 1px solid #000;
-	padding: 12px 18px;
 	border-radius: 99px;
+	padding: 12px 18px;
 	position: relative;
+	cursor: pointer;
 }
 
-.pro-cont__quantityArea::before {
+.pro-cont__quantityArea::before,
+.pro-cont__quantityArea::after {
 	content: "";
 	position: absolute;
-	background: url(../assets/icon-minus.svg) no-repeat center center /contain;
 	width: 12px;
 	height: 12px;
 	top: 50%;
 	transform: translateY(-50%);
+}
+
+.pro-cont__quantityArea::before {
+	background: url(../assets/icon-minus.svg) no-repeat center center /contain;
 	left: 18px;
 }
 
 .pro-cont__quantityArea::after {
-	content: "";
-	position: absolute;
 	background: url(../assets/icon-plus.svg) no-repeat center center /contain;
-	width: 12px;
-	height: 12px;
-	top: 50%;
-	transform: translateY(-50%);
 	right: 18px;
 }
 
