@@ -976,7 +976,38 @@
   </div>
 </product-info>
 
-{% comment %} <script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const triggers = document.querySelectorAll('.js-accordion-trigger');
+
+    triggers.forEach(trigger => {
+      trigger.addEventListener('click', function () {
+        const content = this.nextElementSibling;
+
+        // すでに開いているものをすべて閉じる
+        document.querySelectorAll('.js-accordion-content').forEach(el => {
+          if (el !== content) {
+            el.style.maxHeight = null;
+            el.previousElementSibling.classList.remove('is-open');
+          }
+        });
+
+        // トグル開閉
+        if (content.style.maxHeight) {
+          content.style.maxHeight = null;
+          trigger.classList.remove('is-open');
+        } else {
+          content.style.maxHeight = content.scrollHeight + 'px';
+          trigger.classList.add('is-open');
+        }
+      });
+
+      // 初期状態ですべて閉じる
+      const content = trigger.nextElementSibling;
+      content.style.maxHeight = null;
+    });
+  });
+
   document.addEventListener('DOMContentLoaded', function () {
     const handle = '{{ product.handle }}';
     let viewed = JSON.parse(localStorage.getItem('recently_viewed')) || [];
@@ -988,9 +1019,7 @@
     localStorage.setItem('recently_viewed', JSON.stringify(viewed));
     console.log('保存したrecently_viewed:', viewed);
   });
-</script> {% endcomment %}
-
-
+</script>
 
 
 {% schema %}

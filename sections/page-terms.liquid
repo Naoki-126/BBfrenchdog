@@ -1,0 +1,106 @@
+<main class="commerce">
+  <div class="page-inner">
+    <div class="page-contents">
+      <div class="breadcrumbs-area">
+        <nav  role="navigation" aria-label="breadcrumb">
+          <ol class="col-breadcrumb">
+            <li><a href="{{ routes.root_url }}">ホーム</a></li>
+            <li><a href="{{ routes.collections_url }}">コレクション</a></li>
+            <li>{{ collection.title }}</li>
+          </ol>
+        </nav>
+      </div>
+      <section class="com">
+        <div class="com-titleArea">
+          <h2 class="com-title">{{ page.title }}</h2>
+        </div>
+        <div class="com-contents">
+          {% for block in section.blocks %}
+            <div class="com-content">
+              <h3 class="com-subTitle">{{ block.settings.subtitle }}</h3>
+              <div class="com-textArea">
+                <p class="com-text">{{ block.settings.text | newline_to_br }}</p>
+                {% if block.type == 'commerce_block' and block.settings.num-list != blank %}
+                  {% assign items = block.settings.num-list | split: ',' %}
+                  <ol class="guide-numbers">
+                    {% for item in items %}
+                      <li class="com-list">{{ item }}</li>
+                    {% endfor %}
+                  </ol>
+                {% endif %}
+                {% if block.type == 'commerce_bullet' and block.settings.bull-list != blank %}
+                  {% assign items = block.settings.bull-list | split: ',' %}
+                  <ul class="guide-lists">
+                    {% for item in items %}
+                      <li class="guide-list">{{ item }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+
+{% schema %}
+{
+  "name": "利用規約ページ",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "commerce_block",
+      "name": "番号付きブロック",
+      "settings": [
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "見出し",
+          "default": "見出し（番号付き）"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "本文テキスト",
+        },
+        {
+          "type": "textarea",
+          "id": "num-list",
+          "label": "番号付きリスト（カンマ区切り）"
+        },
+      ]
+    },
+    {
+      "type": "commerce_bullet",
+      "name": "箇条書きブロック",
+      "settings": [
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "見出し",
+          "default": "見出し（箇条書き）"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "本文テキスト",
+        },
+        {
+          "type": "textarea",
+          "id": "bull-list",
+          "label": "箇条書きリスト（カンマ区切り）"
+        },
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "利用規約テンプレート",
+      "category": "ページ"
+    }
+  ]
+}
+{% endschema %}
