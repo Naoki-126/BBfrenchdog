@@ -53,7 +53,7 @@
           "type": "page_link",
           "settings": {
             "link_title": "お問い合わせ",
-            "link_url": ""
+            "link_url": "shopify://pages/contact"
           }
         },
         "item_zTBdce": {
