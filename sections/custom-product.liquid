@@ -114,21 +114,6 @@
                 <div class="pro-contents__titleArea" >
                     <h2 class="pro-title">{{ product.title | escape }}</h2>
                 </div>
-                {% assign current_variant = product.selected_or_first_available_variant %}
-                <div class="pro-price">
-                  {% if current_variant.compare_at_price > current_variant.price %}
-                    <div class="pro-old-price" >
-                      {{ current_variant.compare_at_price | money_without_currency }}
-                    </div>
-                    <div class="pro-emphasis" >
-                      {{ current_variant.price | money_without_currency }}
-                    </div>円（税込）
-                    {% else %}
-                    <span class="pro-emphasis">
-                      {{ current_variant.price | money_without_currency }}
-                    </span>円（税込）
-                  {% endif %}
-                </div>
 
                 {% when 'variant_selector' %}
                 {%- assign color_values = '' -%}
@@ -317,7 +302,7 @@
                     {{- block.settings.text -}}
                   </p>
 
-                {% comment %} {%- when 'price' -%}
+                {%- when 'price' -%}
                   <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                     {%- render 'price',
                       product: product,
@@ -325,7 +310,7 @@
                       show_badges: true,
                       price_class: 'price--large'
                     -%}
-                  </div> {% endcomment %}
+                  </div>
 
                   {%- if product.quantity_price_breaks_configured? -%}
                     <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">

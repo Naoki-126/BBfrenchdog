@@ -265,6 +265,28 @@ body {
 	right: 28px;
 }
 
+.c-btn__label {
+	background: #AB8572;
+	font-family: 'Lato';
+	font-size: 12px;
+	line-height: 1;
+	letter-spacing: 0;
+	color: #fff;
+	padding: 6px 9px;
+	border-radius: 20px;
+}
+
+.c-btn__labelSo {
+	background: #292929;
+	font-family: 'Lato';
+	font-size: 12px;
+	line-height: 1;
+	letter-spacing: 0;
+	color: #fff;
+	padding: 6px 8px;
+	border-radius: 20px;
+}
+
 .breadcrumbs-area {
 	margin-top: 60px;
 	display: flex;
