@@ -49,6 +49,10 @@
         "accordion_info_r9ehbW": {
           "type": "accordion-info",
           "settings": {}
+        },
+        "share_tNfRyc": {
+          "type": "share",
+          "settings": {}
         }
       },
       "block_order": [
@@ -60,7 +64,8 @@
         "product_detail_cRMqGj",
         "content_note_EXXLmb",
         "buy_buttons_8zCfef",
-        "accordion_info_r9ehbW"
+        "accordion_info_r9ehbW",
+        "share_tNfRyc"
       ],
       "name": "カスタム商品ページ",
       "settings": {}
@@ -69,90 +74,64 @@
       "type": "custom-recent",
       "name": "最近チェックした商品",
       "settings": {
-        "title": "最近チェックした製品",
-        "recent": "recent"
+        "title": "最近チェックした製品"
       }
     },
-    "top_category_e6UAkB": {
-      "type": "top-category",
-      "name": "カテゴリー",
-      "settings": {
-        "title": "",
-        "subTitle": ""
-      }
-    },
-    "custom_category_DrA6Gt": {
+    "custom_category_edAkrh": {
       "type": "custom-category",
       "blocks": {
-        "image_fTGTWa": {
+        "image_WaCxYJ": {
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/cat-img1.png",
-            "collection": "wear"
+            "collection": "harness"
           }
         },
-        "image_znbGQy": {
+        "image_wNdrE3": {
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/cat-img2.png",
-            "collection": ""
+            "collection": "wear"
           }
         },
-        "image_x83ecC": {
+        "image_nV9Gxd": {
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/cat-img3.png",
-            "collection": ""
+            "collection": "food"
           }
         },
-        "image_mNXkA8": {
+        "image_686CDx": {
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/cat-img4.png",
-            "collection": ""
+            "collection": "floor"
           }
         },
-        "image_3Gzfip": {
+        "image_Ny76DN": {
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/cat-img5.png",
-            "collection": ""
+            "collection": "origin"
           }
         }
       },
       "block_order": [
-        "image_fTGTWa",
-        "image_znbGQy",
-        "image_x83ecC",
-        "image_mNXkA8",
-        "image_3Gzfip"
+        "image_WaCxYJ",
+        "image_wNdrE3",
+        "image_nV9Gxd",
+        "image_686CDx",
+        "image_Ny76DN"
       ],
       "name": "カスタムカテゴリー",
       "settings": {
         "title": "カテゴリー"
-      }
-    },
-    "1753650806d72ac5b6": {
-      "type": "apps",
-      "blocks": {
-        "justviewed_recently_products_app_block_YarNfw": {
-          "type": "shopify://apps/justviewed-recently-products/blocks/app-block/80a91fd8-2907-4af6-b142-fe30fd256c36",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "justviewed_recently_products_app_block_YarNfw"
-      ],
-      "settings": {
-        "include_margins": true
       }
     }
   },
   "order": [
     "custom_product_xwVxeB",
     "custom_recent_Exmc9c",
-    "top_category_e6UAkB",
-    "custom_category_DrA6Gt",
-    "1753650806d72ac5b6"
+    "custom_category_edAkrh"
   ]
 }

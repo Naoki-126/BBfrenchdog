@@ -102,7 +102,7 @@
           "type": "guide",
           "settings": {
             "guide_title": "ご注文の流れ",
-            "guide_url": ""
+            "guide_url": "shopify://pages/shoping-flow"
           }
         },
         "guide_GfaamA": {
@@ -132,6 +132,27 @@
             "guide_title": "よくある質問",
             "guide_url": "shopify://pages/faq"
           }
+        },
+        "policy_link_VKpBw4": {
+          "type": "policy_link",
+          "settings": {
+            "link_title": "利用規約",
+            "link_url": "shopify://pages/terms"
+          }
+        },
+        "policy_link_cMQnyg": {
+          "type": "policy_link",
+          "settings": {
+            "link_title": "プライバシーポリシー",
+            "link_url": "shopify://pages/privacy-policy"
+          }
+        },
+        "policy_link_dNnXBt": {
+          "type": "policy_link",
+          "settings": {
+            "link_title": "特定商取引法に基づく表記",
+            "link_url": "shopify://pages/commerce"
+          }
         }
       },
       "block_order": [
@@ -151,7 +172,10 @@
         "guide_GfaamA",
         "guide_eXYkgN",
         "guide_j3j4gM",
-        "guide_k6xTzT"
+        "guide_k6xTzT",
+        "policy_link_VKpBw4",
+        "policy_link_cMQnyg",
+        "policy_link_dNnXBt"
       ],
       "name": "カスタムフッター",
       "settings": {}
@@ -184,7 +208,7 @@
           "type": "link_list",
           "settings": {
             "heading": "ショッピングガイド",
-            "menu": "main-menu-2"
+            "menu": ""
           }
         }
       },

@@ -44,12 +44,16 @@
             {% endfor %}
           </ul>
           <ul class="footer-catArea">
-            <li><h3 href="" class="footer-catList__main">ショッピングガイド</h3></li>
+              <li><h3 href="" class="footer-catList__main">ショッピングガイド</h3></li>
             {% for block in section.blocks %}
               {% if block.type == 'guide' %}
-                <li><a href="{{ block.settings.guide_url }}" class="footer-catList">{{ block.settings.guide_title }}</a></li>
-              {% endif %}
-            {% endfor %}
+                <li>
+                <a href="{{ block.settings.guide_url }}" class="footer-catList">
+                  {{ block.settings.guide_title }}
+                </a>
+              </li>
+            {% endif %}
+          {% endfor %}
           </ul>
         </div>
         <div class="footer-creditArea">
@@ -68,9 +72,15 @@
   <div class="footer-middle">
     <div class="page-contents">
       <ul class="footer-contents">
-        <li><a href="/pages/terms" class="footer-content">利用規約</a></li>
-        <li><a href="	/pages/privacy-policy" class="footer-content">プライバシーポリシー</a></li>
-        <li><a href="/pages/legal" class="footer-content">特定商取引法に基づく表記</a></li>
+        {% for block in section.blocks %}
+          {% if block.type == 'policy_link' %}
+            <li>
+              <a href="{{ block.settings.link_url }}" class="footer-content">
+                {{ block.settings.link_title }}
+              </a>
+            </li>
+          {% endif %}
+        {% endfor %}
       </ul>
     </div>
   </div>
@@ -164,6 +174,22 @@
         }
       ]
     },
+    {
+      "type": "policy_link",
+      "name": "ポリシーリンク",
+      "settings": [
+        {
+          "type": "text",
+          "id": "link_title",
+          "label": "リンクタイトル"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "リンク先URL"
+        }
+      ]
+    }
   ],
   "presets": [
     {

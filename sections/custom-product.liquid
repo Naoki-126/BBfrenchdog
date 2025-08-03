@@ -976,6 +976,21 @@
   </div>
 </product-info>
 
+{% comment %} <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const handle = '{{ product.handle }}';
+    let viewed = JSON.parse(localStorage.getItem('recently_viewed')) || [];
+
+    viewed = viewed.filter(item => item !== handle); // 重複除去
+    viewed.unshift(handle);                         // 先頭に追加
+    viewed = viewed.slice(0, 4);                     // 最大4件
+
+    localStorage.setItem('recently_viewed', JSON.stringify(viewed));
+    console.log('保存したrecently_viewed:', viewed);
+  });
+</script> {% endcomment %}
+
+
 
 
 {% schema %}

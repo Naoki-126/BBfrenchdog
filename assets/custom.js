@@ -26,15 +26,4 @@ document.getElementById('js-faq').addEventListener('click', function (e) {
   }
 });
 
-/* 商品ページアコーディオン
-=========================== */
-trigger.addEventListener("click", function () {
-  triggers.forEach(t => t !== this && t.classList.remove("is-open"));
-  document.querySelectorAll(".js-accordion-content").forEach(c => {
-    if (c !== this.nextElementSibling) c.style.display = "none";
-  });
 
-  this.classList.toggle("is-open");
-  const content = this.nextElementSibling;
-  content.style.display = content.style.display === "block" ? "none" : "block";
-});
