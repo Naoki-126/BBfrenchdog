@@ -86,7 +86,8 @@
               class="pro-img__main"
             >
           </div>
-          <ul class="pro-img__thumbArea" id="thumbSlider">
+          {% assign thumb_images = product.images | where: "id", "!=" , product.featured_image.id %}
+          <ul class="pro-img__thumbArea" id="thumbSlider" data-thumb-count="{{ thumb_images.size }}">
             {% for image in product.images %}
               {% unless image == product.featured_image %}
                 <li class="pro-img__thumbnails">
@@ -985,7 +986,6 @@
     thumbnails.forEach(thumb => {
       const newSrc = thumb.getAttribute('src').replace(/width=\d+/, 'width=540');
 
-      // ホバーで一時切替
       thumb.addEventListener('mouseover', function () {
         if (mainImage.src !== newSrc) {
           mainImage.classList.add('fade-out');
@@ -996,7 +996,6 @@
         }
       });
 
-      // ホバー解除で元に戻す
       thumb.addEventListener('mouseout', function () {
         if (mainImage.src !== clickedSrc) {
           mainImage.classList.add('fade-out');
@@ -1007,7 +1006,6 @@
         }
       });
 
-      // クリックで固定
       thumb.addEventListener('click', function () {
         clickedSrc = newSrc;
         if (mainImage.src !== clickedSrc) {
@@ -1029,7 +1027,6 @@
     const thumbWidth = 71;
     const gap = 6;
     const totalThumbWidth = thumbWidth + gap;
-
     let currentIndex = 0;
 
     const wrapper = document.createElement('div');
@@ -1062,6 +1059,13 @@
 
     const leftBtn = createArrow('left');
     const rightBtn = createArrow('right');
+
+    // ← ここでサムネイル数が1未満の場合はボタン非表示にする
+    if (sliderThumbnails.length < 2) {
+      leftBtn.style.display = 'none';
+      rightBtn.style.display = 'none';
+    }
+
     wrapper.appendChild(leftBtn);
     wrapper.appendChild(rightBtn);
 

@@ -1201,11 +1201,11 @@ body {
 
 .pro-img__thumbArea::before,
 .pro-img__thumbArea::after {
-  content: "";
+  /* content: "";
   position: absolute;
   width: 5px;
   height: 8px;
-	transition: opacity 0.3s ease;
+	transition: opacity 0.3s ease; */
 }
 
 .pro-img__thumbArea::before {
