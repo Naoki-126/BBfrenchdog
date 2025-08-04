@@ -1181,6 +1181,12 @@ body {
   max-width: 540px;
   height: auto;
 	border-radius: 36px;
+	transition: opacity 0.4s ease;
+  opacity: 1;
+}
+
+.pro-img__main.fade-out {
+  opacity: 0;
 }
 
 .pro-img__thumbArea {

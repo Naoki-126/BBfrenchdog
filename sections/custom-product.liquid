@@ -76,11 +76,22 @@
     <div class="page-contents">
       <div class="pro-area">
         <div class="pro-imgArea">
-          <div class="pro-img__mainArea"><img src="{{ product.featured_image | image_url: width: 540 }}" alt="(( product.title))" class="pro-img__main"></div>
-          <ul class="pro-img__thumbArea">
+          {% comment %} <div class="pro-img__mainArea"><img src="{{ product.featured_image | image_url: width: 540 }}" alt="(( product.title))" class="pro-img__main"></div> {% endcomment %}
+          <div class="pro-img__mainArea">
+            <img
+              id="mainImage"
+              src="{{ product.featured_image | image_url: width: 540 }}"
+              data-featured-src="{{ product.featured_image | image_url: width: 540 }}"
+              alt="{{ product.title }}"
+              class="pro-img__main"
+            >
+          </div>
+          <ul class="pro-img__thumbArea" id="thumbSlider">
             {% for image in product.images %}
               {% unless image == product.featured_image %}
-                <li class="pro-img__thumbnails"><img src="{{ image |  image_url: width: 71  }}" alt="{{ image.alt | escape }}" class="pro-img__thumbnail"></li>
+                <li class="pro-img__thumbnails">
+                  <img src="{{ image | image_url: width: 71 }}" alt="{{ image.alt | escape }}" class="pro-img__thumbnail">
+                </li>
               {% endunless %}
             {% endfor %}
           </ul>
@@ -963,13 +974,119 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
+    // ==========================
+    // ① メイン画像切り替え（ホバーで一時表示／クリックで固定）
+    // ==========================
+    const mainImage = document.getElementById('mainImage');
+    const thumbnails = document.querySelectorAll('.pro-img__thumbnail');
+    const featuredSrc = mainImage.getAttribute('data-featured-src') || mainImage.src;
+    let clickedSrc = featuredSrc;
+
+    thumbnails.forEach(thumb => {
+      const newSrc = thumb.getAttribute('src').replace(/width=\d+/, 'width=540');
+
+      // ホバーで一時切替
+      thumb.addEventListener('mouseover', function () {
+        if (mainImage.src !== newSrc) {
+          mainImage.classList.add('fade-out');
+          setTimeout(() => {
+            mainImage.src = newSrc;
+            mainImage.classList.remove('fade-out');
+          }, 200);
+        }
+      });
+
+      // ホバー解除で元に戻す
+      thumb.addEventListener('mouseout', function () {
+        if (mainImage.src !== clickedSrc) {
+          mainImage.classList.add('fade-out');
+          setTimeout(() => {
+            mainImage.src = clickedSrc;
+            mainImage.classList.remove('fade-out');
+          }, 200);
+        }
+      });
+
+      // クリックで固定
+      thumb.addEventListener('click', function () {
+        clickedSrc = newSrc;
+        if (mainImage.src !== clickedSrc) {
+          mainImage.classList.add('fade-out');
+          setTimeout(() => {
+            mainImage.src = clickedSrc;
+            mainImage.classList.remove('fade-out');
+          }, 200);
+        }
+      });
+    });
+
+    // ==========================
+    // ② サムネイルスライダー（ループ対応）
+    // ==========================
+    const slider = document.getElementById('thumbSlider');
+    const sliderThumbnails = slider.querySelectorAll('.pro-img__thumbnails');
+    const visibleCount = 7;
+    const thumbWidth = 71;
+    const gap = 6;
+    const totalThumbWidth = thumbWidth + gap;
+
+    let currentIndex = 0;
+
+    const wrapper = document.createElement('div');
+    wrapper.style.overflow = 'hidden';
+    wrapper.style.width = `${visibleCount * totalThumbWidth - gap}px`;
+    wrapper.style.position = 'relative';
+    slider.parentNode.insertBefore(wrapper, slider);
+    wrapper.appendChild(slider);
+
+    slider.style.display = 'flex';
+    slider.style.gap = `${gap}px`;
+    slider.style.transition = 'transform 0.3s ease';
+    slider.style.width = `${sliderThumbnails.length * totalThumbWidth}px`;
+
+    const createArrow = (direction) => {
+      const btn = document.createElement('button');
+      btn.innerText = direction === 'left' ? '◀' : '▶';
+      btn.style.position = 'absolute';
+      btn.style.top = '50%';
+      btn.style.transform = 'translateY(-50%)';
+      btn.style.width = '32px';
+      btn.style.height = '100%';
+      btn.style.cursor = 'pointer';
+      btn.style.background = 'rgba(255,255,255,0.8)';
+      btn.style.border = 'none';
+      btn.style.zIndex = '2';
+      btn.style[direction] = '0';
+      return btn;
+    };
+
+    const leftBtn = createArrow('left');
+    const rightBtn = createArrow('right');
+    wrapper.appendChild(leftBtn);
+    wrapper.appendChild(rightBtn);
+
+    const slide = (direction) => {
+      const maxIndex = sliderThumbnails.length - visibleCount;
+      if (direction === 'left') {
+        currentIndex = currentIndex - 1 < 0 ? maxIndex : currentIndex - 1;
+      } else {
+        currentIndex = currentIndex + 1 > maxIndex ? 0 : currentIndex + 1;
+      }
+      slider.style.transform = `translateX(-${currentIndex * totalThumbWidth}px)`;
+    };
+
+    leftBtn.addEventListener('click', () => slide('left'));
+    rightBtn.addEventListener('click', () => slide('right'));
+
+    // ==========================
+    // ③ アコーディオン
+    // ==========================
     const triggers = document.querySelectorAll('.js-accordion-trigger');
-
     triggers.forEach(trigger => {
-      trigger.addEventListener('click', function () {
-        const content = this.nextElementSibling;
+      const content = trigger.nextElementSibling;
+      content.style.maxHeight = null;
 
-        // すでに開いているものをすべて閉じる
+      trigger.addEventListener('click', function () {
         document.querySelectorAll('.js-accordion-content').forEach(el => {
           if (el !== content) {
             el.style.maxHeight = null;
@@ -977,7 +1094,6 @@
           }
         });
 
-        // トグル開閉
         if (content.style.maxHeight) {
           content.style.maxHeight = null;
           trigger.classList.remove('is-open');
@@ -986,20 +1102,17 @@
           trigger.classList.add('is-open');
         }
       });
-
-      // 初期状態ですべて閉じる
-      const content = trigger.nextElementSibling;
-      content.style.maxHeight = null;
     });
-  });
 
-  document.addEventListener('DOMContentLoaded', function () {
+    // ==========================
+    // ④ 最近見た商品（localStorage）
+    // ==========================
     const handle = '{{ product.handle }}';
     let viewed = JSON.parse(localStorage.getItem('recently_viewed')) || [];
 
-    viewed = viewed.filter(item => item !== handle); // 重複除去
-    viewed.unshift(handle);                         // 先頭に追加
-    viewed = viewed.slice(0, 4);                     // 最大4件
+    viewed = viewed.filter(item => item !== handle);
+    viewed.unshift(handle);
+    viewed = viewed.slice(0, 4);
 
     localStorage.setItem('recently_viewed', JSON.stringify(viewed));
     console.log('保存したrecently_viewed:', viewed);
