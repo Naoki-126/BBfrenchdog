@@ -541,6 +541,19 @@ body {
 	height: 416px;
 }
 
+.top-rec__imgWrap {
+	position: relative;
+	display: inline-block;
+}
+
+.top-rec__tag {
+	content: "";
+	position: absolute;
+	bottom: 8px;
+	left: 8px;
+}
+
+
 .top-rec__img {
 	max-width: 282px;
   height: auto;
@@ -558,16 +571,22 @@ body {
 
 .top-rec__textArea {
 	margin-top: 8px;
-	/* position: relative; */
 }
 
 .top-rec__discountArea {
-	/* content: "";
-	position: absolute; */
-	top: 110%;
-	left: 0;
+	position: relative;
+	margin-top: 8px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
 }
 
+.top-rec__discountTag {
+	content: "";
+	position: absolute;
+	bottom: -20px;
+	left: 8px;
+}
 .top-rec__btnArea {
 	margin-top: 48px;
 	text-align: center;

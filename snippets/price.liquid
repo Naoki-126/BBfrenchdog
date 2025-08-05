@@ -138,12 +138,12 @@
     {% for tag in product.tags %}
       {% if tag contains "info_" %}
         <p><span class="c-btn__label">{{ tag | split:"_" | last }}</span></p>
+        {% elsif tag contains "sale_" %}
+        <p><span class="c-btn__label">{{ tag | split:"_" | last }}</span></p>
+        {% elsif tag contains "out_" %}
+          <p><span class="c-btn__labelSo">{{ tag | split:"_" | last }}</span></p>
       {% endif %}
     {% endfor %}
-    {% for tag in product.tags %}
-      {% if tag contains "out_" %}
-        <p><span class="c-btn__labelSo">{{ tag | split:"_" | last }}</span></p>
-      {% endif %}
-    {% endfor %}
+
   </div>
 {% endunless %}

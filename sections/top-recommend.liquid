@@ -10,13 +10,37 @@
       <ul class="top-rec__items">
         {% for product in collection.products limit: 8 %}
           <li class="top-rec__item">
-            <a href="{{ product.url }}" class=""><img src="{{ product | image_url: width: 282 }}" alt="product" class="top-rec__img">
+            <a href="{{ product.url }}" class="top-rec__link">
+              <div class="top-rec__imgWrap">
+                <img src="{{ product | image_url: width: 282 }}" alt="product" class="top-rec__img">
+
+                {% for tag in product.tags %}
+                  {% if tag contains "sale_" %}
+                    <div class="top-rec__tag">
+                      <p><span class="c-btn__label">{{ tag | split: "_" | last }}</span></p>
+                    </div>
+                  {% elsif tag contains "out_" %}
+                    <div class="top-rec__tag">
+                      <p><span class="c-btn__labelSo">{{ tag | split:"_" | last }}</span></p>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+
+              </div>
               <div class="top-rec__textArea">
                 <h3 class="product-name">{{ product.title }}</h3>
                 <div class="product-color">  {{ product.metafields.custom.color | metafield_text }}</div>
                 <div class="product-price"><span class="product-emphasis">{{ product.price | money }}</span>円（税込）</div>
-                <div class="discount-tag"></div>
               </div>
+                <div class="top-rec__discountArea">
+                  {% for tag in product.tags %}
+                    {% if tag contains "info_" %}
+                      <div class="top-rec__discountTag">
+                        <p><span class="c-btn__label">{{ tag | split: "_" | last }}</span></p>
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                </div>
             </a>
           </li>
         {% endfor %}
