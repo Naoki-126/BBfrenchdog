@@ -215,10 +215,28 @@
                 <h3 class="pro-name">詳　細</h3>
                 <div class="pro-detailArea">
                   {% assign custom = product.metafields.custom %}
+                  {% if custom.product_description and custom.product_description.value != blank %}
+                  <dl class="pro-detail__dl">
+                    <dt class="pro-detail__dt">商品説明</dt>
+                    <dd class="pro-detail__dd">{{ custom.product_description.value }}</dd>
+                  </dl>
+                {% endif %}
                   {% if custom.material and custom.material.value != blank %}
                   <dl class="pro-detail__dl">
                     <dt class="pro-detail__dt">素材</dt>
                     <dd class="pro-detail__dd">{{ custom.material.value }}</dd>
+                  </dl>
+                {% endif %}
+                {% if custom.ingredients and custom.ingredients.value != blank %}
+                  <dl class="pro-detail__dl">
+                    <dt class="pro-detail__dt">原材料</dt>
+                    <dd class="pro-detail__dd">{{ custom.ingredients.value }}</dd>
+                  </dl>
+                {% endif %}
+                {% if custom.design and custom.design.value != blank %}
+                  <dl class="pro-detail__dl">
+                    <dt class="pro-detail__dt">デザイン</dt>
+                    <dd class="pro-detail__dd">{{ custom.design.value }}</dd>
                   </dl>
                 {% endif %}
                 {% if custom.capacity and custom.capacity.value != blank %}
@@ -1086,24 +1104,21 @@
     // ③ アコーディオン
     // ==========================
     const triggers = document.querySelectorAll('.js-accordion-trigger');
+
     triggers.forEach(trigger => {
       const content = trigger.nextElementSibling;
-      content.style.maxHeight = null;
 
       trigger.addEventListener('click', function () {
-        document.querySelectorAll('.js-accordion-content').forEach(el => {
-          if (el !== content) {
-            el.style.maxHeight = null;
-            el.previousElementSibling.classList.remove('is-open');
-          }
-        });
+        const isOpen = trigger.classList.contains('is-open');
 
-        if (content.style.maxHeight) {
-          content.style.maxHeight = null;
+        if (isOpen) {
+          // 閉じる処理
           trigger.classList.remove('is-open');
+          content.style.maxHeight = null;
         } else {
-          content.style.maxHeight = content.scrollHeight + 'px';
+          // 開く処理
           trigger.classList.add('is-open');
+          content.style.maxHeight = content.scrollHeight + 'px';
         }
       });
     });
