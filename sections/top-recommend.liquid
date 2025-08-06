@@ -11,16 +11,16 @@
         {% for product in collection.products limit: 8 %}
           <li class="top-rec__item">
             <a href="{{ product.url }}" class="top-rec__link">
-              <div class="top-rec__imgWrap">
+              <div class="option-add__imgWrap">
                 <img src="{{ product | image_url: width: 282 }}" alt="product" class="top-rec__img">
 
                 {% for tag in product.tags %}
                   {% if tag contains "sale_" %}
-                    <div class="top-rec__tag">
+                    <div class="option-add__tag">
                       <p><span class="c-btn__label">{{ tag | split: "_" | last }}</span></p>
                     </div>
                   {% elsif tag contains "out_" %}
-                    <div class="top-rec__tag">
+                    <div class="option-add__tag">
                       <p><span class="c-btn__labelSo">{{ tag | split:"_" | last }}</span></p>
                     </div>
                   {% endif %}
@@ -32,10 +32,10 @@
                 <div class="product-color">  {{ product.metafields.custom.color | metafield_text }}</div>
                 <div class="product-price"><span class="product-emphasis">{{ product.price | money }}</span>円（税込）</div>
               </div>
-                <div class="top-rec__discountArea">
+                <div class="product-tag__discountArea">
                   {% for tag in product.tags %}
                     {% if tag contains "info_" %}
-                      <div class="top-rec__discountTag">
+                      <div class="product-tag__discountTag">
                         <p><span class="c-btn__label">{{ tag | split: "_" | last }}</span></p>
                       </div>
                     {% endif %}

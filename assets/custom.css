@@ -541,18 +541,17 @@ body {
 	height: 416px;
 }
 
-.top-rec__imgWrap {
+.option-add__imgWrap {
 	position: relative;
 	display: inline-block;
 }
 
-.top-rec__tag {
+.option-add__tag {
 	content: "";
 	position: absolute;
 	bottom: 8px;
 	left: 8px;
 }
-
 
 .top-rec__img {
 	max-width: 282px;
@@ -573,7 +572,7 @@ body {
 	margin-top: 8px;
 }
 
-.top-rec__discountArea {
+.product-tag__discountArea {
 	position: relative;
 	margin-top: 8px;
 	display: flex;
@@ -581,7 +580,7 @@ body {
 	gap: 8px;
 }
 
-.top-rec__discountTag {
+.product-tag__discountTag {
 	content: "";
 	position: absolute;
 	bottom: -20px;
