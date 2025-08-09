@@ -87,19 +87,33 @@
             >
           </div>
           {% assign thumb_images = product.images | where: "id", "!=" , product.featured_image.id %}
-          <ul class="pro-img__thumbArea" id="thumbSlider" data-thumb-count="{{ thumb_images.size }}">
-            {% for image in product.images %}
-              {% unless image == product.featured_image %}
-                <li class="pro-img__thumbnails">
-                  <img src="{{ image | image_url: width: 71 }}" alt="{{ image.alt | escape }}" class="pro-img__thumbnail">
-                </li>
-              {% endunless %}
-            {% endfor %}
-          </ul>
+          <div class="thumbArea-wrapper">
+            <ul class="pro-img__thumbArea" id="thumbSlider" data-thumb-count="{{ product.images.size }}">
+              <!-- まず featured_image をサムネに表示 -->
+              <li class="pro-img__thumbnails">
+                <img
+                  src="{{ product.featured_image | image_url: width: 71 }}"
+                  alt="{{ product.featured_image.alt | escape }}"
+                  class="pro-img__thumbnail">
+              </li>
+              <!-- その後、他の画像を表示 -->
+              {% for image in product.images %}
+                {% unless image.id == product.featured_image.id %}
+                  <li class="pro-img__thumbnails">
+                    <img
+                      src="{{ image | image_url: width: 71 }}"
+                      alt="{{ image.alt | escape }}"
+                      class="pro-img__thumbnail">
+                  </li>
+                {% endunless %}
+              {% endfor %}
+            </ul>
+          </div>
           <div class="pro-img__textArea">
             {% if product.description != blank %}
               <p class="pro-img__text">
-                {{ product.description | newline_to_br }}
+                {% comment %} {{ product.description | newline_to_br }} {% endcomment %}
+                {{ product.description }}
               </p>
             {% endif %}
             {% if product.metafields.detail.product_description %}
@@ -1037,68 +1051,35 @@
     });
 
     // ==========================
-    // ② サムネイルスライダー（ループ対応）
+    // サムネイルスライダー
     // ==========================
     const slider = document.getElementById('thumbSlider');
-    const sliderThumbnails = slider.querySelectorAll('.pro-img__thumbnails');
-    const visibleCount = 7;
-    const thumbWidth = 71;
-    const gap = 6;
-    const totalThumbWidth = thumbWidth + gap;
-    let currentIndex = 0;
+const thumbnails = slider.querySelectorAll('.pro-img__thumbnails');
 
-    const wrapper = document.createElement('div');
-    wrapper.style.overflow = 'hidden';
-    wrapper.style.width = `${visibleCount * totalThumbWidth - gap}px`;
-    wrapper.style.position = 'relative';
-    slider.parentNode.insertBefore(wrapper, slider);
-    wrapper.appendChild(slider);
+const thumbWidth = 71;
+const gap = 6;
+const slideStep = thumbWidth + gap;
+const visibleCount = 6;
 
-    slider.style.display = 'flex';
-    slider.style.gap = `${gap}px`;
-    slider.style.transition = 'transform 0.3s ease';
-    slider.style.width = `${sliderThumbnails.length * totalThumbWidth}px`;
+const totalWidth = thumbnails.length * slideStep - gap; // 最後はgapなしなので引く
 
-    const createArrow = (direction) => {
-      const btn = document.createElement('button');
-      btn.innerText = direction === 'left' ? '◀' : '▶';
-      btn.style.position = 'absolute';
-      btn.style.top = '50%';
-      btn.style.transform = 'translateY(-50%)';
-      btn.style.width = '32px';
-      btn.style.height = '100%';
-      btn.style.cursor = 'pointer';
-      btn.style.background = 'rgba(255,255,255,0.8)';
-      btn.style.border = 'none';
-      btn.style.zIndex = '2';
-      btn.style[direction] = '0';
-      return btn;
-    };
+slider.style.width = `${totalWidth}px`;
+slider.style.display = 'flex';
+slider.style.gap = `${gap}px`;
+slider.style.transition = 'transform 0.3s ease';
 
-    const leftBtn = createArrow('left');
-    const rightBtn = createArrow('right');
+// ここからスライドロジック
+let currentIndex = 0;
+const maxIndex = thumbnails.length - visibleCount;
 
-    // ← ここでサムネイル数が1未満の場合はボタン非表示にする
-    if (sliderThumbnails.length < 2) {
-      leftBtn.style.display = 'none';
-      rightBtn.style.display = 'none';
-    }
-
-    wrapper.appendChild(leftBtn);
-    wrapper.appendChild(rightBtn);
-
-    const slide = (direction) => {
-      const maxIndex = sliderThumbnails.length - visibleCount;
-      if (direction === 'left') {
-        currentIndex = currentIndex - 1 < 0 ? maxIndex : currentIndex - 1;
-      } else {
-        currentIndex = currentIndex + 1 > maxIndex ? 0 : currentIndex + 1;
-      }
-      slider.style.transform = `translateX(-${currentIndex * totalThumbWidth}px)`;
-    };
-
-    leftBtn.addEventListener('click', () => slide('left'));
-    rightBtn.addEventListener('click', () => slide('right'));
+const slide = (direction) => {
+  if (direction === 'left') {
+    currentIndex = currentIndex - 1 < 0 ? maxIndex : currentIndex - 1;
+  } else {
+    currentIndex = currentIndex + 1 > maxIndex ? 0 : currentIndex + 1;
+  }
+  slider.style.transform = `translateX(-${currentIndex * slideStep}px)`;
+};
 
     // ==========================
     // ③ アコーディオン

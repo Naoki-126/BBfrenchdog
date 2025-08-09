@@ -90,7 +90,7 @@
 
                       </div>
 
-                      <div class="top-news__textArea">
+                      <div class="top-rec__textArea">
                         <h3 class="product-name">{{ product.title }}</h3>
                         {% if product.metafields.custom.color != blank %}
                           <div class="product-item"> {{ product.metafields.custom.color | metafield_text }}</div>
@@ -98,9 +98,9 @@
                         {% if product.metafields.custom.capacity != blank %}
                           <div class="product-item"> {{ product.metafields.custom.capacity | metafield_text }}</div>
                         {% endif %}
-                        {% if product.metafields.custom.dimension != blank %}
+                        {% comment %} {% if product.metafields.custom.dimension != blank %}
                           <div class="product-item"> {{ product.metafields.custom.dimension | metafield_text }}</div>
-                        {% endif %}
+                        {% endif %} {% endcomment %}
                         <div class="product-price"><span class="product-emphasis">{{ product.price | money }}</span>円（税込）</div>
                         </div>
                         </a>
