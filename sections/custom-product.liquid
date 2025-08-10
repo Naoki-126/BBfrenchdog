@@ -76,38 +76,30 @@
     <div class="page-contents">
       <div class="pro-area">
         <div class="pro-imgArea">
-          {% comment %} <div class="pro-img__mainArea"><img src="{{ product.featured_image | image_url: width: 540 }}" alt="(( product.title))" class="pro-img__main"></div> {% endcomment %}
           <div class="pro-img__mainArea">
             <img
               id="mainImage"
               src="{{ product.featured_image | image_url: width: 540 }}"
               data-featured-src="{{ product.featured_image | image_url: width: 540 }}"
-              alt="{{ product.title }}"
+              alt="{{ product.title  | escape }}"
               class="pro-img__main"
             >
           </div>
-          {% assign thumb_images = product.images | where: "id", "!=" , product.featured_image.id %}
+          {% assign thumb_images = product.images %}
           <div class="thumbArea-wrapper">
-            <ul class="pro-img__thumbArea" id="thumbSlider" data-thumb-count="{{ product.images.size }}">
-              <!-- まず featured_image をサムネに表示 -->
-              <li class="pro-img__thumbnails">
-                <img
-                  src="{{ product.featured_image | image_url: width: 71 }}"
-                  alt="{{ product.featured_image.alt | escape }}"
-                  class="pro-img__thumbnail">
-              </li>
-              <!-- その後、他の画像を表示 -->
-              {% for image in product.images %}
-                {% unless image.id == product.featured_image.id %}
-                  <li class="pro-img__thumbnails">
-                    <img
-                      src="{{ image | image_url: width: 71 }}"
-                      alt="{{ image.alt | escape }}"
-                      class="pro-img__thumbnail">
-                  </li>
-                {% endunless %}
+            <ul class="pro-img__thumbArea" id="thumbSlider" data-thumb-count="{{ thumb_images.size }}">
+              {% for image in thumb_images %}
+                <li class="pro-img__thumbnails">
+                  <img
+                    src="{{ image | image_url: width: 71 }}"
+                    data-large="{{ image | image_url: width: 540 }}"
+                    alt="{{ image.alt | escape }}"
+                    class="pro-img__thumbnail">
+                </li>
               {% endfor %}
             </ul>
+            <button class="slider-left-btn" aria-label="＜">‹</button>
+            <button class="slider-right-btn" aria-label="＞">›</button>
           </div>
           <div class="pro-img__textArea">
             {% if product.description != blank %}
@@ -1015,71 +1007,125 @@
     const featuredSrc = mainImage.getAttribute('data-featured-src') || mainImage.src;
     let clickedSrc = featuredSrc;
 
+    function normalize(url) {
+      return url.split('?')[0]; // クエリを除去して比較
+    }
+
     thumbnails.forEach(thumb => {
-      const newSrc = thumb.getAttribute('src').replace(/width=\d+/, 'width=540');
+      const newSrc = thumb.src.replace(/width=\d+/, 'width=540');
+      const preloadImage = new Image();
+      preloadImage.src = newSrc;
 
       thumb.addEventListener('mouseover', function () {
-        if (mainImage.src !== newSrc) {
-          mainImage.classList.add('fade-out');
-          setTimeout(() => {
-            mainImage.src = newSrc;
-            mainImage.classList.remove('fade-out');
-          }, 200);
+        if (normalize(mainImage.src) !== normalize(newSrc)) {
+          if (preloadImage.complete) {
+            swapImage(newSrc);
+          } else {
+            preloadImage.onload = () => swapImage(newSrc);
+          }
         }
       });
 
       thumb.addEventListener('mouseout', function () {
-        if (mainImage.src !== clickedSrc) {
-          mainImage.classList.add('fade-out');
-          setTimeout(() => {
-            mainImage.src = clickedSrc;
-            mainImage.classList.remove('fade-out');
-          }, 200);
+        if (normalize(mainImage.src) !== normalize(clickedSrc)) {
+          const revertImage = new Image();
+          revertImage.src = clickedSrc;
+          if (revertImage.complete) {
+            swapImage(clickedSrc);
+          } else {
+            revertImage.onload = () => swapImage(clickedSrc);
+          }
         }
       });
 
       thumb.addEventListener('click', function () {
         clickedSrc = newSrc;
-        if (mainImage.src !== clickedSrc) {
-          mainImage.classList.add('fade-out');
-          setTimeout(() => {
-            mainImage.src = clickedSrc;
-            mainImage.classList.remove('fade-out');
-          }, 200);
+        if (normalize(mainImage.src) !== normalize(clickedSrc)) {
+          if (preloadImage.complete) {
+            swapImage(clickedSrc);
+          } else {
+            preloadImage.onload = () => swapImage(clickedSrc);
+          }
         }
       });
     });
 
+    function swapImage(src) {
+      mainImage.classList.add('fade-out');
+      setTimeout(() => {
+        mainImage.src = src;
+        mainImage.classList.remove('fade-out');
+      }, 200);
+    }
+
     // ==========================
-    // サムネイルスライダー
+    // ② サイドバーループ（ブランク1枚追加）
     // ==========================
     const slider = document.getElementById('thumbSlider');
-const thumbnails = slider.querySelectorAll('.pro-img__thumbnails');
+    if (!slider) return;
 
-const thumbWidth = 71;
-const gap = 6;
-const slideStep = thumbWidth + gap;
-const visibleCount = 6;
+    // すでに初期化されていたら終了
+    if (slider.dataset.initialized === 'true') return;
+    slider.dataset.initialized = 'true';
 
-const totalWidth = thumbnails.length * slideStep - gap; // 最後はgapなしなので引く
+    const wrapper = slider.parentElement;
+    let thumbItems = Array.from(slider.querySelectorAll('.pro-img__thumbnails'));
 
-slider.style.width = `${totalWidth}px`;
-slider.style.display = 'flex';
-slider.style.gap = `${gap}px`;
-slider.style.transition = 'transform 0.3s ease';
+    const thumbWidth = 71;
+    const gap = 6;
+    const slideStep = thumbWidth + gap;
 
-// ここからスライドロジック
-let currentIndex = 0;
-const maxIndex = thumbnails.length - visibleCount;
+    // ------- /ブランク画像追加 -------
+    thumbItems = Array.from(slider.querySelectorAll('.pro-img__thumbnails'));
 
-const slide = (direction) => {
-  if (direction === 'left') {
-    currentIndex = currentIndex - 1 < 0 ? maxIndex : currentIndex - 1;
-  } else {
-    currentIndex = currentIndex + 1 > maxIndex ? 0 : currentIndex + 1;
-  }
-  slider.style.transform = `translateX(-${currentIndex * slideStep}px)`;
-};
+    let visibleCount = 0;
+    let currentIndex = 0;
+
+    function calcVisibleCount() {
+      const wrapperStyle = window.getComputedStyle(wrapper);
+      const paddingLeft = parseFloat(wrapperStyle.paddingLeft) || 0;
+      const paddingRight = parseFloat(wrapperStyle.paddingRight) || 0;
+      const wrapperWidth = wrapper.clientWidth - paddingLeft - paddingRight;
+      visibleCount = Math.floor(wrapperWidth / slideStep);
+      if (visibleCount > thumbItems.length) visibleCount = thumbItems.length;
+    }
+
+    calcVisibleCount();
+
+    slider.style.width = `${(slideStep * thumbItems.length) - gap}px`;
+    slider.style.display = 'flex';
+    slider.style.gap = `${gap}px`;
+    slider.style.transition = 'transform 0.3s ease';
+
+    function slide(direction) {
+      if (direction === 'left') {
+        currentIndex--;
+        if (currentIndex < 0) {
+          currentIndex = thumbItems.length - visibleCount;
+        }
+      } else if (direction === 'right') {
+        currentIndex++;
+        if (currentIndex > thumbItems.length - visibleCount) {
+          currentIndex = 0;
+        }
+      }
+      slider.style.transform = `translateX(-${currentIndex * slideStep}px)`;
+    }
+
+    const leftBtn = wrapper.querySelector('.slider-left-btn');
+    const rightBtn = wrapper.querySelector('.slider-right-btn');
+
+    if (leftBtn) leftBtn.addEventListener('click', () => slide('left'));
+    if (rightBtn) rightBtn.addEventListener('click', () => slide('right'));
+
+    window.addEventListener('resize', () => {
+      calcVisibleCount();
+      if (currentIndex > thumbItems.length - visibleCount) {
+        currentIndex = thumbItems.length - visibleCount;
+        if (currentIndex < 0) currentIndex = 0;
+      }
+      slider.style.transform = `translateX(-${currentIndex * slideStep}px)`;
+    });
 
     // ==========================
     // ③ アコーディオン
@@ -1093,11 +1139,9 @@ const slide = (direction) => {
         const isOpen = trigger.classList.contains('is-open');
 
         if (isOpen) {
-          // 閉じる処理
           trigger.classList.remove('is-open');
           content.style.maxHeight = null;
         } else {
-          // 開く処理
           trigger.classList.add('is-open');
           content.style.maxHeight = content.scrollHeight + 'px';
         }
