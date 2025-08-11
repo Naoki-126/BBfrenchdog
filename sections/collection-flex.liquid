@@ -2,19 +2,12 @@
   <div class="page-inner">
     <div class="page-contents">
       <div class="col-area">
-
-        <!-- SP用フィルターボタン -->
-        <button id="js-drawer-toggle" class="drawer-toggle" aria-expanded="false" aria-controls="js-drawer">
-          <img src="{{ 'icon-filters.png' | asset_url }}" alt="絞り込み" class="col-filter__icon">
-        </button>
-
         <!-- 背景オーバーレイ -->
         <div id="js-drawer-overlay" class="drawer-overlay" aria-hidden="true"></div>
-
         <!-- ドロワー（既存 aside 部分を移動） -->
+
         <aside class="col-aside" id="js-drawer" role="dialog" aria-label="絞り込み">
           <button class="drawer-close" id="js-drawer-close" aria-label="閉じる">×</button>
-
           <div class="col-headArea">
             <p class="col-caption">対象商品数</p>
             <p class="col-result"><span class="-strong">{{ collection.products_count }}</span>件</p>
@@ -57,6 +50,12 @@
         <div class="col-main">
           {% paginate collection.products by 16 %}
             <div class="col-headArea__main">
+
+              <!-- SP用フィルターボタン -->
+              <button id="js-drawer-toggle" class="drawer-toggle" aria-expanded="false" aria-controls="js-drawer">
+                <img src="{{ 'icon-filters.png' | asset_url }}" alt="絞り込み" class="col-filter__icon">
+              </button>
+
               <p class="col-caption">
                 <span>{{ paginate.items }}</span>件中
                 <span>{{ paginate.current_offset | plus: 1 }}</span>件〜
@@ -73,8 +72,8 @@
                   <a href="?sort_by=created-descending"class="sort-option" >新着順</a>
                 </div>
               </div>
-
             </div>
+            
             <div class="col-bodyArea">
               <ul class="col-items">
                 {% for product in collection.products %}
@@ -151,6 +150,7 @@
           {% endpaginate %}
         </div>
       </div>
+
     </div>
   </div>
 </section>
