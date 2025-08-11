@@ -1,5 +1,4 @@
-
-<section class="about-fv">
+<section class="about">
   <div class="page-inner">
     <div class="page-contents">
       <div class="breadcrumbs-area">
@@ -10,18 +9,19 @@
           </ol>
         </nav>
       </div>
-      <div class="about-fv__titleArea">
-        <h2 class="section-title__fv">{{ section.settings.title }}</h2>
-        <h3 class="section-subTitle">{{ section.settings.subTitle }}</h3>
+      <div class="about-fv">
+        <div class="about-fv__titleArea">
+          <h2 class="section-title__fv">{{ section.settings.title }}</h2>
+          <h3 class="section-subTitle">{{ section.settings.subTitle }}</h3>
+        </div>
+        <div class="about-messageArea">
+          <h3 class="about-message">{{ section.settings.message-title }}</h3>
+          <div class="about-message__textArea">
+            <p class="about-message__text">{{ section.settings.message-text }}</p>
+            <p class="about-message__text"></p>
+          </div>
+        </div>
       </div>
-      <div class="about-messageArea">
-              <h3 class="about-message">{{ section.settings.message-title }}</h3>
-              <div class="about-message__textArea">
-                <p class="about-message__text">{{ section.settings.message-text }}</p>
-                <p class="about-message__text"></p>
-              </div>
-            </div>
-
     </div>
   </div>
 </section>

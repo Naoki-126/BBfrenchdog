@@ -21,7 +21,7 @@
     "product-grid": {
       "type": "collection-flex",
       "blocks": {
-        "custom_link_W8bYhU": {
+        "custom_link_azDBJi": {
           "type": "custom_link",
           "settings": {
             "theme-title": "カテゴリー",
@@ -29,7 +29,7 @@
             "title": "ハーネス"
           }
         },
-        "custom_link_ijQDDA": {
+        "custom_link_fD4zfm": {
           "type": "custom_link",
           "settings": {
             "theme-title": "",
@@ -37,7 +37,7 @@
             "title": "ウェア"
           }
         },
-        "custom_link_GfYkrd": {
+        "custom_link_GwLfrV": {
           "type": "custom_link",
           "settings": {
             "theme-title": "",
@@ -45,12 +45,12 @@
             "title": "フード"
           }
         },
-        "custom_link_9Yt9QH": {
+        "custom_link_UeybeK": {
           "type": "custom_link",
           "settings": {
             "theme-title": "",
-            "collection": "floor",
-            "title": "すべらない床"
+            "collection": "origin",
+            "title": "オリジナル"
           }
         },
         "category_group_FXXjBn": {
@@ -87,10 +87,10 @@
         }
       },
       "block_order": [
-        "custom_link_W8bYhU",
-        "custom_link_ijQDDA",
-        "custom_link_GfYkrd",
-        "custom_link_9Yt9QH",
+        "custom_link_azDBJi",
+        "custom_link_fD4zfm",
+        "custom_link_GwLfrV",
+        "custom_link_UeybeK",
         "category_group_FXXjBn",
         "category_group_rAbVFK",
         "category_group_YxNF3X",

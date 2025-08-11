@@ -110,6 +110,10 @@ body {
 	padding: 0 16px;
 }
 
+.is-sp {
+  display: none;
+}
+
 /* コンポーネント
 =========================== */
 .login-icon {
@@ -137,6 +141,7 @@ body {
 	height: auto;
 }
 
+.section-title__top,
 .section-title__fv {
 	font-family: "Lato";
 	font-weight: 700;
@@ -792,17 +797,13 @@ body {
 /* about ページ
 =========================== */
 .about {
-  margin: 72px auto 0;
+  margin: 0 auto;
   width: 100%;
 }
 
 .about-fv {
-  margin-top: 44px;
+  margin-top: 60px;
   text-align: center;
-}
-
-.about-fv__titleArea {
-
 }
 
 .about-messageArea {
@@ -815,12 +816,14 @@ body {
 }
 
 .about-message__textArea {
-  margin-top: 32px;
+  margin: 32px auto 0;
+	max-width: 720px;
 }
 
 .about-message__text {
   font-size: 14px;
   line-height: 2;
+	text-align: left;
 }
 
 .about-commitment {
@@ -992,6 +995,7 @@ body {
 	align-items: center;
   gap: 5px;
 	font-size: 14px;
+	color: #999;
 }
 
 .col-breadcrumb li {
@@ -1062,7 +1066,7 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
-	position: relative;
+  position: relative; /* これでポップアップ位置の基準にする */
 }
 
 .col-filters {
@@ -1074,21 +1078,51 @@ body {
   margin-left: -10px;
   width: 8px;
   height: 8px;
-	cursor: pointer;
-	transition: transform 0.3s ease;
+	display: inline-block;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-.sort-options {
-  flex-direction: column;
-  margin-top: 10px;
-}
-
+.arrow-down:hover,
 .arrow-down.active {
   transform: rotate(180deg);
 }
 
+/* ▼ ポップアップ設定 */
+.sort-options {
+  display: none; /* 初期は非表示 */
+  flex-direction: column;
+  position: absolute;
+  top: 100%;       /* タイトル＋矢印のすぐ下に表示 */
+  left: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 8px 0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  width: max-content; /* 中身に合わせる */
+}
+
+.sort-options a {
+  display: block;
+  padding: 6px 12px;
+  font-size: 12px;
+  color: #333;
+  text-decoration: none;
+}
+
+.sort-options a:hover {
+  background-color: #f5f5f5;
+}
+
+/* active時に表示 */
+.sort-options.active {
+  display: flex;
+}
+
+
 .col-bodyArea {
-  margin-top: 24px;
+	margin-top: 24px;
 }
 
 .col-items {
@@ -1915,6 +1949,11 @@ body {
 # レスポンシブ対応
 =========================== */
 @media screen and (max-width: 768px) {
+	/* 共通
+	=========================== */
+  .is-sp {
+    display: inline;
+  }
 
 	/* コンポーネント
 	=========================== */
@@ -1922,8 +1961,12 @@ body {
 		max-width: 167px;
 	}
 
-	.section-title__fv {
+	.section-title__top {
 		font-size: 20px;
+	}
+
+	.section-title__fv {
+		font-size: 32px;
 	}
 
 	.section-title {
@@ -1932,6 +1975,15 @@ body {
 
 	.product-name {
 		font-size: 14px;
+	}
+
+  .breadcrumbs-area,
+	.breadcrumbs-area20 {
+		margin-top: 16px;
+	}
+
+	.col-breadcrumb {
+		font-size: 12px;
 	}
 
 	/* ヘッダーエリア
@@ -2081,6 +2133,14 @@ body {
 
 	/* aboutページ
 	=========================== */
+  .about-fv {
+		margin-top: 30px;
+	}
+
+	.about-messageArea {
+		margin-top: 26px;
+	}
+
 	.about-message {
     font-size: 19px;
   }

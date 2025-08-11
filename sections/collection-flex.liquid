@@ -53,11 +53,11 @@
                 <img src="../assets/arrow-down.png" alt="arrow-down" class="arrow-down" id="js-toggle-sort">
 
                 <div class="sort-options" id="js-sort-options">
-                  <a href="?sort_by=title-ascending">アルファベット順, A-Z</a>
-                  <a href="?sort_by=title-descending">アルファベット順, Z-A</a>
-                  <a href="?sort_by=price-ascending">価格が安い順</a>
-                  <a href="?sort_by=price-descending">価格が高い順</a>
-                  <a href="?sort_by=created-descending">新着順</a>
+                  <a href="?sort_by=title-ascending" class="sort-option" >アルファベット順, A-Z</a>
+                  <a href="?sort_by=title-descending"class="sort-option" >アルファベット順, Z-A</a>
+                  <a href="?sort_by=price-ascending"class="sort-option" >価格が安い順</a>
+                  <a href="?sort_by=price-descending"class="sort-option" >価格が高い順</a>
+                  <a href="?sort_by=created-descending"class="sort-option" >新着順</a>
                 </div>
               </div>
               <div class="col-headArea__mainSp">
@@ -142,6 +142,28 @@
     </div>
   </div>
 </section>
+
+<script>
+/* 並び替えポップアップ
+=========================== */
+  document.addEventListener('DOMContentLoaded', () => {
+    const arrow = document.getElementById('js-toggle-sort');
+    const sortOptions = document.getElementById('js-sort-options');
+
+    arrow.addEventListener('click', () => {
+      arrow.classList.toggle('active');
+      sortOptions.classList.toggle('active');
+    });
+
+    // クリック外で閉じる
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.col-search')) {
+        arrow.classList.remove('active');
+        sortOptions.classList.remove('active');
+      }
+    });
+  });
+</script>
 
 {% schema %}
 {
