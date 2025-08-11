@@ -293,6 +293,12 @@ body {
 	align-items: center;
 }
 
+.breadcrumbs-area20 {
+	margin-top: 20px;
+	display: flex;
+	align-items: center;
+}
+
 .breadcrumb-text {
 	font-size: 12px;
 	line-height: 1.5;
@@ -1201,7 +1207,7 @@ body {
   width: 100%;
   max-width: 540px;
   /* height: auto; */
-	height: 540px; 
+	height: 540px;
   object-fit: contain;
 	border-radius: 36px;
 	transition: opacity 0.4s ease;
@@ -1416,7 +1422,7 @@ body {
 }
 
 .pro-detail__dt {
-  width: 60px;
+  width: 80px;
 	flex-shrink: 0;
   font-weight: 700;
 }

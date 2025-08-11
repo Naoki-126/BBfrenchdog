@@ -1,8 +1,16 @@
 <section class="col-fv">
   <div class="page-inner">
     <div class="page-contents">
+        <div class="breadcrumbs-area20">
+          <nav role="navigation" aria-label="breadcrumb">
+            <ol class="col-breadcrumb">
+              <li><a href="{{ routes.root_url }}">ホーム</a></li>
+              <li>{{ collection.title }}</li>
+            </ol>
+          </nav>
+        </div>
       <div class="col-fv__inner">
-        
+
         <div class="col-fv__titleArea">
           <h2 class="section-title">{{- collection.title | escape -}}</h2>
           <h3 class="section-subTitle">{{- collection.description -}}</h3>

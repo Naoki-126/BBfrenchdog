@@ -2,6 +2,14 @@
 <section class="about-fv">
   <div class="page-inner">
     <div class="page-contents">
+      <div class="breadcrumbs-area">
+        <nav  role="navigation" aria-label="breadcrumb">
+          <ol class="col-breadcrumb">
+            <li><a href="{{ routes.root_url }}">ホーム</a></li>
+            <li>{{ page.title }}</li>
+          </ol>
+        </nav>
+      </div>
       <div class="about-fv__titleArea">
         <h2 class="section-title__fv">{{ section.settings.title }}</h2>
         <h3 class="section-subTitle">{{ section.settings.subTitle }}</h3>

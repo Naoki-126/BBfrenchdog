@@ -74,6 +74,28 @@
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <div class="page-inner">
     <div class="page-contents">
+      <div class="breadcrumbs-area20">
+        <nav  role="navigation" aria-label="breadcrumb">
+          <ol class="col-breadcrumb">
+            <li><a href="{{ routes.root_url }}">ホーム</a></li>
+              {% if collection %}
+                <li><a href="{{ collection.url }}">{{ collection.title }}</a></li>
+              {% else %}
+              {% assign target_collection = '' %}
+              {% for coll in product.collections %}
+                {% unless coll.title == 'ALL' %}
+                  {% assign target_collection = coll %}
+                  {% break %}
+                {% endunless %}
+              {% endfor %}
+              {% if first_collection != '' %}
+                <li><a href="{{ target_collection.url }}">{{ target_collection.title }}</a></li>
+              {% endif %}
+            {% endif %}
+            <li>{{ product.title }}</li>
+          </ol>
+        </nav>
+      </div>
       <div class="pro-area">
         <div class="pro-imgArea">
           <div class="pro-img__mainArea">
