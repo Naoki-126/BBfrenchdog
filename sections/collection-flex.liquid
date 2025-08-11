@@ -2,11 +2,24 @@
   <div class="page-inner">
     <div class="page-contents">
       <div class="col-area">
-        <div class="col-aside">
+
+        <!-- SP用フィルターボタン -->
+        <button id="js-drawer-toggle" class="drawer-toggle" aria-expanded="false" aria-controls="js-drawer">
+          <img src="{{ 'icon-filters.png' | asset_url }}" alt="絞り込み" class="col-filter__icon">
+        </button>
+
+        <!-- 背景オーバーレイ -->
+        <div id="js-drawer-overlay" class="drawer-overlay" aria-hidden="true"></div>
+
+        <!-- ドロワー（既存 aside 部分を移動） -->
+        <aside class="col-aside" id="js-drawer" role="dialog" aria-label="絞り込み">
+          <button class="drawer-close" id="js-drawer-close" aria-label="閉じる">×</button>
+
           <div class="col-headArea">
             <p class="col-caption">対象商品数</p>
             <p class="col-result"><span class="-strong">{{ collection.products_count }}</span>件</p>
           </div>
+
           <div class="col-bodyArea">
             {%- for block in section.blocks -%}
               {% if block.type == 'custom_link' %}
@@ -20,6 +33,7 @@
                 {% endif %}
               {% endif %}
             {% endfor %}
+
             {%- for block in section.blocks -%}
               {% if block.type == 'category_group' %}
                 <div class="aside-category">
@@ -38,7 +52,7 @@
               {% endif %}
             {%- endfor -%}
           </div>
-        </div>
+        </aside>
 
         <div class="col-main">
           {% paginate collection.products by 16 %}
@@ -50,8 +64,7 @@
               </p>
               <div class="col-search" >
                 <p class="col-filters">並び替え</p>
-                <img src="../assets/arrow-down.png" alt="arrow-down" class="arrow-down" id="js-toggle-sort">
-
+                <img src="{{ 'arrow-down.png' | asset_url }}" alt="arrow-down" class="arrow-down" id="js-toggle-sort">
                 <div class="sort-options" id="js-sort-options">
                   <a href="?sort_by=title-ascending" class="sort-option" >アルファベット順, A-Z</a>
                   <a href="?sort_by=title-descending"class="sort-option" >アルファベット順, Z-A</a>
@@ -60,13 +73,7 @@
                   <a href="?sort_by=created-descending"class="sort-option" >新着順</a>
                 </div>
               </div>
-              <div class="col-headArea__mainSp">
-                <div class="col-search__sp">
-                  <img src="./assets/img/icon-filters.png" alt="icon-filter" class="col-filter__icon">
-                  <p class="col-filters__sp">絞り込みと並び替え</p>
-                  <p class="col-filtersQuantity__sp">1-20件 / 24件</p>
-                </div>
-              </div>
+
             </div>
             <div class="col-bodyArea">
               <ul class="col-items">
@@ -87,7 +94,6 @@
                             </div>
                           {% endif %}
                         {% endfor %}
-
                       </div>
 
                       <div class="top-rec__textArea">
@@ -98,24 +104,30 @@
                         {% if product.metafields.custom.capacity != blank %}
                           <div class="product-item"> {{ product.metafields.custom.capacity | metafield_text }}</div>
                         {% endif %}
-                        {% comment %} {% if product.metafields.custom.dimension != blank %}
-                          <div class="product-item"> {{ product.metafields.custom.dimension | metafield_text }}</div>
-                        {% endif %} {% endcomment %}
-                        <div class="product-price"><span class="product-emphasis">{{ product.price | money }}</span>円（税込）</div>
-                        </div>
-                        </a>
-                        <div class="product-tag__discountArea">
-                        {% for tag in product.tags %}
-                          {% if tag contains "info_" %}
-                            <div class="product-tag__discountTag">
-                              <p><span class="c-btn__label">{{ tag | split: "_" | last }}</span></p>
+                        <div class="product-price">
+                          {% if product.compare_at_price > product.price %}
+                            <div class="product-old-price" style="text-decoration: line-through; color: #888;">
+                              {{ product.compare_at_price | money }}<span class="product-price">円</span>
                             </div>
                           {% endif %}
-                        {% endfor %}
+                          <div class="product-emphasis">
+                            {{ product.price | money }}<span class="product-price"> 円（税込）</span>
+                          </div>
+                        </div>
                       </div>
-                        </li>
+                    </a>
+                    <div class="product-tag__discountArea">
+                      {% for tag in product.tags %}
+                        {% if tag contains "info_" %}
+                          <div class="product-tag__discountTag">
+                            <p><span class="c-btn__label">{{ tag | split: "_" | last }}</span></p>
+                          </div>
+                        {% endif %}
                       {% endfor %}
-                    </ul>
+                    </div>
+                  </li>
+                {% endfor %}
+              </ul>
 
               {% if paginate.pages > 1 %}
                 <div class="col-paginationArea">
@@ -144,24 +156,67 @@
 </section>
 
 <script>
-/* 並び替えポップアップ
-=========================== */
   document.addEventListener('DOMContentLoaded', () => {
-    const arrow = document.getElementById('js-toggle-sort');
-    const sortOptions = document.getElementById('js-sort-options');
+    /* 並び替えポップアップ処理
+    =========================== */
+    function initSortPopup() {
+      const arrow = document.getElementById('js-toggle-sort');
+      const sortOptions = document.getElementById('js-sort-options');
 
-    arrow.addEventListener('click', () => {
-      arrow.classList.toggle('active');
-      sortOptions.classList.toggle('active');
-    });
+      if (!arrow || !sortOptions) return;
 
-    // クリック外で閉じる
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('.col-search')) {
-        arrow.classList.remove('active');
-        sortOptions.classList.remove('active');
-      }
-    });
+      arrow.addEventListener('click', () => {
+        arrow.classList.toggle('active');
+        sortOptions.classList.toggle('active');
+      });
+
+      // クリック外で閉じる
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.col-search')) {
+          arrow.classList.remove('active');
+          sortOptions.classList.remove('active');
+        }
+      });
+    }
+
+    /* ドロワー開閉処理
+    =========================== */
+    function initDrawer() {
+      const toggle = document.getElementById('js-drawer-toggle');
+      const drawer = document.getElementById('js-drawer');
+      const overlay = document.getElementById('js-drawer-overlay');
+      const closeBtn = document.getElementById('js-drawer-close');
+
+      if (!toggle || !drawer || !overlay) return;
+
+      const open = () => {
+        drawer.classList.add('is-open');
+        overlay.classList.add('is-visible');
+        toggle.setAttribute('aria-expanded', 'true');
+        overlay.setAttribute('aria-hidden', 'false');
+      };
+
+      const close = () => {
+        drawer.classList.remove('is-open');
+        overlay.classList.remove('is-visible');
+        toggle.setAttribute('aria-expanded', 'false');
+        overlay.setAttribute('aria-hidden', 'true');
+      };
+
+      toggle.addEventListener('click', () => {
+        drawer.classList.contains('is-open') ? close() : open();
+      });
+      overlay.addEventListener('click', close);
+      if (closeBtn) closeBtn.addEventListener('click', close);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && drawer.classList.contains('is-open')) close();
+      });
+    }
+
+    // 初期化呼び出し
+    initSortPopup();
+    initDrawer();
   });
 </script>
 

@@ -332,6 +332,7 @@ body {
 .product-price {
 	margin-top: 8px;
 	font-size: 12px;
+	font-weight: 400;
 }
 
 .product-emphasis {
@@ -585,7 +586,7 @@ body {
 
 .product-tag__discountArea {
 	position: relative;
-	margin-top: 8px;
+	margin-top: 10px;
 	display: flex;
 	align-items: center;
 	gap: 8px;
@@ -835,12 +836,12 @@ body {
 }
 
 .about-message__span {
-  /* margin-right: 10px; */
   font-size: 32px;
 }
 
 .about-com__contents {
-  margin-top: 32px;
+  margin: 32px auto 0;
+	width: 100%;
 }
 
 .about-com__content {
@@ -1014,7 +1015,6 @@ body {
 }
 
 .col-fv__titleArea {
-  margin-top: 88px;
   text-align: center;
 }
 
@@ -1141,10 +1141,7 @@ body {
 
 .col-product__img {
 	max-width: 213px;
-  height: auto;
 	max-height: 213px;
-	width: 213px;
-	/* height: 213px; */
   border-radius: 12px;
 }
 
@@ -1214,11 +1211,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+	cursor: pointer;
 }
 
 .product-pagination.is-current {
   background: #AB8572;
   color: #fff;
+}
+
+.product-pagination:hover {
+	opacity: .5;
 }
 
 /* pro セクション
@@ -1598,7 +1600,7 @@ body {
 .pro-checked__items {
 	margin-top: 32px;
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(282px, auto));
   gap: 32px 8px;
 }
 
@@ -1977,6 +1979,10 @@ body {
 		font-size: 14px;
 	}
 
+	.product-emphasis {
+		font-size: 16px;
+	}
+
   .breadcrumbs-area,
 	.breadcrumbs-area20 {
 		margin-top: 16px;
@@ -2151,16 +2157,25 @@ body {
 
   .about-com__content {
 		margin-top: 48px;
-    flex-direction: column !important;
+    flex-direction: column;
+		align-items: center;
 		gap: 10px;
   }
+
+	.about-com__content:nth-of-type(2) {
+		margin-top: 48px;
+		flex-direction: column;
+		align-items: center;
+		gap: 10px;
+}
 
   .about-com__title {
     font-size: 18px;
   }
 
 	.about-com__btnArea {
-  margin-top: 32px;
+		margin-top: 32px;
+		text-align: center;
 	}
 
 	/*  一覧ページ
@@ -2171,8 +2186,6 @@ body {
     gap: 24px;
   }
 
-    /* 一覧ページ
-  =========================== */
   .col-headArea,
   .col-headArea__main {
     display: none;
@@ -2190,25 +2203,30 @@ body {
     max-width: 768px;
   }
 
-  .col-search {
-
-  }
-
   .col-items {
-
     margin-top: 24px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(167px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(167px, auto));
     gap: 32px 8px;
   }
 
+	.col-item {
+		width: 100%;
+		height: 289px;
+	}
+
+	.col-product__img {
+		width: 167px;
+		max-height: 167px;
+	}
+
+	/* 商品ページ
+	=========================== */
 	.pro-area {
     flex-direction: column;
     gap: 60px;
   }
-
 }
-
 
 /* ===========================
 # drawer
@@ -2229,10 +2247,6 @@ body {
 
 .drawer-contents.is-checked {
 	transform: translateX(0);
-}
-
-.drawer-content {
-
 }
 
 .drawer-content__link,
@@ -2261,4 +2275,78 @@ body {
 	color: #fff;
 	font-size: 14px;
 	font-weight: 700;
+}
+
+/* 一覧ページ絞り込みドロワー
+=========================== */
+.drawer-toggle-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.drawer-info {
+	width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  justify-content: space-between;
+	flex-wrap: wrap;
+
+}
+
+/* PCではドロワーボタン非表示 */
+.drawer-toggle { display: none; border: none; background: transparent; }
+.col-filter__icon { width: 18px; height: 18px; }
+
+/* 背景オーバーレイ */
+.drawer-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 1090;
+}
+.drawer-overlay.is-visible { display: block; }
+
+.drawer-close { display: none; }
+
+@media (max-width: 768px) {
+  .drawer-toggle {
+    display: block;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+		text-align: left;
+  }
+
+  .col-aside {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100%;
+    background: #fff;
+    overflow-y: auto;
+    box-shadow: 2px 0 12px rgba(0,0,0,0.25);
+    transition: left 0.28s ease;
+    z-index: 1100;
+  }
+  .col-aside.is-open { left: 0; }
+
+  .drawer-close {
+		display: block;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+  }
+}
+
+@media (min-width: 769px) {
+  .drawer-toggle { display: none; }
 }
