@@ -46,6 +46,10 @@
           "type": "buy_buttons",
           "settings": {}
         },
+        "product_text_area_YEFMWR": {
+          "type": "product_text_area",
+          "settings": {}
+        },
         "accordion_info_r9ehbW": {
           "type": "accordion-info",
           "settings": {}
@@ -64,6 +68,7 @@
         "product_detail_cRMqGj",
         "content_note_EXXLmb",
         "buy_buttons_8zCfef",
+        "product_text_area_YEFMWR",
         "accordion_info_r9ehbW",
         "share_tNfRyc"
       ],

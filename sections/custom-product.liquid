@@ -123,6 +123,7 @@
             <button class="slider-left-btn" aria-label="＜">‹</button>
             <button class="slider-right-btn" aria-label="＞">›</button>
           </div>
+
           <div class="pro-img__textArea">
             {% if product.description != blank %}
               <p class="pro-img__text">
@@ -136,6 +137,7 @@
               </p>
             {% endif %}
           </div>
+
         </div>
 
         {% comment %} <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"> {% endcomment %}
@@ -734,6 +736,21 @@
                     </div>
                   </div>
 
+                {% when 'product_text_area' %}
+                  <div class="pro-img__textArea-sp">
+                    {% if product.description != blank %}
+                      <p class="pro-img__text">
+                        {% comment %} {{ product.description | newline_to_br }} {% endcomment %}
+                        {{ product.description }}
+                      </p>
+                    {% endif %}
+                    {% if product.metafields.detail.product_description %}
+                      <p class="pro-img__text2">
+                        {{ product.metafields.detail.product_description | metafield_tag }}
+                      </p>
+                    {% endif %}
+                  </div>
+
                 {%- when 'variant_picker' -%}
                   {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
 
@@ -1236,6 +1253,11 @@
     {
       "type": "share",
       "name": "シェアボタン"
+    },
+    {
+      "type": "product_text_area",
+      "name": "商品説明エリア",
+      "settings": []
     }
   ],
   "presets": [
@@ -1251,7 +1273,8 @@
         { "type": "content-note" },
         { "type": "buy_buttons" },
         { "type": "accordion-info" },
-        { "type": "share" }
+        { "type": "share" },
+        { "type": "product_text_area" }
       ]
     }
   ]
