@@ -155,11 +155,11 @@
                     <h2 class="pro-title">{{ product.title | escape }}</h2>
                 </div>
 
-                {% when 'variant_selector' %}
-                {%- assign color_values = '' -%}
+              {%- when 'variant_selector' -%}
+                {%- assign size_values = '' -%}
                 {% for option in product.options_with_values %}
-                  {% if option.name == '色' %}
-                    {% assign color_values = option.values | join: '' %}
+                  {% if option.name == 'color' %}
+                    {% assign size_values = option.values | join: '' %}
                   {% endif %}
                 {% endfor %}
                 {% unless color_values == '' %}
@@ -167,7 +167,7 @@
                     <h3 class="pro-name">色</h3>
                     <div class="pro-cont__colorArea">
                       {% for option in product.options_with_values %}
-                        {% if option.name == '色' %}
+                        {% if option.name == 'color' %}
                           {% assign option_index = forloop.parentloop.index0 %}
                           {% for value in option.values %}
                             {% assign bg_color = '#ccc' %}
@@ -1184,7 +1184,6 @@
     console.log('保存したrecently_viewed:', viewed);
   });
 </script>
-
 
 {% schema %}
 {
