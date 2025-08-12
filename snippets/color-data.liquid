@@ -1,0 +1,84 @@
+{% comment %}
+色名、カラー1、カラー2の多次元配列的データ
+{% endcomment %}
+{% assign color_data =
+  "ブラック,#000000,#000000|
+    ホワイト,#D9D9D9,#D9D9D9|
+    オフホワイト,#FFF9EE,#FFF9EE|
+    ピンク,#F438CF,#F438CF|
+    ブルー,#41BDE6,#41BDE6|
+    イエロー,#F3E229,#F3E229|
+    ベージュ,#eedcb3,#eedcb3|
+    アッシュ,#b5b5ae,#b5b5ae|
+    グレー,#7d7d7d,#7d7d7d|
+    カーキ,#C5a05a,#C5a05a|
+    カモ,conic-gradient(#556b2f, #6b8e23, #808000, #556b2f),conic-gradient(#556b2f, #6b8e23, #808000, #556b2f)|
+    ルビーレッド,#9b111e,#9b111e|
+    アメイジスト,#9966cc,#9966cc|
+    コーラル,#ff7f50,#ff7f50|
+    ビーグリーン,#32cd32,#32cd32|
+    ウォッシュブルー,#a3c1da,#a3c1da|
+    ライラック,#c8a2c8,#c8a2c8|
+    モスグレイ,#8a9a5b,#8a9a5b|
+    NEONイエロー/ブラック,#ccff00,#000000|
+    NEONイエロー/レインボー,#ccff00,conic-gradient(red,orange,yellow,green,blue,indigo,violet)
+    NEONピンク/ブラック,#ff4da6,#000000|
+    NEONピンク/レインボー,#ff4da6,conic-gradient(red, orange, yellow, green, blue, indigo, violet)|
+    アイボリー/ピンクゴールド,#f8f4e3,#d9a38f|
+    アイボリー/ゴールド,#f8f4e3,#FFD700|
+    アイボリー/ピンク,#f8f4e3,#F438CF|
+    アイボリー/ブラック,#f8f4e3,#000000|
+    アイボリー/レインボー,#f8f4e3,conic-gradient(red, orange, yellow, green, blue, indigo, violet)|
+    ブラック/ブラック,#000000,#000000|
+    ブラック/レインボー,#000000,conic-gradient(red, orange, yellow, green, blue, indigo, violet)
+  "%}
+
+{% assign colors = color_data | split: "|" %}
+
+{% for option in product.options_with_values %}
+  {% if option.name == 'color' %}
+    {% assign option_index = forloop.index0 %}
+    <div class="pro-cont__wrap">
+      <h3 class="pro-name">色</h3>
+      <div class="pro-cont__colorArea">
+        {% for value in option.values %}
+          {% assign bg_color = '#ccc,#ccc' %}
+          {% for color_item in colors %}
+            {% assign parts = color_item | split: "," %}
+            {% assign name = parts[0] | strip %}
+            {% if value == name %}
+              {% assign bg_color = parts[1] | append: ',' | append: parts[2] %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+          {% assign color_parts = bg_color | split: "," %}
+          {% if color_parts[1] contains 'gradient' %}
+            {% assign bg_style = color_parts[1] %}
+          {% else %}
+            {% assign bg_style = 'linear-gradient(to right, ' | append: color_parts[0] | append: ', ' | append: color_parts[1] | append: ')' %}
+          {% endif %}
+          <label class="pro-color__option" style="position: relative; display: inline-block; margin-right: 8px;">
+            <input
+              type="radio"
+              name="option-{{ option_index }}"
+              value="{{ value }}"
+              {% if product.selected_or_first_available_variant.options contains value %}checked{% endif %}
+              required
+              style="display: none;"
+            >
+            <span class="pro-cont__colorDot" style="
+              width: 14px;
+              height: 14px;
+              background: {{ bg_style }};
+              border-radius: 50%;
+              display: inline-block;
+              cursor: pointer;
+              border: 1px solid #b0c4de;
+              transition: transform 0.3s ease;
+            "></span>
+          </label>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+{% endfor %}
