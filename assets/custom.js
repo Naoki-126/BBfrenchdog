@@ -2,28 +2,31 @@
 
 /* FAQページ アコーディオン
 =========================== */
-document.addEventListener('DOMContentLoaded', function () {
-    const toggleBtn = document.getElementById('js-toggle-sort');
-    const sortOptions = document.getElementById('js-sort-options');
-
-    toggleBtn.addEventListener('click', function () {
-      sortOptions.classList.toggle('open');
-      toggleBtn.classList.toggle('active');
-    });
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('#js-faq .accordion-a').forEach(content => {
+    content.style.maxHeight = '0px';
+    content.style.paddingTop = '0';
+    content.style.paddingBottom = '0';
   });
 
-document.getElementById('js-faq').addEventListener('click', function (e) {
-  const clicked = e.target;
+  document.querySelectorAll('#js-faq .accordion-q').forEach(trigger => {
+    const content = trigger.nextElementSibling;
 
-  if (clicked.classList.contains('accordion-q')) {
-    const answer = clicked.nextElementSibling;
+    trigger.addEventListener('click', function () {
+      const isActive = trigger.classList.contains('active');
 
-    // 回答表示切り替え
-    answer.classList.toggle('active');
-
-    // 矢印反転用クラス切り替え
-    clicked.classList.toggle('active');
-  }
+      if (isActive) {
+        trigger.classList.remove('active');
+        content.style.maxHeight = '0px';
+        content.style.paddingTop = '0';
+        content.style.paddingBottom = '0';
+      } else {
+        trigger.classList.add('active');
+        content.style.paddingTop = '14px';
+        content.style.paddingBottom = '14px';
+        content.style.maxHeight = (content.scrollHeight + 30) + 'px';
+      }
+    });
+  });
 });
-
 
