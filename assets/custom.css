@@ -1378,25 +1378,26 @@ body {
 .pro-cont__colorArea-wrapper {
   width: 100%;
 	position: relative;
+	overflow: hidden;
 }
 
 .pro-cont__colorArea {
-	max-width: calc( 100% - 60px );
+	width: 100%;
 	display: flex;
 	align-items: center;
-	padding-left: 4px;
-	gap: 25px;
+	padding-inline: 6px;
+	gap: 12px;
   overflow-x: auto;  /* 横スクロール対応（PC/SP共通） */
-  white-space: nowrap;
   -webkit-overflow-scrolling: touch; /* スマホで慣性スクロール */
+	 scroll-snap-type: x mandatory; /* スクロール吸着（任意） */
 }
 
 /* スクロールバー無し＆右端見切れているバーション */
-.pro-cont__colorArea::-webkit-scrollbar { display: none; }
+/* .pro-cont__colorArea::-webkit-scrollbar { display: none; } */
 
 /* スクロールバーを設定したバーション */
 .pro-cont__colorArea::-webkit-scrollbar {
-  /* height: 6px; */
+  height: 6px;
 }
 
 .pro-cont__colorArea::-webkit-scrollbar-thumb {
@@ -1413,17 +1414,27 @@ body {
   outline-offset: 2px;
 }
 
+.pro-color__option {
+  flex-shrink: 0; /* 縮ませない */
+  scroll-snap-align: start; /* スクロール吸着（任意） */
+}
+
+.pro-cont__colorArea .pro-color__option input:checked + .pro-cont__colorDot {
+  outline: 2px solid #d9d9d9;
+  outline-offset: 2px;
+}
+
 .pro-cont__colorName {
   margin-top: 4px;
   font-size: 14px;
-  white-space: nowrap;  /* 折り返さない */
-  overflow: hidden;     /* はみ出しは隠す */
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis; /* はみ出たら「…」表示 */
   color: #333;
 }
 
 .pro-cont__sizeArea {
-	width: 140px;
+	width: 180px;
 	border: 1px solid #292929;
 	padding: 6px 10px;
 	position: relative;

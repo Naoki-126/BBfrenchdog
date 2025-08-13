@@ -162,7 +162,7 @@
                 {%- when 'size' -%}
                 {%- assign size_values = '' -%}
                 {% for option in product.options_with_values %}
-                  {% if option.name == 'サイズ' %}
+                  {% if option.name == 'size' %}
                     {% assign size_values = option.values | join: '' %}
                   {% endif %}
                 {% endfor %}
@@ -171,9 +171,9 @@
                     <h3 class="pro-name">サイズ</h3>
                     <div class="pro-cont__sizeArea">
                       {% for option in product.options_with_values %}
-                        {% if option.name == 'サイズ'%}
+                        {% if option.name == 'size'%}
                           {% assign option_index = forloop.index0 %}
-                          <select name="options[サイズ]" class="pro-cont__size" id="ProductSelect-Size">
+                          <select name="options[size]" class="pro-cont__size" id="ProductSelect-Size">
                             {% for value in option.values %}
                               {% assign is_selected = false %}
                               {% if product.selected_or_first_available_variant.options[option_index] == value %}

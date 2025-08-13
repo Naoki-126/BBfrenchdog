@@ -88,12 +88,13 @@ NEONピンク/レインボー::#ff4da6~~linear-gradient(to right, #ff4da6 50%, r
         </div>
         <div id="selected-color-name" class="pro-cont__colorName"> </div>
       </div>
-
     </div>
   {% endif %}
 {% endfor %}
 
 <script>
+  /* ラジオボタンを押したら色テキスト表示
+  =========================== */
   document.addEventListener('DOMContentLoaded', function() {
     const inputs = document.querySelectorAll('.pro-cont__colorArea input[type="radio"]');
     const displayArea = document.getElementById('selected-color-name');
