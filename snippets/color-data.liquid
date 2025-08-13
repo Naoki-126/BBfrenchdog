@@ -1,37 +1,38 @@
 {% comment %}
-色名、カラー1、カラー2の多次元配列的データ
+色名::カラー1~~カラー2 形式
+gradient のカンマで split が壊れないように ~~ を使う
 {% endcomment %}
-{% assign color_data =
-  "ブラック,#000000,#000000|
-    ホワイト,#D9D9D9,#D9D9D9|
-    オフホワイト,#FFF9EE,#FFF9EE|
-    ピンク,#F438CF,#F438CF|
-    ブルー,#41BDE6,#41BDE6|
-    イエロー,#F3E229,#F3E229|
-    ベージュ,#eedcb3,#eedcb3|
-    アッシュ,#b5b5ae,#b5b5ae|
-    グレー,#7d7d7d,#7d7d7d|
-    カーキ,#C5a05a,#C5a05a|
-    カモ,conic-gradient(#556b2f, #6b8e23, #808000, #556b2f),conic-gradient(#556b2f, #6b8e23, #808000, #556b2f)|
-    ルビーレッド,#9b111e,#9b111e|
-    アメイジスト,#9966cc,#9966cc|
-    コーラル,#ff7f50,#ff7f50|
-    ビーグリーン,#32cd32,#32cd32|
-    ウォッシュブルー,#a3c1da,#a3c1da|
-    ライラック,#c8a2c8,#c8a2c8|
-    モスグレイ,#8a9a5b,#8a9a5b|
-    NEONイエロー/ブラック,#ccff00,#000000|
-    NEONイエロー/レインボー,#ccff00,conic-gradient(red,orange,yellow,green,blue,indigo,violet)
-    NEONピンク/ブラック,#ff4da6,#000000|
-    NEONピンク/レインボー,#ff4da6,conic-gradient(red, orange, yellow, green, blue, indigo, violet)|
-    アイボリー/ピンクゴールド,#f8f4e3,#d9a38f|
-    アイボリー/ゴールド,#f8f4e3,#FFD700|
-    アイボリー/ピンク,#f8f4e3,#F438CF|
-    アイボリー/ブラック,#f8f4e3,#000000|
-    アイボリー/レインボー,#f8f4e3,conic-gradient(red, orange, yellow, green, blue, indigo, violet)|
-    ブラック/ブラック,#000000,#000000|
-    ブラック/レインボー,#000000,conic-gradient(red, orange, yellow, green, blue, indigo, violet)
-  "%}
+{% assign color_data = "
+ブラック::#000000~~#000000|
+ホワイト::#f6f7f8~~#f6f7f8|
+オフホワイト::#FFF9EE~~#FFF9EE|
+ピンク::#F438CF~~#F438CF|
+ブルー::#41BDE6~~#41BDE6|
+イエロー::#F3E229~~#F3E229|
+ベージュ::#eedcb3~~#eedcb3|
+アッシュ::#b5b5ae~~#b5b5ae|
+グレー::#7d7d7d~~#7d7d7d|
+カーキ::#C5a05a~~#C5a05a|
+カモ::conic-gradient(#556b2f, #6b8e23, #808000, #556b2f)~~conic-gradient(#556b2f, #6b8e23, #808000, #556b2f)|
+ルビーレッド::#9b111e~~#9b111e|
+アメイジスト::#9966cc~~#9966cc|
+コーラル::#ff7f50~~#ff7f50|
+ビーグリーン::#32cd32~~#32cd32|
+ウォッシュブルー::#a3c1da~~#a3c1da|
+ライラック::#c8a2c8~~#c8a2c8|
+モスグレイ::#8a9a5b~~#8a9a5b|
+NEONイエロー/ブラック::#ccff00~~#000000|
+NEONイエロー/レインボー::#ccff00~~conic-gradient(red,orange,yellow,green,blue,indigo,violet)|
+NEONピンク/ブラック::#ff4da6~~#000000|
+NEONピンク/レインボー::#ff4da6~~conic-gradient(red, orange, yellow, green, blue, indigo, violet)|
+アイボリー/ピンクゴールド::#f8f4e3~~#d9a38f|
+アイボリー/ゴールド::#f8f4e3~~#FFD700|
+アイボリー/ピンク::#f8f4e3~~#F438CF|
+アイボリー/ブラック::#f8f4e3~~#000000|
+アイボリー/レインボー::#f8f4e3~~conic-gradient(red, orange, yellow, green, blue, indigo, violet)|
+ブラック/ブラック::#000000~~#000000|
+ブラック/レインボー::#000000~~conic-gradient(red, orange, yellow, green, blue, indigo, violet)
+" | strip %}
 
 {% assign colors = color_data | split: "|" %}
 
@@ -42,21 +43,27 @@
       <h3 class="pro-name">色</h3>
       <div class="pro-cont__colorArea">
         {% for value in option.values %}
-          {% assign bg_color = '#ccc,#ccc' %}
+          {% assign norm_value = value | strip | replace: '　','' | replace: '／','/' %}
+          {% assign c1 = '#ccc' %}
+          {% assign c2 = '#ccc' %}
+
           {% for color_item in colors %}
-            {% assign parts = color_item | split: "," %}
-            {% assign name = parts[0] | strip %}
-            {% if value == name %}
-              {% assign bg_color = parts[1] | append: ',' | append: parts[2] %}
+            {% assign pair = color_item | split: "::" %}
+            {% assign name = pair[0] | strip | replace: '　','' | replace: '／','/' %}
+            {% if name == norm_value %}
+              {% assign cparts = pair[1] | split: "~~" %}
+              {% assign c1 = cparts[0] | strip %}
+              {% assign c2 = cparts[1] | strip %}
               {% break %}
             {% endif %}
           {% endfor %}
-          {% assign color_parts = bg_color | split: "," %}
-          {% if color_parts[1] contains 'gradient' %}
-            {% assign bg_style = color_parts[1] %}
+
+          {% if c2 contains 'gradient(' %}
+            {% assign bg_style = c2 %}
           {% else %}
-            {% assign bg_style = 'linear-gradient(to right, ' | append: color_parts[0] | append: ', ' | append: color_parts[1] | append: ')' %}
+            {% assign bg_style = 'linear-gradient(to right, ' | append: c1 | append: ' 0%, ' | append: c1 | append: ' 50%, ' | append: c2 | append: ' 50%, ' | append: c2 | append: ' 100%)' %}
           {% endif %}
+
           <label class="pro-color__option" style="position: relative; display: inline-block; margin-right: 8px;">
             <input
               type="radio"
