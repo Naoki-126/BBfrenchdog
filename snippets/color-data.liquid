@@ -1,7 +1,4 @@
-{% comment %}
-色名::カラー1~~カラー2 形式
-gradient のカンマで split が壊れないように ~~ を使う
-{% endcomment %}
+
 {% assign color_data = "
 ブラック::#000000~~#000000|
 ホワイト::#f6f7f8~~#f6f7f8|
@@ -22,16 +19,16 @@ gradient のカンマで split が壊れないように ~~ を使う
 ライラック::#c8a2c8~~#c8a2c8|
 モスグレイ::#8a9a5b~~#8a9a5b|
 NEONイエロー/ブラック::#ccff00~~#000000|
-NEONイエロー/レインボー::#ccff00~~conic-gradient(red,orange,yellow,green,blue,indigo,violet)|
+NEONイエロー/レインボー::#ccff00~~linear-gradient(to right, #ccff00 50%, red 57%, orange 64%, yellow 71%, green 78%, blue 85%, indigo 93%, violet 100%)|
 NEONピンク/ブラック::#ff4da6~~#000000|
-NEONピンク/レインボー::#ff4da6~~conic-gradient(red, orange, yellow, green, blue, indigo, violet)|
+NEONピンク/レインボー::#ff4da6~~linear-gradient(to right, #ff4da6 50%, red 57%, orange 64%, yellow 71%, green 78%, blue 85%, indigo 93%, violet 100%)|
 アイボリー/ピンクゴールド::#f8f4e3~~#d9a38f|
 アイボリー/ゴールド::#f8f4e3~~#FFD700|
 アイボリー/ピンク::#f8f4e3~~#F438CF|
 アイボリー/ブラック::#f8f4e3~~#000000|
-アイボリー/レインボー::#f8f4e3~~conic-gradient(red, orange, yellow, green, blue, indigo, violet)|
+アイボリー/レインボー::#f8f4e3~~linear-gradient(to right, #f8f4e3 50%, red 57%, orange 64%, yellow 71%, green 78%, blue 85%, indigo 93%, violet 100%)|
 ブラック/ブラック::#000000~~#000000|
-ブラック/レインボー::#000000~~conic-gradient(red, orange, yellow, green, blue, indigo, violet)
+ブラック/レインボー::#000000~~linear-gradient(to right, #000000 50%, red 57%, orange 64%, yellow 71%, green 78%, blue 85%, indigo 93%, violet 100%)|
 " | strip %}
 
 {% assign colors = color_data | split: "|" %}
@@ -40,52 +37,77 @@ NEONピンク/レインボー::#ff4da6~~conic-gradient(red, orange, yellow, gree
   {% if option.name == 'color' %}
     {% assign option_index = forloop.index0 %}
     <div class="pro-cont__wrap">
-      <h3 class="pro-name">色</h3>
-      <div class="pro-cont__colorArea">
-        {% for value in option.values %}
-          {% assign norm_value = value | strip | replace: '　','' | replace: '／','/' %}
-          {% assign c1 = '#ccc' %}
-          {% assign c2 = '#ccc' %}
-
-          {% for color_item in colors %}
-            {% assign pair = color_item | split: "::" %}
-            {% assign name = pair[0] | strip | replace: '　','' | replace: '／','/' %}
-            {% if name == norm_value %}
-              {% assign cparts = pair[1] | split: "~~" %}
-              {% assign c1 = cparts[0] | strip %}
-              {% assign c2 = cparts[1] | strip %}
-              {% break %}
-            {% endif %}
-          {% endfor %}
-
-          {% if c2 contains 'gradient(' %}
-            {% assign bg_style = c2 %}
-          {% else %}
-            {% assign bg_style = 'linear-gradient(to right, ' | append: c1 | append: ' 0%, ' | append: c1 | append: ' 50%, ' | append: c2 | append: ' 50%, ' | append: c2 | append: ' 100%)' %}
-          {% endif %}
-
-          <label class="pro-color__option" style="position: relative; display: inline-block; margin-right: 8px;">
-            <input
-              type="radio"
-              name="option-{{ option_index }}"
-              value="{{ value }}"
-              {% if product.selected_or_first_available_variant.options contains value %}checked{% endif %}
-              required
-              style="display: none;"
-            >
-            <span class="pro-cont__colorDot" style="
-              width: 14px;
-              height: 14px;
-              background: {{ bg_style }};
-              border-radius: 50%;
-              display: inline-block;
-              cursor: pointer;
-              border: 1px solid #b0c4de;
-              transition: transform 0.3s ease;
-            "></span>
-          </label>
-        {% endfor %}
+      <div class="pro-cont__nameArea">
+        <h3 class="pro-name">色</h3>
       </div>
+      <div class="pro-cont__colorArea-wrapper" style="width: 100%; position: relative;">
+        <div class="pro-cont__colorArea">
+          {% for value in option.values %}
+            {% assign norm_value = value | strip | replace: '　','' | replace: '／','/' %}
+            {% assign c1 = '#ccc' %}
+            {% assign c2 = '#ccc' %}
+
+            {% for color_item in colors %}
+              {% assign pair = color_item | split: "::" %}
+              {% assign name = pair[0] | strip | replace: '　','' | replace: '／','/' %}
+              {% if name == norm_value %}
+                {% assign cparts = pair[1] | split: "~~" %}
+                {% assign c1 = cparts[0] | strip %}
+                {% assign c2 = cparts[1] | strip %}
+                {% break %}
+              {% endif %}
+            {% endfor %}
+
+            {% if c2 contains 'gradient(' %}
+              {% assign bg_style = c2 %}
+            {% else %}
+              {% assign bg_style = 'linear-gradient(to right, ' | append: c1 | append: ' 0%, ' | append: c1 | append: ' 50%, ' | append: c2 | append: ' 50%, ' | append: c2 | append: ' 100%)' %}
+            {% endif %}
+
+            <label class="pro-color__option" style="position: relative; display: inline-block; margin-right: 8px;">
+              <input
+                type="radio"
+                name="option-{{ option_index }}"
+                value="{{ value }}"
+                {% if product.selected_or_first_available_variant.options contains value %}checked{% endif %}
+                required
+                style="display: none;"
+              >
+              <span class="pro-cont__colorDot" style="
+                width: 14px;
+                height: 14px;
+                background: {{ bg_style }} !important;
+                border-radius: 50%;
+                display: inline-block;
+                cursor: pointer;
+                border: 1px solid #b0c4de;
+                transition: transform 0.3s ease;
+              "></span>
+            </label>
+          {% endfor %}
+        </div>
+        <div id="selected-color-name" class="pro-cont__colorName"> </div>
+      </div>
+
     </div>
   {% endif %}
 {% endfor %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const inputs = document.querySelectorAll('.pro-cont__colorArea input[type="radio"]');
+    const displayArea = document.getElementById('selected-color-name');
+
+    inputs.forEach(input => {
+      input.addEventListener('change', () => {
+        displayArea.textContent = input.value;
+      });
+
+      // ページ読み込み時にチェック済みの色名を表示
+      if (input.checked) {
+        displayArea.textContent = input.value;
+      }
+    });
+  });
+
+</script>
