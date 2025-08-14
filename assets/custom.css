@@ -1189,7 +1189,7 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 12px;
 }
 
 .product-pagination {
@@ -1238,8 +1238,9 @@ body {
 .pro-img__main {
   width: 100%;
   max-width: 540px;
-  /* height: auto; */
-	height: 540px;
+  /* height: auto;
+	height: 540px; */
+	height: 300px;
   object-fit: contain;
 	border-radius: 36px;
 	transition: opacity 0.4s ease;
@@ -1455,11 +1456,11 @@ body {
 	pointer-events: none;
 }
 
-
 .pro-cont__size {
 	font-size: 16px;
 	line-height: 1;
 	font-weight: 700;
+	color: #292929;
   background-color: transparent;
   border: none;
   width: 100%;

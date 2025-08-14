@@ -53,36 +53,12 @@
             "title": "オリジナル"
           }
         },
-        "category_group_FXXjBn": {
-          "type": "category_group",
-          "settings": {
-            "heading": "素材",
-            "prefix": "material",
-            "values": "プラチナ,K18,K14,K10,シルバー"
-          }
-        },
         "category_group_rAbVFK": {
           "type": "category_group",
           "settings": {
             "heading": "カラー",
             "prefix": "color",
             "values": "ブラック, ベージュ, ピンク"
-          }
-        },
-        "category_group_YxNF3X": {
-          "type": "category_group",
-          "settings": {
-            "heading": "ブランド",
-            "prefix": "brand",
-            "values": "BONNEL,NUKENAI,ONETOUCH,TEBURA,AAAAA,BBBBB"
-          }
-        },
-        "category_group_JXQFHi": {
-          "type": "category_group",
-          "settings": {
-            "heading": "テーマ",
-            "prefix": "theme",
-            "values": ""
           }
         }
       },
@@ -91,10 +67,7 @@
         "custom_link_fD4zfm",
         "custom_link_GwLfrV",
         "custom_link_UeybeK",
-        "category_group_FXXjBn",
-        "category_group_rAbVFK",
-        "category_group_YxNF3X",
-        "category_group_JXQFHi"
+        "category_group_rAbVFK"
       ],
       "name": "商品インデックス",
       "settings": {
