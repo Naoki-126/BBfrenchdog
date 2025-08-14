@@ -139,7 +139,6 @@
           </div>
         </div>
 
-
         <div class="pro-contentsArea">
           <section
             id="ProductInfo-{{ section.id }}"
@@ -713,7 +712,10 @@
                   {% if product.available %}
                   <div class="pro-btnArea">
                     <div class="product-form">
+
                       {% form 'product', product %}
+                        <!-- hidden input for variant ID -->
+                        <input type="hidden" name="id" id="variant-id" value="{{ product.selected_or_first_available_variant.id }}">
                         <button type="submit" class="c-btn c-btn__pro">
                           カートに入れる
                         </button>
@@ -985,74 +987,71 @@
 </product-info>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // ==========================
-    // ① メイン画像切り替え（ホバーで一時表示／クリックで固定）
-    // ==========================
-    const mainImage = document.getElementById('mainImage');
-    const thumbnails = document.querySelectorAll('.pro-img__thumbnail');
-    const featuredSrc = mainImage.getAttribute('data-featured-src') || mainImage.src;
-    let clickedSrc = featuredSrc;
+document.addEventListener('DOMContentLoaded', function () {
+  /* ==========================
+    ① メイン画像切り替え（ホバーで一時表示／クリックで固定）
+  ========================== */
+  const mainImage = document.getElementById('mainImage');
+  const thumbnails = document.querySelectorAll('.pro-img__thumbnail');
+  const featuredSrc = mainImage.getAttribute('data-featured-src') || mainImage.src;
+  let clickedSrc = featuredSrc;
 
-    function normalize(url) {
-      return url.split('?')[0]; // クエリを除去して比較
-    }
+  function normalize(url) {
+    return url.split('?')[0];
+  }
 
-    thumbnails.forEach(thumb => {
-      const newSrc = thumb.src.replace(/width=\d+/, 'width=540');
-      const preloadImage = new Image();
-      preloadImage.src = newSrc;
+  thumbnails.forEach(thumb => {
+    const newSrc = thumb.src.replace(/width=\d+/, 'width=540');
+    const preloadImage = new Image();
+    preloadImage.src = newSrc;
 
-      thumb.addEventListener('mouseover', function () {
-        if (normalize(mainImage.src) !== normalize(newSrc)) {
-          if (preloadImage.complete) {
-            swapImage(newSrc);
-          } else {
-            preloadImage.onload = () => swapImage(newSrc);
-          }
+    thumb.addEventListener('mouseover', function () {
+      if (normalize(mainImage.src) !== normalize(newSrc)) {
+        if (preloadImage.complete) {
+          swapImage(newSrc);
+        } else {
+          preloadImage.onload = () => swapImage(newSrc);
         }
-      });
-
-      thumb.addEventListener('mouseout', function () {
-        if (normalize(mainImage.src) !== normalize(clickedSrc)) {
-          const revertImage = new Image();
-          revertImage.src = clickedSrc;
-          if (revertImage.complete) {
-            swapImage(clickedSrc);
-          } else {
-            revertImage.onload = () => swapImage(clickedSrc);
-          }
-        }
-      });
-
-      thumb.addEventListener('click', function () {
-        clickedSrc = newSrc;
-        if (normalize(mainImage.src) !== normalize(clickedSrc)) {
-          if (preloadImage.complete) {
-            swapImage(clickedSrc);
-          } else {
-            preloadImage.onload = () => swapImage(clickedSrc);
-          }
-        }
-      });
+      }
     });
 
-    function swapImage(src) {
-      mainImage.classList.add('fade-out');
-      setTimeout(() => {
-        mainImage.src = src;
-        mainImage.classList.remove('fade-out');
-      }, 200);
-    }
+    thumb.addEventListener('mouseout', function () {
+      if (normalize(mainImage.src) !== normalize(clickedSrc)) {
+        const revertImage = new Image();
+        revertImage.src = clickedSrc;
+        if (revertImage.complete) {
+          swapImage(clickedSrc);
+        } else {
+          revertImage.onload = () => swapImage(clickedSrc);
+        }
+      }
+    });
 
-    // ==========================
-    // ② サイドバーループ（ブランク1枚追加）
-    // ==========================
-    const slider = document.getElementById('thumbSlider');
-    if (!slider) return;
+    thumb.addEventListener('click', function () {
+      clickedSrc = newSrc;
+      if (normalize(mainImage.src) !== normalize(clickedSrc)) {
+        if (preloadImage.complete) {
+          swapImage(clickedSrc);
+        } else {
+          preloadImage.onload = () => swapImage(clickedSrc);
+        }
+      }
+    });
+  });
 
-    // すでに初期化されていたら終了
-    if (slider.dataset.initialized === 'true') return;
+  function swapImage(src) {
+    mainImage.classList.add('fade-out');
+    setTimeout(() => {
+      mainImage.src = src;
+      mainImage.classList.remove('fade-out');
+    }, 200);
+  }
+
+  /* ==========================
+    ② サイドバーループ（ブランク1枚追加）
+  ========================== */
+  const slider = document.getElementById('thumbSlider');
+  if (slider && slider.dataset.initialized !== 'true') {
     slider.dataset.initialized = 'true';
 
     const wrapper = slider.parentElement;
@@ -1061,9 +1060,6 @@
     const thumbWidth = 71;
     const gap = 6;
     const slideStep = thumbWidth + gap;
-
-    // ------- /ブランク画像追加 -------
-    thumbItems = Array.from(slider.querySelectorAll('.pro-img__thumbnails'));
 
     let visibleCount = 0;
     let currentIndex = 0;
@@ -1113,42 +1109,75 @@
       }
       slider.style.transform = `translateX(-${currentIndex * slideStep}px)`;
     });
+  }
 
-    // ==========================
-    // ③ アコーディオン
-    // ==========================
-    const triggers = document.querySelectorAll('.js-accordion-trigger');
-
-    triggers.forEach(trigger => {
-      const content = trigger.nextElementSibling;
-
-      trigger.addEventListener('click', function () {
-        const isOpen = trigger.classList.contains('is-open');
-
-        if (isOpen) {
-          trigger.classList.remove('is-open');
-          content.style.maxHeight = null;
-        } else {
-          trigger.classList.add('is-open');
-          content.style.maxHeight = content.scrollHeight + 'px';
-        }
-      });
+  /* ==========================
+    ③ アコーディオン
+  ========================== */
+  const triggers = document.querySelectorAll('.js-accordion-trigger');
+  triggers.forEach(trigger => {
+    const content = trigger.nextElementSibling;
+    trigger.addEventListener('click', function () {
+      const isOpen = trigger.classList.contains('is-open');
+      if (isOpen) {
+        trigger.classList.remove('is-open');
+        content.style.maxHeight = null;
+      } else {
+        trigger.classList.add('is-open');
+        content.style.maxHeight = content.scrollHeight + 'px';
+      }
     });
-
-    // ==========================
-    // ④ 最近見た商品（localStorage）
-    // ==========================
-    const handle = '{{ product.handle }}';
-    let viewed = JSON.parse(localStorage.getItem('recently_viewed')) || [];
-
-    viewed = viewed.filter(item => item !== handle);
-    viewed.unshift(handle);
-    viewed = viewed.slice(0, 4);
-
-    localStorage.setItem('recently_viewed', JSON.stringify(viewed));
-    console.log('保存したrecently_viewed:', viewed);
   });
+
+  /* ==========================
+    ④ 最近見た商品（localStorage）
+  ========================== */
+  const handle = '{{ product.handle }}';
+  let viewed = JSON.parse(localStorage.getItem('recently_viewed')) || [];
+  viewed = viewed.filter(item => item !== handle);
+  viewed.unshift(handle);
+  viewed = viewed.slice(0, 4);
+  localStorage.setItem('recently_viewed', JSON.stringify(viewed));
+  console.log('保存したrecently_viewed:', viewed);
+
+  /* ==========================
+    ⑤ バリアントID更新（色＋サイズ連動）
+  ========================== */
+  const productVariants = {{ product.variants | json }};
+  const variantIdInput = document.getElementById('variant-id');
+
+  let selectedColor = document.querySelector('.pro-cont__colorArea input[type="radio"]:checked')?.value || '';
+  let selectedSize  = document.querySelector('#ProductSelect-Size')?.value || '';
+
+  function updateVariantId() {
+    const match = productVariants.find(v =>
+      v.option1 === selectedColor && v.option2 === selectedSize
+    );
+    if (match) {
+      variantIdInput.value = match.id;
+      console.log("Variant updated:", match.id);
+    } else {
+      console.warn("該当するバリアントが見つかりません");
+    }
+  }
+
+  document.querySelectorAll('.pro-cont__colorArea input[type="radio"]').forEach(input => {
+    input.addEventListener('change', () => {
+      selectedColor = input.value;
+      updateVariantId();
+    });
+  });
+
+  const sizeSelect = document.querySelector('#ProductSelect-Size');
+  if (sizeSelect) {
+    sizeSelect.addEventListener('change', () => {
+      selectedSize = sizeSelect.value;
+      updateVariantId();
+    });
+  }
+});
 </script>
+
 
 {% schema %}
 {
