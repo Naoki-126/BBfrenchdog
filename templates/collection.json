@@ -24,7 +24,7 @@
         "custom_link_azDBJi": {
           "type": "custom_link",
           "settings": {
-            "theme-title": "カテゴリー",
+            "theme-title": "コレクション",
             "collection": "harness",
             "title": "ハーネス"
           }
