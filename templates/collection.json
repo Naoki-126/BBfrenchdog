@@ -56,9 +56,7 @@
         "category_group_rAbVFK": {
           "type": "category_group",
           "settings": {
-            "heading": "カラー",
-            "prefix": "color",
-            "values": "ブラック, ベージュ, ピンク"
+            "heading": "夏のキャンペーン"
           }
         }
       },
