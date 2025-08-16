@@ -108,22 +108,22 @@
         "guide_GfaamA": {
           "type": "guide",
           "settings": {
-            "guide_title": "配送・送料",
-            "guide_url": ""
+            "guide_title": "送料など",
+            "guide_url": "/pages/shoping-flow#fee"
           }
         },
         "guide_eXYkgN": {
           "type": "guide",
           "settings": {
             "guide_title": "品質保証",
-            "guide_url": ""
+            "guide_url": "/pages/shoping-flow#quality"
           }
         },
         "guide_j3j4gM": {
           "type": "guide",
           "settings": {
             "guide_title": "アフターケア",
-            "guide_url": ""
+            "guide_url": "/pages/shoping-flow#care"
           }
         },
         "guide_k6xTzT": {

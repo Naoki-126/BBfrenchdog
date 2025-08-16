@@ -1738,6 +1738,10 @@ body {
   margin-top: 0px;
 }
 
+.guide-content:target {
+  scroll-margin-top: 100px; /* ヘッダー高さ分を指定 */
+}
+
 .guide-text {
   font-size: 14px;
   line-height: 2;

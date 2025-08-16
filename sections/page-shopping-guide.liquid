@@ -1,8 +1,8 @@
- <main class="guide-page">
+<main class="guide-page">
   <div class="page-inner">
     <div class="page-contents">
       <div class="breadcrumbs-area">
-        <nav  role="navigation" aria-label="breadcrumb">
+        <nav role="navigation" aria-label="breadcrumb">
           <ol class="col-breadcrumb">
             <li><a href="{{ routes.root_url }}">ホーム</a></li>
             <li>{{ page.title }}</li>
@@ -16,7 +16,7 @@
         </div>
         <div class="guide-contents">
           {% for block in section.blocks %}
-            <div class="guide-content">
+            <div class="guide-content" {% if block.settings.anchor_id != blank %}id="{{ block.settings.anchor_id }}"{% endif %}>
               {% if block.settings.title != blank %}
                 <h2 class="guide-title">{{ block.settings.title }}</h2>
               {% endif %}
@@ -42,8 +42,8 @@
                 {% endif %}
                 {% if block.type == 'link' and block.settings.link_url != blank %}
                   <div class="guide-linkArea">
-                    <a href="{{ block.settings.link_url }}" class="guide-link" target="_blank" rel="noopener" >{{ block.settings.link_text }}</a>
-                    </div>
+                    <a href="{{ block.settings.link_url }}" class="guide-link" target="_blank" rel="noopener">{{ block.settings.link_text }}</a>
+                  </div>
                 {% endif %}
                 {% if block.type == 'table' %}
                   {% if block.settings.table_html != blank %}
@@ -71,7 +71,7 @@
                     </div>
                   </div>
                 {% endif %}
-                {% if  block.type == 'guide-btn' and block.settings.button_link != blank %}
+                {% if block.type == 'guide-btn' and block.settings.button_link != blank %}
                   <div class="guide-btnArea">
                     <a class="c-btn" href="{{ block.settings.button_link }}">{{ block.settings.button_text }}</a>
                   </div>
@@ -107,163 +107,76 @@
       "default": "ショッピングガイドの内容"
     }
   ],
-   "blocks": [
+  "blocks": [
     {
       "type": "bullet_list",
       "name": "箇条書きリスト",
       "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "タイトル"
-        },
-        {
-          "type": "textarea",
-          "id": "text",
-          "label": "説明文"
-        },
-        {
-          "type": "textarea",
-          "id": "list_items",
-          "label": "リスト項目（カンマ区切り）",
-          "info": "例：項目1, 項目2, 項目3"
-        },
+        { "type": "text", "id": "title", "label": "タイトル" },
+        { "type": "textarea", "id": "text", "label": "説明文" },
+        { "type": "textarea", "id": "list_items", "label": "リスト項目（カンマ区切り）", "info": "例：項目1, 項目2, 項目3" },
+        { "type": "text", "id": "anchor_id", "label": "アンカーID（例：fee, quality, care）" }
       ]
     },
     {
       "type": "numbered_list",
       "name": "番号付きリスト",
       "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "タイトル"
-        },
-        {
-          "type": "textarea",
-          "id": "text",
-          "label": "説明文"
-        },
-        {
-          "type": "textarea",
-          "id": "list_items",
-          "label": "リスト項目（カンマ区切り）",
-          "info": "例：手順1, 手順2, 手順3"
-        }
+        { "type": "text", "id": "title", "label": "タイトル" },
+        { "type": "textarea", "id": "text", "label": "説明文" },
+        { "type": "textarea", "id": "list_items", "label": "リスト項目（カンマ区切り）", "info": "例：手順1, 手順2, 手順3" },
+        { "type": "text", "id": "anchor_id", "label": "アンカーID（例：fee, quality, care）" }
       ]
     },
     {
       "type": "link",
       "name": "テキストリンク",
       "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "タイトル"
-        },
-        {
-          "type": "textarea",
-          "id": "text",
-          "label": "説明文"
-        },
-        {
-          "type": "text",
-          "id": "link_text",
-          "label": "リンクテキスト"
-        },
-        {
-          "type": "url",
-          "id": "link_url",
-          "label": "リンクURL"
-        }
+        { "type": "text", "id": "title", "label": "タイトル" },
+        { "type": "textarea", "id": "text", "label": "説明文" },
+        { "type": "text", "id": "link_text", "label": "リンクテキスト" },
+        { "type": "url", "id": "link_url", "label": "リンクURL" },
+        { "type": "text", "id": "anchor_id", "label": "アンカーID（例：fee, quality, care）" }
       ]
     },
     {
       "type": "table",
       "name": "テーブル",
       "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "タイトル"
-        },
-        {
-          "type": "textarea",
-          "id": "text",
-          "label": "説明文"
-        },
-        {
-          "type": "textarea",
-          "id": "table_html",
-          "label": "テーブルHTML"
-        },
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "画像"
-        }
+        { "type": "text", "id": "title", "label": "タイトル" },
+        { "type": "textarea", "id": "text", "label": "説明文" },
+        { "type": "textarea", "id": "table_html", "label": "テーブルHTML" },
+        { "type": "image_picker", "id": "image", "label": "画像" },
+        { "type": "text", "id": "anchor_id", "label": "アンカーID（例：fee, quality, care）" }
       ]
     },
     {
       "type": "caption",
       "name": "見出し＋テキスト",
       "settings": [
-        {
-          "type": "text",
-          "id": "caption_title4",
-          "label": "見出し3タイトル",
-          "default": "見出し3見出し3"
-        },
-        {
-          "type": "textarea",
-          "id": "caption_text",
-          "label": "本文テキスト",
-          "default": "ここにテキストが入ります。"
-        }
+        { "type": "text", "id": "caption_title4", "label": "見出し3タイトル", "default": "見出し3見出し3" },
+        { "type": "textarea", "id": "caption_text", "label": "本文テキスト", "default": "ここにテキストが入ります。" }
       ]
     },
     {
       "type": "caption-h4",
       "name": "見出し4＋テキスト",
       "settings": [
-        {
-          "type": "text",
-          "id": "caption_title4",
-          "label": "見出し4タイトル",
-          "default": "見出し4見出し4"
-        },
-        {
-          "type": "textarea",
-          "id": "caption_text",
-          "label": "本文テキスト",
-          "default": "ここにテキストが入ります。"
-        }
+        { "type": "text", "id": "caption_title4", "label": "見出し4タイトル", "default": "見出し4見出し4" },
+        { "type": "textarea", "id": "caption_text", "label": "本文テキスト", "default": "ここにテキストが入ります。" }
       ]
     },
     {
       "type": "guide-btn",
       "name": "ガイドボタン",
       "settings": [
-        {
-          "type": "text",
-          "id": "button_text",
-          "label": "ボタンのテキスト",
-          "default": "ショッピングガイド一覧を見る"
-        },
-        {
-          "type": "url",
-          "id": "button_link",
-          "label": "ボタンのリンク先"
-        }
-      ],
+        { "type": "text", "id": "button_text", "label": "ボタンのテキスト", "default": "ショッピングガイド一覧を見る" },
+        { "type": "url", "id": "button_link", "label": "ボタンのリンク先" }
+      ]
     }
   ],
   "presets": [
-    {
-      "name":"ショッピングガイド",
-      "category": "ページ"
-
-    }
+    { "name":"ショッピングガイド", "category": "ページ" }
   ]
 }
 {% endschema %}

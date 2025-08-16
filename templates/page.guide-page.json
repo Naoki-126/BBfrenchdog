@@ -12,69 +12,77 @@
     "page_shoping_guide_DEPHeq": {
       "type": "page-shopping-guide",
       "blocks": {
-        "bullet_list_Ezth4L": {
-          "type": "bullet_list",
+        "numbered_list_KApn3X": {
+          "type": "numbered_list",
           "settings": {
             "title": "購入の流れ",
-            "text": "ジュエリーを新品のような輝きに仕上げるサービスです。\n料金については、お問い合わせください。",
-            "list_items": "箇条書きリストが入ります,\n箇条書きリストが入ります,\n箇条書きリストが入ります,"
+            "text": "当店ではご注文後、通常配送の場合は、ご注文から3営業日以内に発送致します。\n※年末年始やお盆期間など、時期によっては通常よりお時間を頂いております。",
+            "list_items": "ご注文,\n「ご注文確認メール」配信,\n配送準備,\n「商品発送メール」配信,\n商品お届け",
+            "anchor_id": ""
           }
         },
         "numbered_list_7A69VV": {
           "type": "numbered_list",
           "settings": {
             "title": "送料など",
-            "text": "宝石が緩んだり、外れてしまった場合の修理を承ります。\n費用については、お問い合わせください。",
-            "list_items": "番号付きリストが入ります,\n番号付きリストが入ります,\n番号付きリストが入ります,\n番号付きリストが入ります"
+            "text": "複数の商品を組み合わせ購入の場合送料が変わります",
+            "list_items": "番号付きリストが入ります,\n番号付きリストが入ります,\n番号付きリストが入ります,\n番号付きリストが入ります",
+            "anchor_id": "fee"
           }
         },
         "link_3MBWe4": {
           "type": "link",
           "settings": {
             "title": "チェーン修理（有償）",
-            "text": "宝石が緩んだり、外れてしまった場合の修理を承ります。\n費用については、お問い合わせください。",
-            "link_text": "テキストリンクがはいります。",
-            "link_url": "https://www.google.co.jp/index.html"
+            "text": "商品は厳重に管理・梱包してお届けしておりますが、万が一、商品が破損していたり、ご注文内容と異なっていた場合は、速やかに対応いたします。\nお客様都合によるキャンセル返品は受け付けておりませんのでご理解のほどよろしくお願いします。",
+            "link_text": "テキストリンクが入ります。",
+            "link_url": "https://www.google.co.jp/index.html",
+            "anchor_id": ""
           }
         },
         "table_c4AFiR": {
           "type": "table",
           "settings": {
             "title": "サイズ等",
-            "text": "宝石が緩んだり、外れてしまった場合の修理を承ります。\n費用については、お問い合わせください。",
-            "table_html": "<table class=\"guide-table\">\n                <tr class=\"guide-table__tr\">\n                  <th class=\"guide-table__th\">ここに表のテキストが入ります。</th>\n                  <td class=\"guide-table__td\">ここに表のテキストが入ります。<br>これはダミーのテキストです。</td>\n                  <td class=\"guide-table__td\">ここに表のテキストが入ります。<br>これはダミーのテキストです。</td>\n                </tr>\n                <tr class=\"guide-table__tr\">\n                  <th class=\"guide-table__th\">ここに表のテキストが入ります。</th>\n                  <td class=\"guide-table__td\">ここに表のテキストが入ります。<br>これはダミーのテキストです。</td>\n                  <td class=\"guide-table__td\">ここに表のテキストが入ります。<br>これはダミーのテキストです。</td>\n                </tr>\n              </table>",
-            "image": "shopify://shop_images/guide-img.jpg"
+            "text": "ハーネスやウェアにはサイズがございます。商品詳細欄を確認の上お求め下さい。",
+            "table_html": "",
+            "image": "shopify://shop_images/guide-img.jpg",
+            "anchor_id": ""
           }
         },
-        "caption_h6PTFL": {
-          "type": "caption",
+        "bullet_list_tH6EMg": {
+          "type": "bullet_list",
           "settings": {
-            "caption_title4": "見出し3見出し3",
-            "caption_text": "ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。\n\nここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。\n\nここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。"
+            "title": "品質保証",
+            "text": "当店では、フレンチブルドックの特性を熟知した専門スタッフが厳選した商品のみを取り扱っております。万が一商品に不備がございましたら、到着後7日以内にご連絡ください。迅速に交換・返品対応いたします。",
+            "list_items": "",
+            "anchor_id": "quality"
           }
         },
-        "caption_h4_QmdBDB": {
-          "type": "caption-h4",
+        "bullet_list_PLCqr9": {
+          "type": "bullet_list",
           "settings": {
-            "caption_title4": "見出し4見出し4",
-            "caption_text": "ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。\n\nここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。"
+            "title": "アフターケア",
+            "text": "ご購入後も安心のアフターケア体制を整えております。フレンチブルドックの専門知識を持つスタッフが、商品の使用方法から日常のお悩みまでサポート。お気軽にお問い合わせください。\n\n犬種特有の悩み相談（皮膚トラブル、呼吸器系など）\n季節ごとのケアアドバイス（暑さ対策、寒さ対策）\n成長段階に応じた商品提案\n獣医師監修のケア情報提供",
+            "list_items": "",
+            "anchor_id": "care"
           }
         },
         "guide_btn_UPTRyJ": {
           "type": "guide-btn",
           "settings": {
-            "button_text": "ショッピングガイド一覧を見る",
+            "button_text": "ショッピングを続ける",
             "button_link": "https://www.google.co.jp/index.html"
           }
         }
       },
       "block_order": [
-        "bullet_list_Ezth4L",
+        "numbered_list_KApn3X",
         "numbered_list_7A69VV",
         "link_3MBWe4",
         "table_c4AFiR",
-        "caption_h6PTFL",
-        "caption_h4_QmdBDB",
+        "bullet_list_tH6EMg",
+        "bullet_list_PLCqr9",
         "guide_btn_UPTRyJ"
       ],
       "name": "ショッピングガイド",
