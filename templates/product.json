@@ -53,10 +53,6 @@
         "accordion_info_r9ehbW": {
           "type": "accordion-info",
           "settings": {}
-        },
-        "share_tNfRyc": {
-          "type": "share",
-          "settings": {}
         }
       },
       "block_order": [
@@ -69,8 +65,7 @@
         "content_note_EXXLmb",
         "buy_buttons_8zCfef",
         "product_text_area_YEFMWR",
-        "accordion_info_r9ehbW",
-        "share_tNfRyc"
+        "accordion_info_r9ehbW"
       ],
       "name": "カスタム商品ページ",
       "settings": {}
