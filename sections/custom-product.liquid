@@ -168,21 +168,28 @@
                 {% unless size_values == '' %}
                   <div class="pro-cont__wrap">
                     <h3 class="pro-name">サイズ</h3>
+
                     <div class="pro-cont__sizeArea">
-                      {% for option in product.options_with_values %}
-                        {% if option.name == 'size'%}
-                          {% assign option_index = forloop.index0 %}
-                          <select name="options[size]" class="pro-cont__size" id="ProductSelect-Size">
+                      <div class="pro-cont__sizeButtons" id="ProductSizeOptions">
+                        {% for option in product.options_with_values %}
+                          {% if option.name == 'size' %}
+                            {% assign option_index = forloop.index0 %}
                             {% for value in option.values %}
                               {% assign is_selected = false %}
                               {% if product.selected_or_first_available_variant.options[option_index] == value %}
                                 {% assign is_selected = true %}
                               {% endif %}
-                              <option value="{{ value | escape }}"{% if is_selected %} selected{% endif %}>{{ value }}</option>
+                              <button
+                                type="button"
+                                class="pro-sizeBtn{% if is_selected %} is-active{% endif %}"
+                                data-value="{{ value | escape }}">
+                                {{ value }}
+                              </button>
                             {% endfor %}
-                          </select>
-                        {% endif %}
-                      {% endfor %}
+                          {% endif %}
+                        {% endfor %}
+                      </div>
+                      <input type="hidden" id="ProductSelect-Size" name="options[size]" value="{{ product.selected_or_first_available_variant.options[option_index] }}">
                     </div>
                   </div>
                 {% endunless %}
@@ -1161,40 +1168,62 @@ document.addEventListener('DOMContentLoaded', function () {
   /* ==========================
     ⑤ バリアントID更新（色＋サイズ連動＋今すぐ購入対応）
   ========================== */
-  const productVariants = {{ product.variants | json }};
-  const variantIdInput = document.getElementById('variant-id'); // カート用
-  const buyNowInput = document.getElementById('buy-now-variant-id'); // 今すぐ購入用
+const productVariants = {{ product.variants | json }};
+const variantIdInput = document.getElementById('variant-id'); // カート用
+const buyNowInput = document.getElementById('buy-now-variant-id'); // 今すぐ購入用
 
-  let selectedColor = document.querySelector('.pro-cont__colorArea input[type="radio"]:checked')?.value || '';
-  let selectedSize  = document.querySelector('#ProductSelect-Size')?.value || '';
+let selectedColor = document.querySelector('.pro-cont__colorArea input[type="radio"]:checked')?.value || '';
+let selectedSize  = document.querySelector('#ProductSelect-Size')?.value || '';
 
-  function updateVariantId() {
-    const match = productVariants.find(v =>
-      v.option1 === selectedColor && v.option2 === selectedSize
-    );
-    if (match) {
-      variantIdInput.value = match.id; // カート
-      if (buyNowInput) buyNowInput.value = match.id; // 今すぐ購入
-      console.log("Variant updated:", match.id);
-    } else {
-      console.warn("該当するバリアントが見つかりません");
-    }
+function updateVariantId() {
+  const match = productVariants.find(v =>
+    v.option1 === selectedColor && v.option2 === selectedSize
+  );
+  if (match) {
+    variantIdInput.value = match.id; // カート
+    if (buyNowInput) buyNowInput.value = match.id; // 今すぐ購入
+    console.log("Variant updated:", match.id);
+  } else {
+    console.warn("該当するバリアントが見つかりません");
   }
+}
 
-  document.querySelectorAll('.pro-cont__colorArea input[type="radio"]').forEach(input => {
-    input.addEventListener('change', () => {
-      selectedColor = input.value;
+/* ---- 色選択ラジオ ---- */
+document.querySelectorAll('.pro-cont__colorArea input[type="radio"]').forEach(input => {
+  input.addEventListener('change', () => {
+    selectedColor = input.value;
+    updateVariantId();
+  });
+});
+
+/* ---- サイズ選択：セレクト（旧） ---- */
+const sizeSelect = document.querySelector('#ProductSelect-Size');
+if (sizeSelect) {
+  sizeSelect.addEventListener('change', () => {
+    selectedSize = sizeSelect.value;
+    updateVariantId();
+  });
+}
+
+/* ---- サイズ選択：ボタンUI（新） ---- */
+const sizeButtons = document.querySelectorAll('.pro-sizeBtn');
+if (sizeButtons.length > 0) {
+  sizeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // すべてのボタンから is-active を外す
+      sizeButtons.forEach(b => b.classList.remove('is-active'));
+      // クリックされたボタンに付与
+      btn.classList.add('is-active');
+
+      // hidden input に反映
+      selectedSize = btn.dataset.value;
+      document.getElementById('ProductSelect-Size').value = selectedSize;
+
+      // バリアント更新
       updateVariantId();
     });
   });
-
-  const sizeSelect = document.querySelector('#ProductSelect-Size');
-  if (sizeSelect) {
-    sizeSelect.addEventListener('change', () => {
-      selectedSize = sizeSelect.value;
-      updateVariantId();
-    });
-  }
+}
 
   /* ==========================
     ⑥ 今すぐ購入ボタン押下でフォーム送信
