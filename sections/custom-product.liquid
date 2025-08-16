@@ -1013,11 +1013,7 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  /* ==========================
-    ① メイン画像切り替え（ホバーで一時表示／クリックで固定）
-  ========================== */
   const mainImage = document.getElementById('mainImage');
-  const thumbnails = document.querySelectorAll('.pro-img__thumbnail');
   const featuredSrc = mainImage.getAttribute('data-featured-src') || mainImage.src;
   let clickedSrc = featuredSrc;
 
@@ -1025,46 +1021,44 @@ document.addEventListener('DOMContentLoaded', function () {
     return url.split('?')[0];
   }
 
-  thumbnails.forEach(thumb => {
-    const newSrc = thumb.src.replace(/width=\d+/, 'width=540');
-    const preloadImage = new Image();
-    preloadImage.src = newSrc;
+  /* ==========================
+    メイン画像切替（ホバー/クリック）
+  ========================== */
+  function setupThumbnails(){
+    const thumbnails = document.querySelectorAll('.pro-img__thumbnail');
 
-    thumb.addEventListener('mouseover', function () {
-      if (normalize(mainImage.src) !== normalize(newSrc)) {
-        if (preloadImage.complete) {
-          swapImage(newSrc);
-        } else {
-          preloadImage.onload = () => swapImage(newSrc);
+    thumbnails.forEach((thumb) => {
+      const newSrc = thumb.src.replace(/width=\d+/, 'width=540');
+      const preloadImage = new Image();
+      preloadImage.src = newSrc;
+
+      thumb.addEventListener('mouseover', () => {
+        if (normalize(mainImage.src) !== normalize(newSrc)) {
+          if(preloadImage.complete) swapImage(newSrc);
+          else preloadImage.onload = () => swapImage(newSrc);
         }
-      }
-    });
+      });
 
-    thumb.addEventListener('mouseout', function () {
-      if (normalize(mainImage.src) !== normalize(clickedSrc)) {
-        const revertImage = new Image();
-        revertImage.src = clickedSrc;
-        if (revertImage.complete) {
-          swapImage(clickedSrc);
-        } else {
-          revertImage.onload = () => swapImage(clickedSrc);
+      thumb.addEventListener('mouseout', () => {
+        if(normalize(mainImage.src) !== normalize(clickedSrc)){
+          const revertImage = new Image();
+          revertImage.src = clickedSrc;
+          if(revertImage.complete) swapImage(clickedSrc);
+          else revertImage.onload = () => swapImage(clickedSrc);
         }
-      }
-    });
+      });
 
-    thumb.addEventListener('click', function () {
-      clickedSrc = newSrc;
-      if (normalize(mainImage.src) !== normalize(clickedSrc)) {
-        if (preloadImage.complete) {
-          swapImage(clickedSrc);
-        } else {
-          preloadImage.onload = () => swapImage(clickedSrc);
+      thumb.addEventListener('click', () => {
+        clickedSrc = newSrc;
+        if(normalize(mainImage.src) !== normalize(clickedSrc)){
+          if(preloadImage.complete) swapImage(clickedSrc);
+          else preloadImage.onload = () => swapImage(clickedSrc);
         }
-      }
+      });
     });
-  });
+  }
 
-  function swapImage(src) {
+  function swapImage(src){
     mainImage.classList.add('fade-out');
     setTimeout(() => {
       mainImage.src = src;
@@ -1072,172 +1066,154 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 200);
   }
 
+  setupThumbnails();
+
   /* ==========================
-    ② サイドバーループ（ブランク1枚追加）
+    サムネイルスライダー（PC/スマホ）
   ========================== */
   const slider = document.getElementById('thumbSlider');
-  if (slider && slider.dataset.initialized !== 'true') {
-    slider.dataset.initialized = 'true';
+  const wrapper = slider?.parentElement;
+  const thumbWidth = 71;
+  const gap = 6;
+  let visibleCount = 0;
+  let currentIndex = 0;
 
-    const wrapper = slider.parentElement;
-    let thumbItems = Array.from(slider.querySelectorAll('.pro-img__thumbnails'));
+  function calcVisibleCount(){
+    if(!wrapper) return;
+    const wrapperStyle = window.getComputedStyle(wrapper);
+    const paddingLeft = parseFloat(wrapperStyle.paddingLeft) || 0;
+    const paddingRight = parseFloat(wrapperStyle.paddingRight) || 0;
+    const wrapperWidth = wrapper.clientWidth - paddingLeft - paddingRight;
+    visibleCount = Math.floor(wrapperWidth / (thumbWidth + gap));
+    if(visibleCount > slider.children.length) visibleCount = slider.children.length;
+  }
 
-    const thumbWidth = 71;
-    const gap = 6;
-    const slideStep = thumbWidth + gap;
+  calcVisibleCount();
 
-    let visibleCount = 0;
-    let currentIndex = 0;
-
-    function calcVisibleCount() {
-      const wrapperStyle = window.getComputedStyle(wrapper);
-      const paddingLeft = parseFloat(wrapperStyle.paddingLeft) || 0;
-      const paddingRight = parseFloat(wrapperStyle.paddingRight) || 0;
-      const wrapperWidth = wrapper.clientWidth - paddingLeft - paddingRight;
-      visibleCount = Math.floor(wrapperWidth / slideStep);
-      if (visibleCount > thumbItems.length) visibleCount = thumbItems.length;
+  function slideTo(index){
+    const thumbItems = Array.from(slider.children);
+    if(window.innerWidth <= 768){
+      const targetLi = thumbItems[index];
+      if(targetLi) targetLi.scrollIntoView({behavior:'smooth', inline:'center'});
+    } else {
+      if(index < 0) index = 0;
+      if(index > thumbItems.length - visibleCount) index = thumbItems.length - visibleCount;
+      currentIndex = index;
+      slider.style.transform = `translateX(-${currentIndex * (thumbWidth + gap)}px)`;
     }
+  }
 
+  const leftBtn = wrapper?.querySelector('.slider-left-btn');
+  const rightBtn = wrapper?.querySelector('.slider-right-btn');
+  leftBtn?.addEventListener('click', ()=>slideTo(currentIndex-1));
+  rightBtn?.addEventListener('click', ()=>slideTo(currentIndex+1));
+
+  window.addEventListener('resize', ()=>{
     calcVisibleCount();
+    if(currentIndex > slider.children.length - visibleCount) currentIndex = slider.children.length - visibleCount;
+    if(currentIndex < 0) currentIndex = 0;
+    slider.style.transform = `translateX(-${currentIndex * (thumbWidth + gap)}px)`;
+  });
 
-    slider.style.width = `${(slideStep * thumbItems.length) - gap}px`;
-    slider.style.display = 'flex';
-    slider.style.gap = `${gap}px`;
-    slider.style.transition = 'transform 0.3s ease';
+  /* ==========================
+    色選択 → メイン画像切替 + サムネ自動スクロール
+  ========================== */
+  const productVariants = {{ product.variants | json }};
+  const variantIdInput = document.getElementById('variant-id');
+  const buyNowInput = document.getElementById('buy-now-variant-id');
 
-    function slide(direction) {
-      if (direction === 'left') {
-        currentIndex--;
-        if (currentIndex < 0) {
-          currentIndex = thumbItems.length - visibleCount;
-        }
-      } else if (direction === 'right') {
-        currentIndex++;
-        if (currentIndex > thumbItems.length - visibleCount) {
-          currentIndex = 0;
-        }
-      }
-      slider.style.transform = `translateX(-${currentIndex * slideStep}px)`;
+  let selectedColor = document.querySelector('.pro-cont__colorArea input[type="radio"]:checked')?.value || '';
+  let selectedSize  = document.querySelector('#ProductSelect-Size')?.value || '';
+
+  function updateVariantId(){
+    const match = productVariants.find(v=> v.option1===selectedColor && v.option2===selectedSize);
+    if(match){
+      variantIdInput.value = match.id;
+      if(buyNowInput) buyNowInput.value = match.id;
     }
-
-    const leftBtn = wrapper.querySelector('.slider-left-btn');
-    const rightBtn = wrapper.querySelector('.slider-right-btn');
-
-    if (leftBtn) leftBtn.addEventListener('click', () => slide('left'));
-    if (rightBtn) rightBtn.addEventListener('click', () => slide('right'));
-
-    window.addEventListener('resize', () => {
-      calcVisibleCount();
-      if (currentIndex > thumbItems.length - visibleCount) {
-        currentIndex = thumbItems.length - visibleCount;
-        if (currentIndex < 0) currentIndex = 0;
-      }
-      slider.style.transform = `translateX(-${currentIndex * slideStep}px)`;
-    });
   }
 
-  /* ==========================
-    ③ アコーディオン
-  ========================== */
-  const triggers = document.querySelectorAll('.js-accordion-trigger');
-  triggers.forEach(trigger => {
-    const content = trigger.nextElementSibling;
-    trigger.addEventListener('click', function () {
-      const isOpen = trigger.classList.contains('is-open');
-      if (isOpen) {
-        trigger.classList.remove('is-open');
-        content.style.maxHeight = null;
-      } else {
-        trigger.classList.add('is-open');
-        content.style.maxHeight = content.scrollHeight + 'px';
+  // バリアント画像マップ作成
+  const variantImages = {};
+  productVariants.forEach(v=>{
+    if(v.option1 && v.featured_image?.src){
+      variantImages[v.option1] = v.featured_image.src.replace(/width=\d+/, 'width=540');
+    }
+  });
+
+  const colorInputs = document.querySelectorAll('.pro-cont__colorArea input[type="radio"]');
+
+  function scrollThumbToImage(src){
+    const thumbItems = Array.from(slider.children);
+    const index = thumbItems.findIndex(li=>{
+      const img = li.querySelector('img');
+      return img && normalize(img.src) === normalize(src);
+    });
+    if(index >= 0) slideTo(index);
+  }
+
+  colorInputs.forEach(input=>{
+    input.addEventListener('change', ()=>{
+      selectedColor = input.value;
+      updateVariantId();
+
+      const newImage = variantImages[selectedColor];
+      if(newImage){
+        mainImage.src = newImage;
+        mainImage.dataset.featuredSrc = newImage;
+        clickedSrc = newImage;
+        scrollThumbToImage(newImage);
       }
+
+      const displayArea = document.getElementById('selected-color-name');
+      if(displayArea) displayArea.textContent = input.value;
     });
   });
 
-  /* ==========================
-    ④ 最近見た商品（localStorage）
-  ========================== */
-  const handle = '{{ product.handle }}';
-  let viewed = JSON.parse(localStorage.getItem('recently_viewed')) || [];
-  viewed = viewed.filter(item => item !== handle);
-  viewed.unshift(handle);
-  viewed = viewed.slice(0, 4);
-  localStorage.setItem('recently_viewed', JSON.stringify(viewed));
-  console.log('保存したrecently_viewed:', viewed);
-
-  /* ==========================
-    ⑤ バリアントID更新（色＋サイズ連動＋今すぐ購入対応）
-  ========================== */
-const productVariants = {{ product.variants | json }};
-const variantIdInput = document.getElementById('variant-id'); // カート用
-const buyNowInput = document.getElementById('buy-now-variant-id'); // 今すぐ購入用
-
-let selectedColor = document.querySelector('.pro-cont__colorArea input[type="radio"]:checked')?.value || '';
-let selectedSize  = document.querySelector('#ProductSelect-Size')?.value || '';
-
-function updateVariantId() {
-  const match = productVariants.find(v =>
-    v.option1 === selectedColor && v.option2 === selectedSize
-  );
-  if (match) {
-    variantIdInput.value = match.id; // カート
-    if (buyNowInput) buyNowInput.value = match.id; // 今すぐ購入
-    console.log("Variant updated:", match.id);
-  } else {
-    console.warn("該当するバリアントが見つかりません");
+  // 初期表示
+  const checkedInput = document.querySelector('.pro-cont__colorArea input[type="radio"]:checked');
+  if(checkedInput){
+    const initialImage = variantImages[checkedInput.value];
+    if(initialImage){
+      mainImage.src = initialImage;
+      mainImage.dataset.featuredSrc = initialImage;
+      clickedSrc = initialImage;
+      scrollThumbToImage(initialImage);
+    }
   }
-}
 
-/* ---- 色選択ラジオ ---- */
-document.querySelectorAll('.pro-cont__colorArea input[type="radio"]').forEach(input => {
-  input.addEventListener('change', () => {
-    selectedColor = input.value;
-    updateVariantId();
-  });
-});
-
-/* ---- サイズ選択：セレクト（旧） ---- */
-const sizeSelect = document.querySelector('#ProductSelect-Size');
-if (sizeSelect) {
-  sizeSelect.addEventListener('change', () => {
+  /* ==========================
+    サイズ選択
+  ========================== */
+  const sizeSelect = document.querySelector('#ProductSelect-Size');
+  if(sizeSelect) sizeSelect.addEventListener('change', ()=>{
     selectedSize = sizeSelect.value;
     updateVariantId();
   });
-}
 
-/* ---- サイズ選択：ボタンUI（新） ---- */
-const sizeButtons = document.querySelectorAll('.pro-sizeBtn');
-if (sizeButtons.length > 0) {
-  sizeButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      // すべてのボタンから is-active を外す
-      sizeButtons.forEach(b => b.classList.remove('is-active'));
-      // クリックされたボタンに付与
-      btn.classList.add('is-active');
-
-      // hidden input に反映
-      selectedSize = btn.dataset.value;
-      document.getElementById('ProductSelect-Size').value = selectedSize;
-
-      // バリアント更新
-      updateVariantId();
+  const sizeButtons = document.querySelectorAll('.pro-sizeBtn');
+  if(sizeButtons.length>0){
+    sizeButtons.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        sizeButtons.forEach(b=>b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        selectedSize = btn.dataset.value;
+        document.getElementById('ProductSelect-Size').value = selectedSize;
+        updateVariantId();
+      });
     });
-  });
-}
+  }
 
   /* ==========================
-    ⑥ 今すぐ購入ボタン押下でフォーム送信
+    今すぐ購入
   ========================== */
   const buyNowBtn = document.querySelector('.c-btn__byNow');
   const buyNowForm = document.getElementById('buy-now-form');
-
-  if (buyNowBtn && buyNowForm) {
-    buyNowBtn.addEventListener('click', () => {
-      buyNowForm.submit();
-    });
-  }
+  if(buyNowBtn && buyNowForm) buyNowBtn.addEventListener('click', ()=>buyNowForm.submit());
 });
 </script>
+
+
 
 {% schema %}
 {
