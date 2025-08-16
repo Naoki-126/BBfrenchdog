@@ -25,7 +25,8 @@
         "subTitle": "​『最高に優しい。美しい。愛犬との繋がり方』",
         "image": "shopify://shop_images/top-bonnel.png",
         "text": "飼い主も愛犬も、もっと自由に、もっと快適に。<br>\n                B&BFRENCHのヌケないハーネスは、「上質」「使いやすさ」「安心感」、そして――<br>\n                “最高の優しさと美しさ” をもたらす、新しいハーネス体験です。<br>\n                美しい光沢と柔らかな手触りを持つ綾袋織ボンネルテープを採用。その質感は、飼い主の手にも、愛犬の体にも優しく寄り添います。さらに、高級車の内装にも使われる「Ultrasuede®」を裏地全面に贅沢に使用。<br>\n                肌触りは格別で、愛犬の皮膚や被毛にもやさしく、クセになる心地よさをご体験ください。<br>\n                見て感じて使って喜べるB&Bqualityを愛犬とあなたへ。",
-        "button": "詳しく見る"
+        "button": "詳しく見る",
+        "button_link": "shopify://collections/all"
       }
     },
     "top_recommend_MiGqFf": {
@@ -36,50 +37,6 @@
         "title": "お勧め",
         "subTitle": "新着商品",
         "button": "新着商品を全てみる"
-      }
-    },
-    "top_sns_rKHjUa": {
-      "type": "top-sns",
-      "blocks": {
-        "image_link_rXMpWV": {
-          "type": "image_link",
-          "settings": {
-            "image": "shopify://shop_images/insta-img1.png",
-            "link": "https://www.instagram.com/?locale=ja_JP"
-          }
-        },
-        "image_link_9b4jVw": {
-          "type": "image_link",
-          "settings": {
-            "image": "shopify://shop_images/insta-img2.png",
-            "link": ""
-          }
-        },
-        "image_link_JWF7rE": {
-          "type": "image_link",
-          "settings": {
-            "image": "shopify://shop_images/insta-img3.png",
-            "link": ""
-          }
-        },
-        "image_link_q4j6Pa": {
-          "type": "image_link",
-          "settings": {
-            "image": "shopify://shop_images/insta-img4.png",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "image_link_rXMpWV",
-        "image_link_9b4jVw",
-        "image_link_JWF7rE",
-        "image_link_q4j6Pa"
-      ],
-      "name": "Instagramギャラリー",
-      "settings": {
-        "title": "Instagram",
-        "sub_title": "インスタグラム"
       }
     },
     "top_category_ttHNr9": {
@@ -132,6 +89,50 @@
       "settings": {
         "title": "Category",
         "subTitle": "カテゴリーから探す"
+      }
+    },
+    "top_sns_rKHjUa": {
+      "type": "top-sns",
+      "blocks": {
+        "image_link_rXMpWV": {
+          "type": "image_link",
+          "settings": {
+            "image": "shopify://shop_images/insta-img1.png",
+            "link": "https://www.instagram.com/?locale=ja_JP"
+          }
+        },
+        "image_link_9b4jVw": {
+          "type": "image_link",
+          "settings": {
+            "image": "shopify://shop_images/insta-img2.png",
+            "link": ""
+          }
+        },
+        "image_link_JWF7rE": {
+          "type": "image_link",
+          "settings": {
+            "image": "shopify://shop_images/insta-img3.png",
+            "link": ""
+          }
+        },
+        "image_link_q4j6Pa": {
+          "type": "image_link",
+          "settings": {
+            "image": "shopify://shop_images/insta-img4.png",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_link_rXMpWV",
+        "image_link_9b4jVw",
+        "image_link_JWF7rE",
+        "image_link_q4j6Pa"
+      ],
+      "name": "Instagramギャラリー",
+      "settings": {
+        "title": "Instagram",
+        "sub_title": "インスタグラム"
       }
     }
   },

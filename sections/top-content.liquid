@@ -19,8 +19,8 @@
         </div>
       </div>
       <div class="top-fv__btnArea">
-        {% if section.settings.button != blank%}
-          <a href="{{ collection.url }}" class="c-btn">{{ section.settings.button }}</a>
+        {% if section.settings.button != blank and section.settings.button_link != blank %}
+          <a href="{{ section.settings.button_link }}" class="c-btn">{{ section.settings.button }}</a>
         {% endif %}
       </div>
     </div>
@@ -61,6 +61,11 @@
       "id":"button",
       "label": "ボタンのテキスト"
     },
+    {
+    "type": "url",
+    "id": "button_link",
+    "label": "ボタンリンク先"
+  }
   ],
   "presets": [
     {
