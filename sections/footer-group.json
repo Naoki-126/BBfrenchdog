@@ -46,7 +46,14 @@
           "type": "page_link",
           "settings": {
             "link_title": "お知らせ",
-            "link_url": ""
+            "link_url": "shopify://blogs/news"
+          }
+        },
+        "page_link_VntMnf": {
+          "type": "page_link",
+          "settings": {
+            "link_title": "ブログ",
+            "link_url": "shopify://blogs/blog"
           }
         },
         "page_link_irgFJk": {
@@ -161,6 +168,7 @@
         "sns_icon_aN8gCa",
         "page_link_txwgAw",
         "page_link_AyNTKf",
+        "page_link_VntMnf",
         "page_link_irgFJk",
         "item_zTBdce",
         "item_7Hk6Jw",

@@ -309,6 +309,40 @@ body {
 	line-height: 1.5;
 }
 
+/* お知らせ_ブログページ
+=========================== */
+.custom-article-card .card__heading,
+.custom-article-card .article-card__info,
+.custom-article-card .custom-excerpt {
+	width: 100%;
+	max-width: 992px;
+	box-sizing: border-box;
+	margin: 0;
+	text-align: left;
+}
+
+.custom-article-card .custom-excerpt {
+	margin-top: 8px;
+}
+
+.custom-article-card .custom-readmore  {
+	text-align: left;
+}
+
+.custom-article-card .custom-readmore a {
+  color: #007acc;
+  text-decoration: underline;
+  display: inline-block;
+}
+
+.article-card__readmore a {
+	text-align: left;
+  color: #007acc;
+  text-decoration: underline;
+}
+
+
+
 /* 商品コンポーネント
 =========================== */
 .product-img {
