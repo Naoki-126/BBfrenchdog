@@ -1396,6 +1396,12 @@ body {
 	font-weight: 700;
 }
 
+.pro-sizeBtn.is-disabled {
+  opacity: 0.5;          /* 半透明でグレーアウト */
+  cursor: not-allowed;   /* 禁止カーソル */
+  pointer-events: none;  /* クリック無効化 */
+}
+
 .pro-cont__wrap {
 	margin-top: 16px;
 	width: 100%;

@@ -182,9 +182,11 @@
                               <button
                                 type="button"
                                 class="pro-sizeBtn{% if is_selected %} is-active{% endif %}"
+                                data-option-index="{{ option_index }}"
                                 data-value="{{ value | escape }}">
                                 {{ value }}
                               </button>
+
                             {% endfor %}
                           {% endif %}
                         {% endfor %}
@@ -1022,11 +1024,19 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /* ==========================
+    フォーマット関数（円表示）
+  ========================== */
+  function formatMoney(cents) {
+    if (!cents) return '';
+    // 「￥」なし、円だけ表示
+    return new Intl.NumberFormat('ja-JP', { style: 'decimal', minimumFractionDigits: 0 }).format(cents/100);
+  }
+
+  /* ==========================
     メイン画像切替（ホバー/クリック）
   ========================== */
   function setupThumbnails(){
     const thumbnails = document.querySelectorAll('.pro-img__thumbnail');
-
     thumbnails.forEach((thumb) => {
       const newSrc = thumb.src.replace(/width=\d+/, 'width=540');
       const preloadImage = new Image();
@@ -1097,7 +1107,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if(targetLi) targetLi.scrollIntoView({behavior:'smooth', inline:'center'});
     } else {
       if(index < 0) index = 0;
-      if(index > thumbItems.length - visibleCount) index = thumbItems.length - visibleCount;
+      if(index > slider.children.length - visibleCount) index = slider.children.length - visibleCount;
       currentIndex = index;
       slider.style.transform = `translateX(-${currentIndex * (thumbWidth + gap)}px)`;
     }
@@ -1121,16 +1131,32 @@ document.addEventListener('DOMContentLoaded', function () {
   const productVariants = {{ product.variants | json }};
   const variantIdInput = document.getElementById('variant-id');
   const buyNowInput = document.getElementById('buy-now-variant-id');
+  const priceContainer = document.querySelector('#price-{{ section.id }}');
 
   let selectedColor = document.querySelector('.pro-cont__colorArea input[type="radio"]:checked')?.value || '';
   let selectedSize  = document.querySelector('#ProductSelect-Size')?.value || '';
 
+  function updatePriceAndVariant(variant){
+    if(variant) {
+      if(variantIdInput) variantIdInput.value = variant.id;
+      if(buyNowInput) buyNowInput.value = variant.id;
+
+      if(priceContainer){
+        // 現行価格
+        let currentPriceHTML = '<span class="pro-emphasis">' + formatMoney(variant.price) + '</span><span class="pro-price-suffix">円（税込）</span>';
+        // 割引前価格
+        let oldPriceHTML = '';
+        if(variant.compare_at_price && variant.compare_at_price > variant.price){
+          oldPriceHTML = '<span class="pro-old-price">' + formatMoney(variant.compare_at_price) + '</span>';
+        }
+        priceContainer.innerHTML = currentPriceHTML + oldPriceHTML;
+      }
+    }
+  }
+
   function updateVariantId(){
     const match = productVariants.find(v=> v.option1===selectedColor && v.option2===selectedSize);
-    if(match){
-      variantIdInput.value = match.id;
-      if(buyNowInput) buyNowInput.value = match.id;
-    }
+    updatePriceAndVariant(match);
   }
 
   // バリアント画像マップ作成
@@ -1194,6 +1220,12 @@ document.addEventListener('DOMContentLoaded', function () {
   const sizeButtons = document.querySelectorAll('.pro-sizeBtn');
   if(sizeButtons.length>0){
     sizeButtons.forEach(btn=>{
+      const variantForSize = productVariants.find(v => v.option2 === btn.dataset.value && v.option1 === selectedColor);
+      if(!variantForSize || !variantForSize.available){
+        btn.classList.add('is-disabled');
+        btn.disabled = true;
+        return;
+      }
       btn.addEventListener('click', ()=>{
         sizeButtons.forEach(b=>b.classList.remove('is-active'));
         btn.classList.add('is-active');
@@ -1212,7 +1244,6 @@ document.addEventListener('DOMContentLoaded', function () {
   if(buyNowBtn && buyNowForm) buyNowBtn.addEventListener('click', ()=>buyNowForm.submit());
 });
 </script>
-
 
 
 {% schema %}
