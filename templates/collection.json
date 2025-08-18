@@ -45,6 +45,14 @@
             "title": "フード"
           }
         },
+        "custom_link_tEr3gw": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "",
+            "collection": "floor",
+            "title": "滑らない床"
+          }
+        },
         "custom_link_UeybeK": {
           "type": "custom_link",
           "settings": {
@@ -64,6 +72,7 @@
         "custom_link_azDBJi",
         "custom_link_fD4zfm",
         "custom_link_GwLfrV",
+        "custom_link_tEr3gw",
         "custom_link_UeybeK",
         "category_group_rAbVFK"
       ],

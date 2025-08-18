@@ -243,12 +243,15 @@
                     <dd class="pro-detail__dd">{{ custom.color.value }}</dd>
                   </dl>
                 {% endif %}
-                {% if product.variants.first.sku != blank %}
+                {% if product.selected_or_first_available_variant.sku != blank %}
                   <dl class="pro-detail__dl">
                     <dt class="pro-detail__dt">品番</dt>
-                    <dd class="pro-detail__dd">{{ product.variants.first.sku }}</dd>
+                    <dd class="pro-detail__dd" id="js-sku">
+                      {{ product.selected_or_first_available_variant.sku }}
+                    </dd>
                   </dl>
                 {% endif %}
+
                 </div>
                 {% for block in section.blocks %}
                   {% if block.type == 'content-note' %}
@@ -1028,7 +1031,6 @@ document.addEventListener('DOMContentLoaded', function () {
   ========================== */
   function formatMoney(cents) {
     if (!cents) return '';
-    // 「￥」なし、円だけ表示
     return new Intl.NumberFormat('ja-JP', { style: 'decimal', minimumFractionDigits: 0 }).format(cents/100);
   }
 
@@ -1132,6 +1134,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const variantIdInput = document.getElementById('variant-id');
   const buyNowInput = document.getElementById('buy-now-variant-id');
   const priceContainer = document.querySelector('#price-{{ section.id }}');
+  const skuElement = document.getElementById('js-sku'); // SKU表示エリア
 
   let selectedColor = document.querySelector('.pro-cont__colorArea input[type="radio"]:checked')?.value || '';
   let selectedSize  = document.querySelector('#ProductSelect-Size')?.value || '';
@@ -1141,15 +1144,19 @@ document.addEventListener('DOMContentLoaded', function () {
       if(variantIdInput) variantIdInput.value = variant.id;
       if(buyNowInput) buyNowInput.value = variant.id;
 
+      // 価格更新
       if(priceContainer){
-        // 現行価格
         let currentPriceHTML = '<span class="pro-emphasis">' + formatMoney(variant.price) + '</span><span class="pro-price-suffix">円（税込）</span>';
-        // 割引前価格
         let oldPriceHTML = '';
         if(variant.compare_at_price && variant.compare_at_price > variant.price){
           oldPriceHTML = '<span class="pro-old-price">' + formatMoney(variant.compare_at_price) + '</span>';
         }
         priceContainer.innerHTML = currentPriceHTML + oldPriceHTML;
+      }
+
+      // SKU更新
+      if(skuElement){
+        skuElement.textContent = variant.sku || '';
       }
     }
   }
@@ -1207,6 +1214,7 @@ document.addEventListener('DOMContentLoaded', function () {
       scrollThumbToImage(initialImage);
     }
   }
+  updateVariantId(); // ページロード時にSKUと価格を初期化
 
   /* ==========================
     サイズ選択
