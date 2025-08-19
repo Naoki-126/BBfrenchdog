@@ -246,12 +246,9 @@
                 {% if product.selected_or_first_available_variant.sku != blank %}
                   <dl class="pro-detail__dl">
                     <dt class="pro-detail__dt">品番</dt>
-                    <dd class="pro-detail__dd" id="js-sku">
-                      {{ product.selected_or_first_available_variant.sku }}
-                    </dd>
+                    <dd class="pro-detail__dd" id="js-sku" >{{ product.selected_or_first_available_variant.sku }}</dd>
                   </dl>
                 {% endif %}
-
                 </div>
                 {% for block in section.blocks %}
                   {% if block.type == 'content-note' %}
@@ -1019,70 +1016,63 @@
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   const mainImage = document.getElementById('mainImage');
-  const featuredSrc = mainImage.getAttribute('data-featured-src') || mainImage.src;
-  let clickedSrc = featuredSrc;
+  let clickedSrc = mainImage?.dataset.featuredSrc || mainImage?.src || '';
 
-  function normalize(url) {
-    return url.split('?')[0];
-  }
-
-  /* ==========================
-    フォーマット関数（円表示）
-  ========================== */
+  function normalize(url) { return (url || '').split('?')[0]; }
   function formatMoney(cents) {
-    if (!cents) return '';
+    if (cents == null) return '';
     return new Intl.NumberFormat('ja-JP', { style: 'decimal', minimumFractionDigits: 0 }).format(cents/100);
   }
 
-  /* ==========================
-    メイン画像切替（ホバー/クリック）
-  ========================== */
+  // ==========================
+  // サムネイル切替
+  // ==========================
   function setupThumbnails(){
     const thumbnails = document.querySelectorAll('.pro-img__thumbnail');
-    thumbnails.forEach((thumb) => {
-      const newSrc = thumb.src.replace(/width=\d+/, 'width=540');
+    const swapImage = (src)=>{
+      if(!mainImage) return;
+      mainImage.classList.add('fade-out');
+      setTimeout(()=>{
+        mainImage.src = src;
+        mainImage.classList.remove('fade-out');
+      },200);
+    };
+    thumbnails.forEach(thumb=>{
+      const newSrc = (thumb.src || '').replace(/width=\d+/, 'width=540');
       const preloadImage = new Image();
       preloadImage.src = newSrc;
 
-      thumb.addEventListener('mouseover', () => {
-        if (normalize(mainImage.src) !== normalize(newSrc)) {
+      thumb.addEventListener('mouseover', ()=>{
+        if (!mainImage) return;
+        if (normalize(mainImage.src) !== normalize(newSrc)){
           if(preloadImage.complete) swapImage(newSrc);
-          else preloadImage.onload = () => swapImage(newSrc);
+          else preloadImage.onload = ()=>swapImage(newSrc);
         }
       });
-
-      thumb.addEventListener('mouseout', () => {
+      thumb.addEventListener('mouseout', ()=>{
+        if(!mainImage) return;
         if(normalize(mainImage.src) !== normalize(clickedSrc)){
           const revertImage = new Image();
           revertImage.src = clickedSrc;
           if(revertImage.complete) swapImage(clickedSrc);
-          else revertImage.onload = () => swapImage(clickedSrc);
+          else revertImage.onload = ()=>swapImage(clickedSrc);
         }
       });
-
-      thumb.addEventListener('click', () => {
+      thumb.addEventListener('click', ()=>{
         clickedSrc = newSrc;
+        if(!mainImage) return;
         if(normalize(mainImage.src) !== normalize(clickedSrc)){
           if(preloadImage.complete) swapImage(clickedSrc);
-          else preloadImage.onload = () => swapImage(clickedSrc);
+          else preloadImage.onload = ()=>swapImage(clickedSrc);
         }
       });
     });
   }
-
-  function swapImage(src){
-    mainImage.classList.add('fade-out');
-    setTimeout(() => {
-      mainImage.src = src;
-      mainImage.classList.remove('fade-out');
-    }, 200);
-  }
-
   setupThumbnails();
 
-  /* ==========================
-    サムネイルスライダー（PC/スマホ）
-  ========================== */
+  // ==========================
+  // サムネイルスライダー
+  // ==========================
   const slider = document.getElementById('thumbSlider');
   const wrapper = slider?.parentElement;
   const thumbWidth = 71;
@@ -1091,7 +1081,7 @@ document.addEventListener('DOMContentLoaded', function () {
   let currentIndex = 0;
 
   function calcVisibleCount(){
-    if(!wrapper) return;
+    if(!wrapper || !slider) return;
     const wrapperStyle = window.getComputedStyle(wrapper);
     const paddingLeft = parseFloat(wrapperStyle.paddingLeft) || 0;
     const paddingRight = parseFloat(wrapperStyle.paddingRight) || 0;
@@ -1100,9 +1090,8 @@ document.addEventListener('DOMContentLoaded', function () {
     if(visibleCount > slider.children.length) visibleCount = slider.children.length;
   }
 
-  calcVisibleCount();
-
   function slideTo(index){
+    if(!slider) return;
     const thumbItems = Array.from(slider.children);
     if(window.innerWidth <= 768){
       const targetLi = thumbItems[index];
@@ -1111,62 +1100,56 @@ document.addEventListener('DOMContentLoaded', function () {
       if(index < 0) index = 0;
       if(index > slider.children.length - visibleCount) index = slider.children.length - visibleCount;
       currentIndex = index;
-      slider.style.transform = `translateX(-${currentIndex * (thumbWidth + gap)}px)`;
+      slider.style.transform = `translateX(-${currentIndex*(thumbWidth+gap)}px)`;
     }
   }
 
+  calcVisibleCount();
   const leftBtn = wrapper?.querySelector('.slider-left-btn');
   const rightBtn = wrapper?.querySelector('.slider-right-btn');
   leftBtn?.addEventListener('click', ()=>slideTo(currentIndex-1));
   rightBtn?.addEventListener('click', ()=>slideTo(currentIndex+1));
-
   window.addEventListener('resize', ()=>{
+    if(!slider) return;
     calcVisibleCount();
     if(currentIndex > slider.children.length - visibleCount) currentIndex = slider.children.length - visibleCount;
     if(currentIndex < 0) currentIndex = 0;
-    slider.style.transform = `translateX(-${currentIndex * (thumbWidth + gap)}px)`;
+    slider.style.transform = `translateX(-${currentIndex*(thumbWidth+gap)}px)`;
   });
 
-  /* ==========================
-    色選択 → メイン画像切替 + サムネ自動スクロール
-  ========================== */
+  function scrollThumbToImage(src){
+    if(!slider) return;
+    const thumbItems = Array.from(slider.children);
+    const index = thumbItems.findIndex(li=>{
+      const img = li.querySelector('img');
+      return img && normalize(img.src) === normalize(src);
+    });
+    if(index>=0) slideTo(index);
+  }
+
+  // ==========================
+  // バリアント・価格・SKU
+  // ==========================
   const productVariants = {{ product.variants | json }};
+  const productOptions  = {{ product.options_with_values | json }};
+
   const variantIdInput = document.getElementById('variant-id');
   const buyNowInput = document.getElementById('buy-now-variant-id');
   const priceContainer = document.querySelector('#price-{{ section.id }}');
-  const skuElement = document.getElementById('js-sku'); // SKU表示エリア
+  const skuElement = document.getElementById('js-sku');
+  const qtyInput = document.getElementById('Quantity-{{ section.id }}');
 
   let selectedColor = document.querySelector('.pro-cont__colorArea input[type="radio"]:checked')?.value || '';
   let selectedSize  = document.querySelector('#ProductSelect-Size')?.value || '';
+  let currentVariant = null;
 
-  function updatePriceAndVariant(variant){
-    if(variant) {
-      if(variantIdInput) variantIdInput.value = variant.id;
-      if(buyNowInput) buyNowInput.value = variant.id;
+  // ==== Color / Size の位置を判定 ====
+  const colorOption = productOptions.find(o => o.name.toLowerCase() === 'color');
+  const sizeOption  = productOptions.find(o => o.name.toLowerCase() === 'size');
+  const colorPosition = colorOption?.position; // 1 or 2
+  const sizePosition  = sizeOption?.position;  // 1 or 2
 
-      // 価格更新
-      if(priceContainer){
-        let currentPriceHTML = '<span class="pro-emphasis">' + formatMoney(variant.price) + '</span><span class="pro-price-suffix">円（税込）</span>';
-        let oldPriceHTML = '';
-        if(variant.compare_at_price && variant.compare_at_price > variant.price){
-          oldPriceHTML = '<span class="pro-old-price">' + formatMoney(variant.compare_at_price) + '</span>';
-        }
-        priceContainer.innerHTML = currentPriceHTML + oldPriceHTML;
-      }
-
-      // SKU更新
-      if(skuElement){
-        skuElement.textContent = variant.sku || '';
-      }
-    }
-  }
-
-  function updateVariantId(){
-    const match = productVariants.find(v=> v.option1===selectedColor && v.option2===selectedSize);
-    updatePriceAndVariant(match);
-  }
-
-  // バリアント画像マップ作成
+  // バリアント画像用マップ
   const variantImages = {};
   productVariants.forEach(v=>{
     if(v.option1 && v.featured_image?.src){
@@ -1174,84 +1157,176 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  const colorInputs = document.querySelectorAll('.pro-cont__colorArea input[type="radio"]');
-
-  function scrollThumbToImage(src){
-    const thumbItems = Array.from(slider.children);
-    const index = thumbItems.findIndex(li=>{
-      const img = li.querySelector('img');
-      return img && normalize(img.src) === normalize(src);
-    });
-    if(index >= 0) slideTo(index);
-  }
-
-  colorInputs.forEach(input=>{
-    input.addEventListener('change', ()=>{
-      selectedColor = input.value;
-      updateVariantId();
-
-      const newImage = variantImages[selectedColor];
-      if(newImage){
-        mainImage.src = newImage;
-        mainImage.dataset.featuredSrc = newImage;
-        clickedSrc = newImage;
-        scrollThumbToImage(newImage);
-      }
-
-      const displayArea = document.getElementById('selected-color-name');
-      if(displayArea) displayArea.textContent = input.value;
-    });
-  });
-
-  // 初期表示
-  const checkedInput = document.querySelector('.pro-cont__colorArea input[type="radio"]:checked');
-  if(checkedInput){
-    const initialImage = variantImages[checkedInput.value];
-    if(initialImage){
-      mainImage.src = initialImage;
-      mainImage.dataset.featuredSrc = initialImage;
-      clickedSrc = initialImage;
-      scrollThumbToImage(initialImage);
+  function updateTotalPrice(variant){
+    if(!variant || !priceContainer) return;
+    const qty = Math.max(1, parseInt(qtyInput?.value||1,10));
+    const total = (variant.price||0)*qty;
+    let html = '<span class="pro-emphasis">'+formatMoney(total)+'</span><span class="pro-price-suffix">円（税込）</span>';
+    if(variant.compare_at_price && variant.compare_at_price>variant.price){
+      html += '<span class="pro-old-price">'+formatMoney(variant.compare_at_price*qty)+'円</span>';
     }
+    priceContainer.innerHTML = html;
   }
-  updateVariantId(); // ページロード時にSKUと価格を初期化
 
-  /* ==========================
-    サイズ選択
-  ========================== */
-  const sizeSelect = document.querySelector('#ProductSelect-Size');
-  if(sizeSelect) sizeSelect.addEventListener('change', ()=>{
-    selectedSize = sizeSelect.value;
-    updateVariantId();
+  function getMatchingVariant(){
+    let match = productVariants.find(v=>{
+      const colorMatch = !colorPosition || v[`option${colorPosition}`] === selectedColor;
+      const sizeMatch  = !sizePosition  || v[`option${sizePosition}`] === selectedSize;
+      return colorMatch && sizeMatch && v.available;
+    });
+    if(!match) match = productVariants.find(v=>v.available) || productVariants[0];
+    return match;
+  }
+
+  let initialized = false; // 初期化フラグ
+
+  function updatePriceAndVariant(variant){
+    if(!variant) return;
+    currentVariant = variant;
+    if(variantIdInput) variantIdInput.value = variant.id;
+    if(buyNowInput) buyNowInput.value = variant.id;
+    if(skuElement) skuElement.textContent = variant.sku||'';
+    updateTotalPrice(variant);
+
+    // 初回だけ setActive = true
+    updateSizeButtonsState(!initialized);
+    initialized = true;
+  }
+
+
+  function updateVariantId(){
+    const variant = getMatchingVariant();
+    updatePriceAndVariant(variant);
+  }
+
+  // ==========================
+// サイズボタン処理
+// ==========================
+const sizeSelect = document.querySelector('#ProductSelect-Size');
+const sizeButtons = document.querySelectorAll('.pro-sizeBtn');
+
+// 初期化: クリックイベントを一度だけ設定
+sizeButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (btn.disabled) return;
+
+    // 既存の is-active をリセット
+    sizeButtons.forEach(b => b.classList.remove('is-active'));
+
+    // クリックしたボタンに is-active を付与
+    btn.classList.add('is-active');
+    selectedSize = btn.dataset.value;
+
+    if (sizeSelect) sizeSelect.value = selectedSize;
+
+    updateVariantId(); // バリアント更新（価格やSKU切り替え）
+  });
+});
+
+// ボタンの有効/無効更新（is-activeは初期表示時または色変更時）
+function updateSizeButtonsState(setActive = false) {
+  if (!sizeButtons.length) return;
+
+  let activeSet = false;
+
+  sizeButtons.forEach(btn => {
+    const sizeValue = btn.dataset.value;
+
+    // 選択中の色で利用可能なバリアントがあるか判定
+    const availableVariant = productVariants.find(v => {
+      const colorMatch = !colorPosition || v[`option${colorPosition}`] === selectedColor;
+      const sizeMatch  = !sizePosition  || v[`option${sizePosition}`] === sizeValue;
+      return colorMatch && sizeMatch && v.available;
+    });
+
+    const isAvailable = !!availableVariant;
+
+    btn.disabled = !isAvailable;
+    btn.classList.toggle('is-disabled', !isAvailable);
+
+    // 初期表示や色変更時に最初の有効サイズをアクティブに
+    if (setActive && isAvailable && !activeSet) {
+      sizeButtons.forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      selectedSize = sizeValue;
+      if (sizeSelect) sizeSelect.value = selectedSize;
+      activeSet = true;
+    }
   });
 
-  const sizeButtons = document.querySelectorAll('.pro-sizeBtn');
-  if(sizeButtons.length>0){
-    sizeButtons.forEach(btn=>{
-      const variantForSize = productVariants.find(v => v.option2 === btn.dataset.value && v.option1 === selectedColor);
-      if(!variantForSize || !variantForSize.available){
-        btn.classList.add('is-disabled');
-        btn.disabled = true;
-        return;
-      }
-      btn.addEventListener('click', ()=>{
-        sizeButtons.forEach(b=>b.classList.remove('is-active'));
-        btn.classList.add('is-active');
-        selectedSize = btn.dataset.value;
-        document.getElementById('ProductSelect-Size').value = selectedSize;
+  // 全て無効の場合は selectedSize をクリア
+  if (!activeSet) {
+    selectedSize = null;
+    if (sizeSelect) sizeSelect.value = '';
+  }
+}
+
+
+  // ==========================
+  // 色選択
+  // ==========================
+    const colorInputs = document.querySelectorAll('.pro-cont__colorArea input[type="radio"]');
+    colorInputs.forEach(input=>{
+      input.addEventListener('change', ()=>{
+        selectedColor = input.value;
+
+        // バリアント更新（価格・SKU・数量も含む）
         updateVariantId();
+
+        // 🔹 ここを追加：色に応じてサイズボタンの状態を更新
+        updateSizeButtonsState(true);
+
+        // 画像の切り替え
+        const newImage = variantImages[selectedColor];
+        if(newImage && mainImage){
+          mainImage.src=newImage;
+          mainImage.dataset.featuredSrc=newImage;
+          clickedSrc=newImage;
+          scrollThumbToImage(newImage);
+        }
       });
     });
-  }
 
-  /* ==========================
-    今すぐ購入
-  ========================== */
+    // 初期画像の設定
+    const checkedInput = document.querySelector('.pro-cont__colorArea input[type="radio"]:checked');
+    if(checkedInput){
+      const initialImage = variantImages[checkedInput.value];
+      if(initialImage && mainImage){
+        mainImage.src = initialImage;
+        mainImage.dataset.featuredSrc = initialImage;
+        clickedSrc = initialImage;
+        scrollThumbToImage(initialImage);
+      }
+    }
+
+  // ==========================
+  // 数量
+  // ==========================
+  if(qtyInput){
+    qtyInput.addEventListener('input', ()=>updateTotalPrice(currentVariant));
+    qtyInput.addEventListener('change', ()=>updateTotalPrice(currentVariant));
+  }
+  const qtyWrapper = document.querySelector('quantity-input.quantity');
+  const minusBtn = qtyWrapper?.querySelector('button[name="minus"]');
+  const plusBtn = qtyWrapper?.querySelector('button[name="plus"]');
+  const afterQtyButton = ()=>setTimeout(()=>updateTotalPrice(currentVariant),0);
+  minusBtn?.addEventListener('click', afterQtyButton);
+  plusBtn?.addEventListener('click', afterQtyButton);
+
+  // ==========================
+  // 今すぐ購入
+  // ==========================
   const buyNowBtn = document.querySelector('.c-btn__byNow');
   const buyNowForm = document.getElementById('buy-now-form');
   if(buyNowBtn && buyNowForm) buyNowBtn.addEventListener('click', ()=>buyNowForm.submit());
+
+  // ==========================
+  // 初期表示
+  // ==========================
+  updateVariantId();
 });
 </script>
+
 
 
 {% schema %}

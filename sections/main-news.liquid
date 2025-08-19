@@ -16,14 +16,14 @@
   }
 {%- endstyle -%}
 
-<div class="main-blog page-width section-{{ section.id }}-padding" style="max-width:720px;margin:0 auto;font-size:16px;">
+<div class="main-blog page-width section-{{ section.id }}-padding" style="max-width:1184px;margin:100px auto 0; padding: 0 16px;">
 
-  <h1 class="title--primary">{{ section.settings.title }}</h1>
+  <h1 class="title--primary" style="font-size: 40px; text-align:center;">{{ section.settings.title }}</h1>
 
   {%- assign news_blog = blogs['news'] -%}
 
   {%- if news_blog.articles_count > 0 -%}
-    <div class="articles-list" style="display:flex;flex-direction:column;">
+    <div class="articles-list" style="max-width:720px; margin: 0 auto; padding-top:30px; display:flex;flex-direction:column;font-size: 16px;">
       {%- for article in news_blog.articles -%}
         <div class="article-item" style="
               display:flex;
@@ -34,7 +34,7 @@
             ">
 
           <!-- 日付 -->
-          <div class="article-date" style="flex:0 0 120px;color:#666;">
+          <div class="article-date" style="flex:0 0 140px;color:#666;">
             {{ article.published_at | date: "%Y年%m月%d日" }}
           </div>
 
