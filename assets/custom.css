@@ -270,6 +270,33 @@ body {
 	right: 28px;
 }
 
+.c-btn__submit {
+	display: inline-block;
+	background: #292929;
+	border: 1px solid #292929;
+	font-weight: 700;
+	line-height: 1.68;
+	color: #fff;
+	padding: 18px;
+	width: 312px;
+	border-radius: 99px;
+	position: relative;
+	border: none !important;       /* 元の枠線を消す */
+  box-shadow: none !important;
+}
+
+.c-btn__submit::before,
+.c-btn__submit::after {
+  content: none !important;       /* 疑似要素で描かれた線を消す */
+}
+
+.c-btn__submit:focus,
+.c-btn__submit:active {
+  border: none !important;
+  box-shadow: none !important;   /* フォーカス時・クリック時の枠線を消す */
+  outline: none !important;      /* 青枠も消す */
+}
+
 .c-btn__label {
 	background: #AB8572;
 	font-family: 'Lato';
@@ -2043,6 +2070,58 @@ body {
   margin-top: 0;
 }
 
+/* お問い合わせ
+=========================== */
+.contact-bbArea {
+	width: 100%;
+	text-align: center;
+}
+
+.contact-bb__title {
+	font-family: "Lato";
+	font-size: 40px;
+	font-weight: 700;
+}
+
+.contact-bb__sub {
+	margin-top: 5px;
+	font-size: 14px;
+	color: #999999;
+}
+
+.contact-bb__txtArea {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.contact-bb__text {
+	margin-top: 40px;
+	font-size: 14px;
+	line-height: 2;
+	text-align: left;
+}
+
+.contact-bb__messageArea {
+	margin-top: 30px;
+	display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+	font-size: 14px;
+	line-height: 2;
+}
+
+.contact-bb__link {
+	text-decoration: underline;
+	color: #AB8572;
+}
+
+.contact-bb__link,
+.contact-bb__message {
+  white-space: pre-wrap; /* テキスト折り返し許可 */
+  min-width: 0;          /* flex 内で縮小可能に */
+}
 
 /* ===========================
 # レスポンシブ対応

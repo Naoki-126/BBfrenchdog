@@ -30,13 +30,12 @@
             "anchor_id": "fee"
           }
         },
-        "link_3MBWe4": {
-          "type": "link",
+        "bullet_list_wrUKct": {
+          "type": "bullet_list",
           "settings": {
-            "title": "チェーン修理（有償）",
+            "title": "返品等について",
             "text": "商品は厳重に管理・梱包してお届けしておりますが、万が一、商品が破損していたり、ご注文内容と異なっていた場合は、速やかに対応いたします。\nお客様都合によるキャンセル返品は受け付けておりませんのでご理解のほどよろしくお願いします。",
-            "link_text": "テキストリンクが入ります。",
-            "link_url": "https://www.google.co.jp/index.html",
+            "list_items": "",
             "anchor_id": ""
           }
         },
@@ -79,7 +78,7 @@
       "block_order": [
         "numbered_list_KApn3X",
         "numbered_list_7A69VV",
-        "link_3MBWe4",
+        "bullet_list_wrUKct",
         "table_c4AFiR",
         "bullet_list_tH6EMg",
         "bullet_list_PLCqr9",
@@ -88,7 +87,7 @@
       "name": "ショッピングガイド",
       "settings": {
         "title": "ショッピングガイド",
-        "explain": "ショッピングガイドの内容"
+        "explain": ""
       }
     }
   },

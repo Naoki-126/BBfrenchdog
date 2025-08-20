@@ -22,11 +22,13 @@
 
 .contact__button {
   margin-top: 3rem;
+  width: 100%;
+  text-align: center;
 }
 
 @media screen and (min-width: 750px) {
   .contact__button {
-    margin-top: 4rem;
+    margin-top: 5rem;
   }
 }
 

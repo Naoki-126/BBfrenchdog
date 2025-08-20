@@ -17,7 +17,7 @@
                 {% for tag in product.tags %}
                   {% if tag contains "sale_" %}
                     <div class="option-add__tag">
-                      <p><span class="c-btn__label">{{ tag | split: "_" | last }}</span></p>
+                      <p><span class="c-btn__labelSo">{{ tag | split: "_" | last }}</span></p>
                     </div>
                   {% elsif tag contains "out_" %}
                     <div class="option-add__tag">
@@ -36,7 +36,7 @@
                   {% for tag in product.tags %}
                     {% if tag contains "info_" %}
                       <div class="product-tag__discountTag">
-                        <p><span class="c-btn__label">{{ tag | split: "_" | last }}</span></p>
+                        <p><span class="c-btn__labelSo">{{ tag | split: "_" | last }}</span></p>
                       </div>
                     {% endif %}
                   {% endfor %}

@@ -22,9 +22,17 @@
     </ol>
   </nav>
   <div class="breadcrumbs-area"> </div>
-  <h1 class="main-page-title page-title h0{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-    {{ page.title | escape }}
-  </h1>
+  <div class="contact-bbArea">
+    <h1 class="contact-bb__title">お問合せ</h1>
+    {% comment %} <h1 class="main-page-title page-title h0{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %} contact-title__bb">
+      {{ page.content }}
+    </h1> {% endcomment %}
+    <p class="contact-bb__sub">メールフォーム</p>
+    <div class="contact-bb__txtArea">
+      <p class="contact-bb__text">以下の項目をご入力の上、送信ボタンを押してください。<br>3営業日以内に追って担当からご連絡させていただきます。</p>
+    </div>
+
+  </div>
   <div class="rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
     {{ page.content }}
   </div>
