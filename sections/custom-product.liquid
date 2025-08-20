@@ -474,7 +474,8 @@
                     <div class="price-per-item__container">
                       <div class="pro-cont__wrap">
                         <h4 class="pro-name">数　量</h4>
-                        <quantity-input class="quantity" data-url="{{ product.url }}" data-section="{{ section.id }}">
+
+                        {% comment %} <quantity-input class="quantity" data-url="{{ product.url }}" data-section="{{ section.id }}">
                           <button class="quantity__button" name="minus" type="button">
                             <span class="visually-hidden">
                               {{- 'products.product.quantity.decrease' | t: product: product.title | escape -}}
@@ -507,7 +508,25 @@
                               {{- 'icon-plus.svg' | inline_asset_content -}}
                             </span>
                           </button>
-                        </quantity-input>
+                        </quantity-input> {% endcomment %}
+
+                        <!-- 既存カウンターをそのまま使用 -->
+                          <quantity-input class="quantity" data-url="{{ product.url }}" data-section="{{ section.id }}">
+                            <button class="quantity__button" name="minus" type="button">-</button>
+                            <input
+                              class="quantity__input pro-cont__quantity"
+                              type="number"
+                              name="quantity"
+                              id="Quantity-{{ section.id }}"
+                              value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                              min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                              form="AddToCartForm"
+                            >
+                            <button class="quantity__button" name="plus" type="button">+</button>
+                          </quantity-input>
+
+
+
                         {%- liquid
                           assign volume_pricing_array = product.selected_or_first_available_variant.quantity_price_breaks | sort: 'quantity' | reverse
                           assign current_qty_for_volume_pricing = cart_qty | plus: product.selected_or_first_available_variant.quantity_rule.min
@@ -737,20 +756,38 @@
                   </div>
                 {% endif %} {% endcomment %}
 
-                <div class="pro-btnArea">
+                {% comment %} <div class="pro-btnArea">
                   <!-- カート追加フォーム -->
                   <div class="product-form">
                     {% form 'product', product %}
+                      <!-- バリアントID -->
                       <input type="hidden" name="id" id="variant-id" value="{{ product.selected_or_first_available_variant.id }}">
+
+                      <!-- 既存カウンターと連動する数量 input -->
+                      <input type="number" name="quantity" id="quantity-input" value="1" min="1">
+
+                      <!-- カートに入れるボタン -->
                       <button type="submit" class="c-btn c-btn__pro">カートに入れる</button>
                     {% endform %}
                   </div>
+                </div> {% endcomment %}
+
+                <div class="pro-btnArea">
+                  {% form 'product', product, id: 'AddToCartForm' %}
+                    <input type="hidden" name="id" id="variant-id" value="{{ product.selected_or_first_available_variant.id }}">
+                    <button type="submit" class="c-btn c-btn__pro">カートに入れる</button>
+                  {% endform %}
 
                   <!-- 今すぐ購入フォーム -->
                   {% form 'product', product, id: 'buy-now-form' %}
                     <input type="hidden" name="id" id="buy-now-variant-id" value="{{ product.selected_or_first_available_variant.id }}">
-                    <button type="button" class="c-btn c-btn__byNow">今すぐ購入する</button>
+
+                    <!-- 既存カウンターの値を送信する hidden input -->
+                    <input type="hidden" name="quantity" id="buy-now-quantity" value="1">
+
+                    <button type="button" class="c-btn c-btn__byNow" id="buy-now-btn">今すぐ購入する</button>
                   {% endform %}
+
                 </div>
 
 
@@ -1314,11 +1351,34 @@ function updateSizeButtonsState(setActive = false) {
   plusBtn?.addEventListener('click', afterQtyButton);
 
   // ==========================
-  // 今すぐ購入
-  // ==========================
-  const buyNowBtn = document.querySelector('.c-btn__byNow');
-  const buyNowForm = document.getElementById('buy-now-form');
-  if(buyNowBtn && buyNowForm) buyNowBtn.addEventListener('click', ()=>buyNowForm.submit());
+// 今すぐ購入
+// ==========================
+const buyNowBtn = document.querySelector('.c-btn__byNow');
+const buyNowForm = document.getElementById('buy-now-form');
+const buyNowQuantityInput = document.getElementById('buy-now-quantity');
+
+buyNowBtn?.addEventListener('click', () => {
+  if (!buyNowForm) return;
+
+  // 既存の quantity-input と同期
+  const mainQtyInput = document.getElementById('Quantity-{{ section.id }}');
+  if (mainQtyInput && buyNowQuantityInput) {
+    buyNowQuantityInput.value = mainQtyInput.value;
+  }
+
+  // 既存の variant-id と同期
+  const variantIdInput = document.getElementById('variant-id');
+  const buyNowVariantInput = document.getElementById('buy-now-variant-id');
+  if (variantIdInput && buyNowVariantInput) {
+    buyNowVariantInput.value = variantIdInput.value;
+  }
+
+  // フォーム送信してチェックアウトページへ
+  const formData = new FormData(buyNowForm);
+  const params = new URLSearchParams(formData).toString();
+  window.location.href = `/cart/add?${params}&checkout[attributes][buy_now]=true`;
+});
+
 
   // ==========================
   // 初期表示
