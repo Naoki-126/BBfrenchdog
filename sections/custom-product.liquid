@@ -474,42 +474,6 @@
                     <div class="price-per-item__container">
                       <div class="pro-cont__wrap">
                         <h4 class="pro-name">数　量</h4>
-
-                        {% comment %} <quantity-input class="quantity" data-url="{{ product.url }}" data-section="{{ section.id }}">
-                          <button class="quantity__button" name="minus" type="button">
-                            <span class="visually-hidden">
-                              {{- 'products.product.quantity.decrease' | t: product: product.title | escape -}}
-                            </span>
-                            <span class="svg-wrapper">
-                              {{- 'icon-minus.svg' | inline_asset_content -}}
-                            </span>
-                          </button>
-                          <input
-                            class="quantity__input pro-cont__quantity"
-                            type="number"
-                            name="quantity"
-                            id="Quantity-{{ section.id }}"
-                            data-cart-quantity="{{ cart_qty }}"
-                            data-min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
-                            min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
-                            {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
-                              data-max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
-                              max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
-                            {% endif %}
-                            step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
-                            value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
-                            form="{{ product_form_id }}"
-                          >
-                          <button class="quantity__button" name="plus" type="button">
-                            <span class="visually-hidden">
-                              {{- 'products.product.quantity.increase' | t: product: product.title | escape -}}
-                            </span>
-                            <span class="svg-wrapper">
-                              {{- 'icon-plus.svg' | inline_asset_content -}}
-                            </span>
-                          </button>
-                        </quantity-input> {% endcomment %}
-
                         <!-- 既存カウンターをそのまま使用 -->
                           <quantity-input class="quantity" data-url="{{ product.url }}" data-section="{{ section.id }}">
                             <button class="quantity__button" name="minus" type="button">-</button>
@@ -524,8 +488,6 @@
                             >
                             <button class="quantity__button" name="plus" type="button">+</button>
                           </quantity-input>
-
-
 
                         {%- liquid
                           assign volume_pricing_array = product.selected_or_first_available_variant.quantity_price_breaks | sort: 'quantity' | reverse
@@ -730,48 +692,6 @@
                   {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
 
                 {%- when 'buy_buttons' -%}
-                  {% comment %} {%- render 'buy-buttons',
-                    block: block,
-                    product: product,
-                    product_form_id: product_form_id,
-                    section_id: section.id,
-                    show_pickup_availability: true
-                  -%} {% endcomment %}
-
-                  {% comment %} {% if product.available %}
-                  <div class="pro-btnArea">
-                    <div class="product-form">
-
-                      {% form 'product', product %}
-                        <!-- hidden input for variant ID -->
-                        <input type="hidden" name="id" id="variant-id" value="{{ product.selected_or_first_available_variant.id }}">
-                        <button type="submit" class="c-btn c-btn__pro">
-                          カートに入れる
-                        </button>
-                      {% endform %}
-                    </div>
-                    <button type="submit" form="buy-now-form" class="c-btn c-btn__byNow">
-                      今すぐ購入する
-                    </button>
-                  </div>
-                {% endif %} {% endcomment %}
-
-                {% comment %} <div class="pro-btnArea">
-                  <!-- カート追加フォーム -->
-                  <div class="product-form">
-                    {% form 'product', product %}
-                      <!-- バリアントID -->
-                      <input type="hidden" name="id" id="variant-id" value="{{ product.selected_or_first_available_variant.id }}">
-
-                      <!-- 既存カウンターと連動する数量 input -->
-                      <input type="number" name="quantity" id="quantity-input" value="1" min="1">
-
-                      <!-- カートに入れるボタン -->
-                      <button type="submit" class="c-btn c-btn__pro">カートに入れる</button>
-                    {% endform %}
-                  </div>
-                </div> {% endcomment %}
-
                 <div class="pro-btnArea">
                   {% form 'product', product, id: 'AddToCartForm' %}
                     <input type="hidden" name="id" id="variant-id" value="{{ product.selected_or_first_available_variant.id }}">
@@ -789,7 +709,6 @@
                   {% endform %}
 
                 </div>
-
 
                 {%- when 'rating' -%}
                   {%- if product.metafields.reviews.rating.value != blank -%}
@@ -984,15 +903,9 @@
               {%- endcase -%}
             {%- endfor -%}
 
-            {% comment %} <a href="{{ product.url }}" class="link product__view-details animate-arrow">
-              {{ 'products.product.view_full_details' | t }}
-              {{- 'icon-arrow.svg' | inline_asset_content -}}
-            </a> {% endcomment %}
           </section>
         </div>
-        {% comment %} </div> {% endcomment %}
       </div>
-
 
       {% render 'product-media-modal', variant_images: variant_images %}
 
@@ -1230,7 +1143,6 @@ document.addEventListener('DOMContentLoaded', function () {
     initialized = true;
   }
 
-
   function updateVariantId(){
     const variant = getMatchingVariant();
     updatePriceAndVariant(variant);
@@ -1379,6 +1291,34 @@ buyNowBtn?.addEventListener('click', () => {
   window.location.href = `/cart/add?${params}&checkout[attributes][buy_now]=true`;
 });
 
+  /* ==========================
+    ③ アコーディオン
+  ========================== */
+  const triggers = document.querySelectorAll('.js-accordion-trigger');
+  triggers.forEach(trigger => {
+    const content = trigger.nextElementSibling;
+    trigger.addEventListener('click', function () {
+      const isOpen = trigger.classList.contains('is-open');
+      if (isOpen) {
+        trigger.classList.remove('is-open');
+        content.style.maxHeight = null;
+      } else {
+        trigger.classList.add('is-open');
+        content.style.maxHeight = content.scrollHeight + 'px';
+      }
+    });
+  });
+
+    /* ==========================
+    ④ 最近見た商品（localStorage）
+  ========================== */
+  const handle = '{{ product.handle }}';
+  let viewed = JSON.parse(localStorage.getItem('recently_viewed')) || [];
+  viewed = viewed.filter(item => item !== handle);
+  viewed.unshift(handle);
+  viewed = viewed.slice(0, 4);
+  localStorage.setItem('recently_viewed', JSON.stringify(viewed));
+  console.log('保存したrecently_viewed:', viewed);
 
   // ==========================
   // 初期表示
@@ -1386,7 +1326,6 @@ buyNowBtn?.addEventListener('click', () => {
   updateVariantId();
 });
 </script>
-
 
 
 {% schema %}
