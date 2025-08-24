@@ -13,7 +13,7 @@
       "type": "top-fv",
       "name": "トップFV画像",
       "settings": {
-        "image": "shopify://shop_images/top-fv.jpg",
+        "image": "shopify://shop_images/hptop.jpg",
         "sp_image": "shopify://shop_images/fv-sp.jpg"
       }
     },

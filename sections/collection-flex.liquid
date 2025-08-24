@@ -32,16 +32,16 @@
                 <div class="aside-category">
                   <h3 class="aside-cat__title">{{ block.settings.heading }}</h3>
                   <ul class="aside-cat__lists">
-                    {%- assign summer_list = '' -%}
+                    {%- assign tag_list = '' -%}
                     {%- for product in collection.products -%}
-                      {% if product.tags contains 'summer' %}
-                        {% assign summer_list = summer_list | append: product.title | append: '||' | append: product.url | append: ',' %}
+                      {% if product.tags contains block.settings.tag_name %}
+                        {% assign tag_list = tag_list | append: product.title | append: '||' | append: product.url | append: ',' %}
                       {% endif %}
                     {%- endfor -%}
-                    {%- assign summer_array = summer_list | split: ',' | uniq -%}
-                    {%- for summer_item in summer_array -%}
-                      {% unless summer_item == '' %}
-                        {% assign parts = summer_item | split: '||' %}
+                    {%- assign tag_array = tag_list | split: ',' | uniq -%}
+                    {%- for tag_item in tag_array -%}
+                      {% unless tag_item == '' %}
+                        {% assign parts = tag_item | split: '||' %}
                         <li>
                           <a href="{{ parts[1] }}" class="aside-cat__list">
                             {{ parts[0] }}
@@ -58,7 +58,7 @@
         </aside>
 
         <div class="col-main">
-          {% paginate collection.products by 16 %}
+          {% paginate collection.products by 100 %}
             <div class="col-headArea__main">
 
               <!-- SP用フィルターボタン -->
@@ -275,6 +275,11 @@
           "id": "heading",
           "label": "見出し（例：カラー、ブランド、テーマなど）"
         },
+        {
+        "type": "text",
+        "id": "tag_name",
+        "label": "タグ名（例：summer, blue, brand-x など）"
+        }
       ]
     }
   ],

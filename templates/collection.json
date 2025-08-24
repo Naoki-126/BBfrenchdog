@@ -24,7 +24,7 @@
         "custom_link_azDBJi": {
           "type": "custom_link",
           "settings": {
-            "theme-title": "コレクション",
+            "theme-title": "カテゴリー",
             "collection": "harness",
             "title": "ハーネス"
           }
@@ -61,10 +61,19 @@
             "title": "オリジナル"
           }
         },
+        "custom_link_678xbi": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "ブランド",
+            "collection": "db-hoodie",
+            "title": "db hoodie"
+          }
+        },
         "category_group_rAbVFK": {
           "type": "category_group",
           "settings": {
-            "heading": "キャンペーン"
+            "heading": "キャンペーン",
+            "tag_name": "summer"
           }
         }
       },
@@ -74,6 +83,7 @@
         "custom_link_GwLfrV",
         "custom_link_tEr3gw",
         "custom_link_UeybeK",
+        "custom_link_678xbi",
         "category_group_rAbVFK"
       ],
       "name": "商品インデックス",
