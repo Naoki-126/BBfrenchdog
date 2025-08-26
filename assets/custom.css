@@ -741,7 +741,7 @@ body {
 }
 
 .footer-logoImg {
-	width: 177px;
+	width: 180px;
 	height: auto;
 }
 
@@ -2170,6 +2170,10 @@ body {
 
 	/* ヘッダーエリア
 	=========================== */
+	.header {
+		padding-inline: 16px !important;
+	}
+
 	.header-wrap {
 		padding: 0 16px;
 	}
