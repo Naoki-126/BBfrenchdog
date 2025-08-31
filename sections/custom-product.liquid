@@ -234,7 +234,7 @@
                 {% if custom.dimension and custom.dimension.value != blank %}
                   <dl class="pro-detail__dl">
                     <dt class="pro-detail__dt">寸法</dt>
-                    <dd class="pro-detail__dd">{{ custom.dimension.value }}</dd>
+                    <dd class="pro-detail__dd">{{ custom.dimension.value | newline_to_br }}</dd>
                   </dl>
                 {% endif %}
                 {% if custom.color and custom.color.value != blank %}
