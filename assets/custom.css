@@ -176,6 +176,7 @@ body {
 	width: 312px;
 	border-radius: 99px;
 	position: relative;
+	text-align: center;
 }
 
 .c-btn::after {

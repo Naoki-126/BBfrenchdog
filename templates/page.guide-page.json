@@ -71,7 +71,7 @@
           "type": "guide-btn",
           "settings": {
             "button_text": "ショッピングを続ける",
-            "button_link": "https://www.google.co.jp/index.html"
+            "button_link": "shopify://collections/all"
           }
         }
       },

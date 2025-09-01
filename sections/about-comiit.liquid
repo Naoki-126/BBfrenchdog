@@ -30,7 +30,7 @@
                 </div>
                 {% if block.settings.button != blank %}
                   <div class="about-com__btnArea">
-                    <button class="c-btn__about">{{ block.settings.button }}</button>
+                    <a href="{{ block.settings.button_link }}" class="c-btn__about">{{ block.settings.button }}</a>
                   </div>
                 {% endif %}
               {% endfor %}
@@ -62,7 +62,7 @@
                 </div>
                 {% if block.settings.button-2 != blank %}
                   <div class="about-com__btnArea">
-                    <button class="c-btn">{{ block.settings.button-2 }}</button>
+                    <a href="{{ block.settings.button_link_2 }}" class="c-btn">{{ block.settings.button-2 }}</a>
                   </div>
                 {% endif %}
               {% endfor %}
@@ -93,7 +93,7 @@
                 </div>
                 {% if block.settings.button-3 != blank %}
                   <div class="about-com__btnArea">
-                    <button class="c-btn">{{ block.settings.button-3 }}</button>
+                    <a href="{{ block.settings.button_link_3 }}" class="c-btn">{{ block.settings.button-3 }}</a>
                   </div>
                 {% endif %}
               {% endfor %}
@@ -127,86 +127,101 @@
       "default": "つのこだわり"
     },
   ],
-    "blocks": [
-      {
-        "type": "item",
-        "name": "アイテム",
-        "settings":[
+  "blocks": [
+    {
+      "type": "item",
+      "name": "アイテム",
+      "settings":[
         {
           "type": "image_picker",
           "id": "image",
           "label": "画像1"
         },
         {
+        "type": "text",
+        "id":"theme-1",
+        "label": "テーマ1",
+        "default": "遊びへのこだわり"
+        },
+        {
+          "type": "textarea",
+          "id":"text-1",
+          "label": "テキスト1",
+          "default": "文章が入ります"
+        },
+        {
           "type": "text",
-          "id":"theme-1",
-          "label": "テーマ1",
-          "default": "遊びへのこだわり"
-          },
-          {
-            "type": "textarea",
-            "id":"text-1",
-            "label": "テキスト1",
-            "default": "文章が入ります"
-          },
-          {
-            "type": "text",
-            "id":"button",
-            "label": "ボタンのテキスト",
-            "default": "詳しく見る"
-          },
-          {
-            "type": "image_picker",
-            "id": "image-2",
-            "label": "画像-2"
-          },
-          {
-            "type": "text",
-            "id":"theme-2",
-            "label": "テーマ2",
-            "default": "品質のこだわり"
-          },
-          {
-            "type": "textarea",
-            "id":"text-2",
-            "label": "テキスト2",
-            "default": "文章が入ります"
-          },
-          {
-            "type": "text",
-            "id":"button-2",
-            "label": "ボタン2のテキスト",
-            "default": "詳しく見る"
-          },
-          {
-            "type": "image_picker",
-            "id": "image-3",
-            "label": "画像-3"
-          },
-          {
-            "type": "text",
-            "id":"theme-3",
-            "label": "テーマ3",
-            "default": "フードへのこだわり"
-          },
-          {
-            "type": "textarea",
-            "id":"text-3",
-            "label": "テキスト3",
-            "default": "文章が入ります"
-          },
-          {
-            "type": "text",
-            "id":"button-3",
-            "label": "ボタン3のテキスト",
-            "default": "詳しく見る"
-          },
-          ]
+          "id":"button",
+          "label": "ボタンのテキスト",
+          "default": "詳しく見る"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "ボタン1のリンク先"
+        },
+        {
+          "type": "image_picker",
+          "id": "image-2",
+          "label": "画像-2"
+        },
+        {
+          "type": "text",
+          "id":"theme-2",
+          "label": "テーマ2",
+          "default": "品質のこだわり"
+        },
+        {
+          "type": "textarea",
+          "id":"text-2",
+          "label": "テキスト2",
+          "default": "文章が入ります"
+        },
+        {
+          "type": "text",
+          "id":"button-2",
+          "label": "ボタン2のテキスト",
+          "default": "詳しく見る"
+        },
+        {
+          "type": "url",
+          "id": "button_link_2",
+          "label": "ボタン2のリンク先"
+        },
+        {
+          "type": "image_picker",
+          "id": "image-3",
+          "label": "画像-3"
+        },
+        {
+          "type": "text",
+          "id":"theme-3",
+          "label": "テーマ3",
+          "default": "フードへのこだわり"
+        },
+        {
+          "type": "textarea",
+          "id":"text-3",
+          "label": "テキスト3",
+          "default": "文章が入ります"
+        },
+        {
+          "type": "text",
+          "id":"button-3",
+          "label": "ボタン3のテキスト",
+          "default": "詳しく見る"
+        },
+        {
+          "type": "url",
+          "id": "button_link_3",
+          "label": "ボタン3のリンク先"
         }
-        ], "presets": [
-          { "name":"アバウトコミット",
-          "category": "ページ"
-          }
-          ]
-          }
-  {% endschema %}
+      ]
+    }
+  ], "presets": [
+    { "name":"アバウトコミット",
+    "category": "ページ"
+    }
+  ]
+}
+{% endschema %}
