@@ -1269,7 +1269,7 @@ const buyNowBtn = document.querySelector('.c-btn__byNow');
 const buyNowForm = document.getElementById('buy-now-form');
 const buyNowQuantityInput = document.getElementById('buy-now-quantity');
 
-buyNowBtn?.addEventListener('click', () => {
+buyNowBtn?.addEventListener('click', async () => {
   if (!buyNowForm) return;
 
   // 既存の quantity-input と同期
@@ -1285,11 +1285,28 @@ buyNowBtn?.addEventListener('click', () => {
     buyNowVariantInput.value = variantIdInput.value;
   }
 
-  // フォーム送信してチェックアウトページへ
+    // Ajaxで商品追加 → チェックアウトへ
   const formData = new FormData(buyNowForm);
-  const params = new URLSearchParams(formData).toString();
-  window.location.href = `/cart/add?${params}&checkout[attributes][buy_now]=true`;
+
+  try {
+    await fetch('/cart/add.js', {
+      method: 'POST',
+      body: formData
+    });
+
+      await fetch('/cart.js');
+      
+    window.location.href = '/checkout';
+  } catch (error) {
+    console.error('今すぐ購入エラー:', error);
+  }
 });
+
+  // フォーム送信してチェックアウトページへ
+//   const formData = new FormData(buyNowForm);
+//   const params = new URLSearchParams(formData).toString();
+//   window.location.href = `/cart/add?${params}&checkout[attributes][buy_now]=true`;
+// });
 
   /* ==========================
     ③ アコーディオン
