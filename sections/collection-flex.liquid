@@ -16,7 +16,7 @@
           <div class="col-bodyArea">
             {%- for block in section.blocks -%}
               {% if block.type == 'custom_link' %}
-                {% if block.settings.collection %}
+                {% if block.settings.collection and block.settings.collection.products_count > 0  %}
                   <div class="aside-category">
                     <h3 class="aside-cat__title">{{ block.settings.theme-title }}</h3>
                     <ul class="aside-cat__lists">

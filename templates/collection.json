@@ -61,19 +61,164 @@
             "title": "オリジナル"
           }
         },
+        "custom_link_rixCWz": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "犬種（ウェア）",
+            "collection": "ウェア_小型犬",
+            "title": "小型犬"
+          }
+        },
+        "custom_link_RXaYj6": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "",
+            "collection": "ウェア_中型犬",
+            "title": "中型犬"
+          }
+        },
+        "custom_link_CiVCgd": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "",
+            "collection": "ウェア_大型犬",
+            "title": "大型犬"
+          }
+        },
         "custom_link_yzJiWQ": {
           "type": "custom_link",
           "settings": {
-            "theme-title": "ブランド",
+            "theme-title": "ブランド（ウェア）",
             "collection": "db-hoodie",
-            "title": "db hoodie"
+            "title": "POCKET刺繍Tee"
           }
         },
-        "category_group_cGEJgX": {
-          "type": "category_group",
+        "custom_link_jTajjm": {
+          "type": "custom_link",
           "settings": {
-            "heading": "キャンペーン",
-            "tag_name": "summer"
+            "theme-title": "",
+            "collection": "ウェア_frenchloverbaby",
+            "title": "FRENCHLOVER(BABY)"
+          }
+        },
+        "custom_link_HhVpCD": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "",
+            "collection": "ウェア_frenchloverkids",
+            "title": "FRENCHLOVER(KIDS)"
+          }
+        },
+        "custom_link_cxVBK3": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "",
+            "collection": "ウェア_frenchlover",
+            "title": "FRENCHLOVER"
+          }
+        },
+        "custom_link_hcDcd6": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "",
+            "collection": "ウェア_b-boriginalt",
+            "title": "B&BOriginalT"
+          }
+        },
+        "custom_link_KgGyzd": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "犬種（ハーネス）",
+            "collection": "ハーネス_小型犬",
+            "title": "小型犬"
+          }
+        },
+        "custom_link_PULBPa": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "",
+            "collection": "ハーネス_中型犬",
+            "title": "中型犬"
+          }
+        },
+        "custom_link_JX7ipG": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "",
+            "collection": "ハーネス_大型犬",
+            "title": "大型犬"
+          }
+        },
+        "custom_link_Qc9r7f": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "ブランド（ハーネス）",
+            "collection": "tebura-leash-set",
+            "title": "TEBURA LEASH SET"
+          }
+        },
+        "custom_link_URHPJg": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "",
+            "collection": "one-touch-collar",
+            "title": "ONE-TOUCH Collar"
+          }
+        },
+        "custom_link_MTDX7j": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "",
+            "collection": "one-touch-choke-collar",
+            "title": "ONE-TOUCH CHOKE Collar"
+          }
+        },
+        "custom_link_igepgq": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "",
+            "collection": "nukenai-harness",
+            "title": "NUKENAI HARNESS"
+          }
+        },
+        "custom_link_aXpBg4": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "",
+            "collection": "nb-leash",
+            "title": "NB.LEASH"
+          }
+        },
+        "custom_link_zpJEit": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "",
+            "collection": "corduraハーネス-首輪",
+            "title": "CORDURAハーネス&首輪"
+          }
+        },
+        "custom_link_qMqdMt": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "",
+            "collection": "bonnel-harness-leash",
+            "title": "BONNEL HARNESS&LEASH"
+          }
+        },
+        "custom_link_ndqMUi": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "",
+            "collection": "b-boriginalchoker-enamel",
+            "title": "B&BOriginalCHOKER enamel"
+          }
+        },
+        "custom_link_YxhRGh": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "",
+            "collection": "b-bcustom",
+            "title": "B&Bcustom"
           }
         }
       },
@@ -83,8 +228,26 @@
         "custom_link_GwLfrV",
         "custom_link_tEr3gw",
         "custom_link_UeybeK",
+        "custom_link_rixCWz",
+        "custom_link_RXaYj6",
+        "custom_link_CiVCgd",
         "custom_link_yzJiWQ",
-        "category_group_cGEJgX"
+        "custom_link_jTajjm",
+        "custom_link_HhVpCD",
+        "custom_link_cxVBK3",
+        "custom_link_hcDcd6",
+        "custom_link_KgGyzd",
+        "custom_link_PULBPa",
+        "custom_link_JX7ipG",
+        "custom_link_Qc9r7f",
+        "custom_link_URHPJg",
+        "custom_link_MTDX7j",
+        "custom_link_igepgq",
+        "custom_link_aXpBg4",
+        "custom_link_zpJEit",
+        "custom_link_qMqdMt",
+        "custom_link_ndqMUi",
+        "custom_link_YxhRGh"
       ],
       "name": "商品インデックス",
       "settings": {
