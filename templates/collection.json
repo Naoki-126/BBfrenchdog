@@ -61,70 +61,6 @@
             "title": "オリジナル"
           }
         },
-        "custom_link_rixCWz": {
-          "type": "custom_link",
-          "settings": {
-            "theme-title": "犬種（ウェア）",
-            "collection": "ウェア_小型犬",
-            "title": "小型犬"
-          }
-        },
-        "custom_link_RXaYj6": {
-          "type": "custom_link",
-          "settings": {
-            "theme-title": "",
-            "collection": "ウェア_中型犬",
-            "title": "中型犬"
-          }
-        },
-        "custom_link_CiVCgd": {
-          "type": "custom_link",
-          "settings": {
-            "theme-title": "",
-            "collection": "ウェア_大型犬",
-            "title": "大型犬"
-          }
-        },
-        "custom_link_yzJiWQ": {
-          "type": "custom_link",
-          "settings": {
-            "theme-title": "ブランド（ウェア）",
-            "collection": "db-hoodie",
-            "title": "POCKET刺繍Tee"
-          }
-        },
-        "custom_link_jTajjm": {
-          "type": "custom_link",
-          "settings": {
-            "theme-title": "",
-            "collection": "ウェア_frenchloverbaby",
-            "title": "FRENCHLOVER(BABY)"
-          }
-        },
-        "custom_link_HhVpCD": {
-          "type": "custom_link",
-          "settings": {
-            "theme-title": "",
-            "collection": "ウェア_frenchloverkids",
-            "title": "FRENCHLOVER(KIDS)"
-          }
-        },
-        "custom_link_cxVBK3": {
-          "type": "custom_link",
-          "settings": {
-            "theme-title": "",
-            "collection": "ウェア_frenchlover",
-            "title": "FRENCHLOVER"
-          }
-        },
-        "custom_link_hcDcd6": {
-          "type": "custom_link",
-          "settings": {
-            "theme-title": "",
-            "collection": "ウェア_b-boriginalt",
-            "title": "B&BOriginalT"
-          }
-        },
         "custom_link_KgGyzd": {
           "type": "custom_link",
           "settings": {
@@ -146,6 +82,30 @@
           "settings": {
             "theme-title": "",
             "collection": "ハーネス_大型犬",
+            "title": "大型犬"
+          }
+        },
+        "custom_link_rixCWz": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "犬種（ウェア）",
+            "collection": "ウェア_小型犬",
+            "title": "小型犬"
+          }
+        },
+        "custom_link_RXaYj6": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "",
+            "collection": "ウェア_中型犬",
+            "title": "中型犬"
+          }
+        },
+        "custom_link_CiVCgd": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "",
+            "collection": "ウェア_大型犬",
             "title": "大型犬"
           }
         },
@@ -220,6 +180,54 @@
             "collection": "b-bcustom",
             "title": "B&Bcustom"
           }
+        },
+        "custom_link_yzJiWQ": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "ブランド（ウェア）",
+            "collection": "db-hoodie",
+            "title": "POCKET刺繍Tee"
+          }
+        },
+        "custom_link_jTajjm": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "",
+            "collection": "ウェア_frenchloverbaby",
+            "title": "FRENCHLOVER(BABY)"
+          }
+        },
+        "custom_link_HhVpCD": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "",
+            "collection": "ウェア_frenchloverkids",
+            "title": "FRENCHLOVER(KIDS)"
+          }
+        },
+        "custom_link_cxVBK3": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "",
+            "collection": "ウェア_frenchlover",
+            "title": "FRENCHLOVER"
+          }
+        },
+        "custom_link_hcDcd6": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "",
+            "collection": "ウェア_b-boriginalt",
+            "title": "B&BOriginalT"
+          }
+        },
+        "custom_link_grGQ4m": {
+          "type": "custom_link",
+          "settings": {
+            "theme-title": "",
+            "collection": "架空ブランド-テスト",
+            "title": "架空ブランド"
+          }
         }
       },
       "block_order": [
@@ -228,17 +236,12 @@
         "custom_link_GwLfrV",
         "custom_link_tEr3gw",
         "custom_link_UeybeK",
-        "custom_link_rixCWz",
-        "custom_link_RXaYj6",
-        "custom_link_CiVCgd",
-        "custom_link_yzJiWQ",
-        "custom_link_jTajjm",
-        "custom_link_HhVpCD",
-        "custom_link_cxVBK3",
-        "custom_link_hcDcd6",
         "custom_link_KgGyzd",
         "custom_link_PULBPa",
         "custom_link_JX7ipG",
+        "custom_link_rixCWz",
+        "custom_link_RXaYj6",
+        "custom_link_CiVCgd",
         "custom_link_Qc9r7f",
         "custom_link_URHPJg",
         "custom_link_MTDX7j",
@@ -247,7 +250,13 @@
         "custom_link_zpJEit",
         "custom_link_qMqdMt",
         "custom_link_ndqMUi",
-        "custom_link_YxhRGh"
+        "custom_link_YxhRGh",
+        "custom_link_yzJiWQ",
+        "custom_link_jTajjm",
+        "custom_link_HhVpCD",
+        "custom_link_cxVBK3",
+        "custom_link_hcDcd6",
+        "custom_link_grGQ4m"
       ],
       "name": "商品インデックス",
       "settings": {

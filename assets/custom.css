@@ -169,12 +169,12 @@ body {
 	display: inline-block;
 	background: #292929;
 	border: 1px solid #292929;
+	border-radius: 99px;
 	font-weight: 700;
 	line-height: 1.68;
 	color: #fff;
 	padding: 18px;
 	width: 312px;
-	border-radius: 99px;
 	position: relative;
 	text-align: center;
 }
@@ -284,6 +284,10 @@ body {
 	position: relative;
 	border: none !important;       /* 元の枠線を消す */
   box-shadow: none !important;
+}
+
+.c-btn__submit:hover {
+	opacity: .6;
 }
 
 .c-btn__submit::before,
@@ -762,6 +766,7 @@ body {
 }
 .footer-snsArea .sns-icon:hover svg {
   fill: #888;
+	opacity: .6;
 }
 
 .footer-menuArea {
@@ -776,6 +781,11 @@ body {
 	font-size: 14px;
 	line-height: 1.7;
 }
+
+.footer-menu:hover {
+	opacity: .6;
+}
+
 
 .footer-catArea {
 	display: flex;
@@ -805,6 +815,10 @@ body {
 	top: 50%;
 	transform: translateY(-50%);
 	left: 0;
+}
+
+.footer-catList:hover {
+	opacity: .6;
 }
 
 .footer-low__textArea {
@@ -1035,6 +1049,10 @@ body {
   position: relative;
 }
 
+.aside-cat__list:hover {
+	opacity: .6;
+}
+
 .aside-cat__list::before {
   content: "";
   position: absolute;
@@ -1044,6 +1062,10 @@ body {
   top: 50%;
   transform: translateY(-50%);
   left: 0;
+}
+
+.aside-cat__list:hover::before {
+  background-color: #292929;
 }
 
 /* collection(一覧)ページ
@@ -1199,6 +1221,11 @@ body {
 	max-width: 213px;
 	max-height: 213px;
   border-radius: 12px;
+	transition: transform 0.3s ease;
+}
+
+.col-item:hover .col-product__img {
+  transform: scale(1.1);
 }
 
 #js-sort-options {

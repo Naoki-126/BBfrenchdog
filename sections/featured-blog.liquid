@@ -181,7 +181,8 @@
         <a
           href="{{ section.settings.blog.url }}"
           id="ViewAll-{{ section.id }}"
-          class="blog__button button"
+          {% comment %} class="blog__button button" {% endcomment %}
+          class="c-btn" style="margin-top:60px;
           aria-labelledby="ViewAll-{{ section.id }} SectionHeading-{{ section.id }}"
         >
           {{ 'sections.featured_blog.view_all' | t }}
